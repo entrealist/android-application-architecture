@@ -1,4 +1,4 @@
-package com.rosberry.sample
+package com.rosberry.android.sample
 
 import android.app.Application
 

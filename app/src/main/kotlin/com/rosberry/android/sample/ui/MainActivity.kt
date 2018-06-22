@@ -1,8 +1,8 @@
-package com.rosberry.sample.ui
+package com.rosberry.android.sample.ui
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import com.rosberry.sample.R
+import com.rosberry.android.sample.R
 
 class MainActivity : AppCompatActivity() {
 

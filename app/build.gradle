@@ -12,7 +12,7 @@ android {
     compileSdkVersion rootProject.ext.compileSdkVersion
 
     defaultConfig {
-        applicationId "com.rosberry.sample"
+        applicationId "com.rosberry.android.sample"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
@@ -94,6 +94,8 @@ android {
 
     sourceSets {
         main.java.srcDirs += ['src/main/kotlin']
+        test.java.srcDirs += ['src/test/kotlin']
+
 
     }
 
