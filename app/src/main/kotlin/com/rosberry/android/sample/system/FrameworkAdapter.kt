@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.FragmentManager
 import com.rosberry.android.sample.data.persistence.internal.ViewDataRepository
+import com.rosberry.android.sample.ui.main.MainActivity
 import javax.inject.Inject
 
 class FrameworkAdapter @Inject constructor(val viewData: ViewDataRepository) {
@@ -26,8 +27,8 @@ class FrameworkAdapter @Inject constructor(val viewData: ViewDataRepository) {
         viewData.saveInstanceState(bundle)
     }
 
-    fun restoreInstanceState(bundle: Bundle?) {
-        viewData.restoreInstanceState(bundle)
+    fun restoreInstanceState(activity: MainActivity, savedInstanceState: Bundle?) {
+        viewData.restoreInstanceState(savedInstanceState)
     }
 
     fun addActivityResultListener(listener: OnActivityResult) {

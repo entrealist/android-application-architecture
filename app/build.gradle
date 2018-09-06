@@ -185,6 +185,12 @@ dependencies {
 
     //media
     implementation deps.picasso
+
+    //moxy
+    implementation deps.moxy
+    implementation deps.moxySupport
+    kapt deps.moxyCompiler
+
 }
 
 

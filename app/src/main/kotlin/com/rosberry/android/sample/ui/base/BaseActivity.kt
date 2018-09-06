@@ -4,25 +4,46 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import com.rosberry.android.sample.R
+import com.arellomobile.mvp.MvpAppCompatActivity
 import com.rosberry.android.sample.ui.base.model.ActivityModel
 
-abstract class BaseActivity : AppCompatActivity() {
+abstract class BaseActivity : MvpAppCompatActivity() {
 
     var stateSaved = false
     val model = ActivityModel()
+
 
     open fun onSoftBackClicked() {
         finish()
     }
 
+    override fun onBackPressed() {
+
+        val fragmentList = supportFragmentManager.fragments
+
+        var handled = false
+        for (f in fragmentList) {
+            if (f is BaseFragment) {
+                handled = f.onBackPressed()
+                if (handled) break
+            }
+        }
+
+        if (!handled) {
+            super.onBackPressed()
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(model.layoutId)
-
         stateSaved = false
     }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        stateSaved = true
+        super.onSaveInstanceState(outState)
+    }
 
     override fun onResume() {
         super.onResume()
@@ -62,8 +83,5 @@ abstract class BaseActivity : AppCompatActivity() {
         return true
     }
 
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        stateSaved = true
-    }
+
 }

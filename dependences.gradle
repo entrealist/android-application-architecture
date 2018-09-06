@@ -61,6 +61,9 @@ ext {
     pageIndicator_version = "0.2.6"
     stickyHeaders_version = "0.4.3@aar"
 
+    moxy_version = '1.5.5'
+
+
     testDependencies = [
             jUnit      : "junit:junit:$junit_version",
             espresso   : "com.android.support.test.espresso:espresso-core:$espresso_version",
@@ -154,6 +157,12 @@ ext {
             maskedEditText          : "ru.egslava:MaskedEditText:$maskedEditText_version",
             pageIndicator           : "com.github.chahine:pageindicator:$pageIndicator_version",
 
-            stickyHeaders           : "com.timehop.stickyheadersrecyclerview:library:$stickyHeaders_version"
+            stickyHeaders           : "com.timehop.stickyheadersrecyclerview:library:$stickyHeaders_version",
+
+            //moxy
+            moxy                    : "com.arello-mobile:moxy:$moxy_version",
+            moxyCompiler            : "com.arello-mobile:moxy-compiler:$moxy_version",
+            moxySupport             : "com.arello-mobile:moxy-app-compat:$moxy_version"
+
     ]
 }
