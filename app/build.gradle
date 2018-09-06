@@ -6,10 +6,31 @@ apply plugin: 'kotlin-kapt'
 apply plugin: 'com.github.ben-manes.versions'
 defaultTasks 'dependencyUpdates'
 
+def keystorePropertiesFile = rootProject.file("keystore.properties")
+def keystoreProperties = new Properties()
+
+keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+
 android {
 
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdkVersion rootProject.ext.compileSdkVersion
+
+    signingConfigs {
+        release {
+            keyAlias keystoreProperties['keyAlias']
+            keyPassword keystoreProperties['keyPassword']
+            storeFile file(keystoreProperties['storeFile'])
+            storePassword keystoreProperties['storePassword']
+        }
+
+        debug{
+            keyAlias keystoreProperties['keyAlias']
+            keyPassword keystoreProperties['keyPassword']
+            storeFile file(keystoreProperties['storeFile'])
+            storePassword keystoreProperties['storePassword']
+        }
+    }
 
     defaultConfig {
         applicationId "com.rosberry.android.sample"
@@ -29,35 +50,23 @@ android {
         }
     }
 
-    signingConfigs {
-        release {
-            storeFile file("../develop.jks")
-            storePassword "develop"
-            keyAlias "develop"
-            keyPassword "develop"
-        }
-    }
-
     buildTypes {
-        //upload distribution: ./gradlew assembleFabric crashlyticsUploadDistributionFabricDebug
         debug {
-            resValue 'string', 'custom_string', '"1286841551451040"'
+            postprocessing {
+                removeUnusedCode false
+                removeUnusedResources false
+                obfuscate false
+                optimizeCode false
+                proguardFiles 'proguard-rules.pro'
+            }
 
-            minifyEnabled false
+            versionNameSuffix "debug"
             debuggable true
-            shrinkResources false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            ext.betaDistributionReleaseNotes = "Release notes"
-            ext.betaDistributionGroupAliases = "Rosberry testers"
+
             signingConfig signingConfigs.release
         }
+
         release {
-            resValue 'string', 'custom_string', '"1286841551451040"'
-
-            ext.betaDistributionReleaseNotes = "Release notes"
-            ext.betaDistributionGroupAliases = "Rosberry testers"
-            signingConfig signingConfigs.release
-
             postprocessing {
                 removeUnusedCode true
                 removeUnusedResources true
@@ -65,20 +74,23 @@ android {
                 optimizeCode true
                 proguardFile 'proguard-rules.pro'
             }
+
+            versionNameSuffix "release"
+            debuggable false
+
+            signingConfig signingConfigs.release
         }
     }
 
     flavorDimensions "default"
 
     productFlavors {
-
         demo {
             dimension "default"
 
             minSdkVersion 19
             resValue 'string', 'api_url', '"url"'
             resValue 'string', 'random', '"52r5qqq8l"'
-
         }
 
         prod {
@@ -87,16 +99,12 @@ android {
             minSdkVersion 19
             resValue 'string', 'api_url', '"url"'
             resValue 'string', 'random', '"52r5qqq8l"'
-
         }
-
     }
 
     sourceSets {
         main.java.srcDirs += ['src/main/kotlin']
         test.java.srcDirs += ['src/test/kotlin']
-
-
     }
 
     aaptOptions {
@@ -106,7 +114,6 @@ android {
     dexOptions {
         jumboMode = false
         javaMaxHeapSize "2048M"
-
     }
 
     lintOptions {
@@ -116,15 +123,14 @@ android {
         abortOnError false
     }
 
-
     packagingOptions {
         pickFirst 'META-INF/rxjava.properties'
     }
 
     configurations.all {
-        resolutionStrategy.force rootProject.ext.dependencies.supportv13
-
+        resolutionStrategy.force rootProject.ext.dependencies.supportLint
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -132,17 +138,53 @@ android {
 }
 
 dependencies {
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
     def deps = rootProject.ext.dependencies
     def testDeps = rootProject.ext.testDependencies
 
     testImplementation testDeps.jUnit
 
-
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation deps.supportAppCompat
+    implementation deps.supportv13
+    implementation deps.supportRecyclerView
+    implementation deps.supportCardView
+    implementation deps.supportConstraintLayout
+    implementation deps.supportMultidex
+    implementation deps.supportMultidexInst
+
+    //kotlin
     implementation deps.kotlin
+    implementation deps.ankoCommons
+    implementation deps.ankoCoroutines
 
+    //rx
+    implementation deps.rxAndroid
+    implementation deps.rxJava
+    implementation deps.rxPermissions
+    implementation deps.rxKotlin
 
+    //inject
+    implementation deps.dagger
+    kapt deps.daggerCompiler
+    kapt deps.daggerAnnotation
+
+    //rest
+    implementation deps.retrofit
+    implementation deps.retrofitRxJavaAdapter
+    implementation deps.retrofitGsonConverter
+    implementation deps.okHttpLoggingInterceptor
+    implementation deps.okHttp
+    implementation deps.googleGson
+
+    //ui
+    implementation(deps.materialDialogs) { transitive = true }
+
+    //state
+    implementation deps.androidState
+    kapt deps.androidStateCompiler
+
+    //media
+    implementation deps.picasso
 }
 
 
