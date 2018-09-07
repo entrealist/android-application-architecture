@@ -1,7 +1,7 @@
 package com.rosberry.android.sample.ui.base.model
 
 import android.support.annotation.StringRes
-import com.rosberry.android.sample.domain.Callback
+import com.rosberry.android.sample.data.persistence.Callback
 
 /**
  * Created by dmitry on 30.10.18.

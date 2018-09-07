@@ -3,6 +3,7 @@ package com.rosberry.android.sample.data.persistence.internal
 import android.content.Context
 import android.content.SharedPreferences
 import android.text.TextUtils
+import com.rosberry.android.sample.BuildConfig
 import com.rosberry.android.sample.R
 import com.rosberry.android.sample.system.TextEncoder
 import javax.inject.Inject
@@ -10,7 +11,7 @@ import javax.inject.Singleton
 
 @Singleton
 class PreferencesRepository
-@Inject constructor(val prefs: SharedPreferences, private val ctx: Context) {
+@Inject constructor(val prefs: SharedPreferences) {
     val accessTokenKey = "access_token"
 
     fun getAccessToken() = getDecodedString(accessTokenKey, "")
@@ -44,14 +45,14 @@ class PreferencesRepository
     fun putLong(key: String, value: Long) = prefs.edit().putLong(key, value).apply()
 
     fun putEncodedString(key: String, value: String) = prefs.edit()
-        .putString(key, TextEncoder.encrypt(value, ctx.getString(R.string.app_name))).apply()
+        .putString(key, TextEncoder.encrypt(value, BuildConfig.RANDOM)).apply()
 
 
     fun getDecodedString(key: String, defValue: String): String {
         val result = prefs.getString(key, defValue)
         if (result === defValue || result == null)
             return ""
-        return TextEncoder.decrypt(result, ctx.getString(R.string.app_name))
+        return TextEncoder.decrypt(result, BuildConfig.RANDOM)
     }
 
     fun remove(key: String) = prefs.edit().remove(key).apply()

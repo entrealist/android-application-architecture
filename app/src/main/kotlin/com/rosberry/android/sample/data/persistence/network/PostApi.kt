@@ -22,5 +22,5 @@ interface PostApi {
 
     @FormUrlEncoded
     @POST("posts")
-    fun addPost(@Body postRequest: PostRequest): Single<BaseResponse>
+    fun addPost(@Body postRequest: PostRequest): Single<PostResponse>
 }

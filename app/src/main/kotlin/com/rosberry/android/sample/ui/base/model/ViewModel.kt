@@ -16,7 +16,7 @@ import java.io.Serializable
 import java.util.*
 
 /**
- * Created by dmitry on 25.09.18.
+ * Created by neestell on 25.09.18.
  */
 abstract class ViewModel : Serializable {
 

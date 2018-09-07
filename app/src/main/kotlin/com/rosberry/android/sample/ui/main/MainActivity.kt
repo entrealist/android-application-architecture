@@ -4,6 +4,7 @@ import android.os.Bundle
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.rosberry.android.sample.R
+import com.rosberry.android.sample.di.AndroidInjector
 import com.rosberry.android.sample.domain.main.MainInteractor
 import com.rosberry.android.sample.presentation.main.*
 import com.rosberry.android.sample.ui.base.BaseActivity
@@ -15,7 +16,7 @@ class MainActivity : BaseActivity(), MainView{
 
     @ProvidePresenter
     fun providePresenter(): MainPresenter {
-        return MainPresenter(MainViewData(), MainInteractor())
+        return AndroidInjector.openMainScope().getMainPresenter()
     }
 
     init {

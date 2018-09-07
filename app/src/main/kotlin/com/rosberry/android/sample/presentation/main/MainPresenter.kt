@@ -7,6 +7,10 @@ import javax.inject.Inject
 
 @InjectViewState
 class MainPresenter @Inject constructor(viewData: MainViewData, val mainInteractor: MainInteractor)
-:BasePresenter<MainView, MainViewData>(viewData) {
+    : BasePresenter<MainView, MainViewData>(viewData) {
 
+    override fun onFirstViewAttach() {
+        super.onFirstViewAttach()
+        mainInteractor.getPosts().subscribe()
+    }
 }

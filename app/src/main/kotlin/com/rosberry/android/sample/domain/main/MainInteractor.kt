@@ -1,15 +1,18 @@
 package com.rosberry.android.sample.domain.main
 
 import com.rosberry.android.sample.data.persistence.internal.ResourcesRepository
-import io.reactivex.Completable
-import io.reactivex.Single
+import com.rosberry.android.sample.data.persistence.network.repository.PostRepository
+import com.rosberry.android.sample.entity.Post
+import io.reactivex.*
+import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
-class MainInteractor @Inject constructor(
-        ) {
+class MainInteractor @Inject constructor(private val postRepository: PostRepository) {
 
-    fun isTrue(b: Boolean): Boolean {
-        return b
+    fun getPosts(): Single<ArrayList<Post>>{
+        return postRepository.getPosts()
+            .subscribeOn(Schedulers.io())
+            .observeOn(Schedulers.io())
     }
 
 }
