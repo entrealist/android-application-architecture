@@ -88,8 +88,8 @@ android {
         demo {
             dimension "default"
 
-            minSdkVersion 19
-            resValue 'string', 'api_url', '"url"'
+            minSdkVersion 21
+            resValue 'string', 'api_url', '"https://jsonplaceholder.typicode.com/"'
             resValue 'string', 'random', '"52r5qqq8l"'
         }
 
@@ -97,7 +97,7 @@ android {
             dimension "default"
 
             minSdkVersion 19
-            resValue 'string', 'api_url', '"url"'
+            resValue 'string', 'api_url', '"https://jsonplaceholder.typicode.com/"'
             resValue 'string', 'random', '"52r5qqq8l"'
         }
     }
