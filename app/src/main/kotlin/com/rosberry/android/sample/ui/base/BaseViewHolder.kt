@@ -2,7 +2,8 @@ package com.rosberry.android.sample.ui.base
 
 import android.support.annotation.LayoutRes
 import android.support.v7.widget.RecyclerView
-import android.view.*
+import android.view.LayoutInflater
+import android.view.ViewGroup
 
 abstract class BaseViewHolder(parent: ViewGroup, @LayoutRes layoutId: Int) :
         RecyclerView.ViewHolder(LayoutInflater

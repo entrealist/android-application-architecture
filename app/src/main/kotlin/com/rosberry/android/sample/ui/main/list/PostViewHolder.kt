@@ -1,6 +1,6 @@
 package com.rosberry.android.sample.ui.main.list
 
-import android.view.*
+import android.view.ViewGroup
 import com.rosberry.android.sample.R
 import com.rosberry.android.sample.presentation.main.list.PostItem
 import com.rosberry.android.sample.ui.base.BaseViewHolder

@@ -1,11 +1,8 @@
 package com.rosberry.android.sample.system
 
-import android.view.LayoutInflater
-import android.view.View
+import android.view.*
 import android.view.View.VISIBLE
-import android.view.ViewGroup
 import android.view.animation.ScaleAnimation
-import android.widget.ImageView
 
 
 /**

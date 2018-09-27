@@ -5,8 +5,8 @@ import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.rosberry.android.sample.R
 import com.rosberry.android.sample.di.AndroidInjector
-import com.rosberry.android.sample.domain.main.MainInteractor
-import com.rosberry.android.sample.presentation.main.*
+import com.rosberry.android.sample.presentation.main.MainPresenter
+import com.rosberry.android.sample.presentation.main.MainView
 import com.rosberry.android.sample.presentation.main.list.PostItem
 import com.rosberry.android.sample.system.gone
 import com.rosberry.android.sample.system.show
@@ -24,7 +24,8 @@ class MainActivity : BaseActivity(), MainView{
 
     @ProvidePresenter
     fun providePresenter(): MainPresenter {
-        return AndroidInjector.openMainScope().getMainPresenter()
+        return AndroidInjector.openMainScope()
+            .getMainPresenter()
     }
 
     init {
@@ -41,14 +42,16 @@ class MainActivity : BaseActivity(), MainView{
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        presenter.getAndroidAdapter().restoreInstanceState(this, savedInstanceState)
+        presenter.getAndroidAdapter()
+            .restoreInstanceState(this, savedInstanceState)
         recyclerPosts.adapter = postsAdapter
         buttonRetry.setOnClickListener { presenter.clickRetryLoadPosts() }
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        presenter.getAndroidAdapter().saveInstanceState(outState)
+        presenter.getAndroidAdapter()
+            .saveInstanceState(outState)
     }
 
     override fun setTitle(text: String) {
@@ -57,16 +60,12 @@ class MainActivity : BaseActivity(), MainView{
 
     override fun setPosts(posts: List<PostItem>) = postsAdapter.submitList(posts)
 
+    override fun showProgress(visible: Boolean) =
+            if (visible) progressContent.show() else progressContent.hide()
 
-    override fun showProgress(visible: Boolean) {
-        if (visible) progressContent.show() else progressContent.hide()
-    }
+    override fun showRetry(visible: Boolean) =
+            if (visible) buttonRetry.show() else buttonRetry.gone()
 
-    override fun showRetry(visible: Boolean) {
-        if (visible) buttonRetry.show() else buttonRetry.gone()
-    }
-
-    override fun showToast(toastModel: DialogModel) {
-    }
+    override fun showToast(toastModel: DialogModel) {}
 
 }

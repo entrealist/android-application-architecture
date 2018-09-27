@@ -1,10 +1,8 @@
 package com.rosberry.android.sample.data.persistence.internal
 
-import android.content.Context
 import android.content.SharedPreferences
 import android.text.TextUtils
 import com.rosberry.android.sample.BuildConfig
-import com.rosberry.android.sample.R
 import com.rosberry.android.sample.system.TextEncoder
 import javax.inject.Inject
 import javax.inject.Singleton

@@ -1,8 +1,8 @@
 package com.rosberry.android.sample.data.persistence.network
 
-import com.rosberry.android.sample.data.persistence.network.dto.response.*
+import com.rosberry.android.sample.data.persistence.network.dto.response.UsersResponse
 import io.reactivex.Single
-import retrofit2.http.*
+import retrofit2.http.GET
 
 
 /**

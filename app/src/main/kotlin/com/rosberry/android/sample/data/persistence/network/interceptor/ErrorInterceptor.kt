@@ -5,7 +5,6 @@ import com.rosberry.android.sample.data.persistence.exception.NetworkException
 import com.rosberry.android.sample.data.persistence.exception.ServerException
 import okhttp3.Interceptor
 import okhttp3.Response
-import java.net.HttpURLConnection
 import javax.inject.Inject
 
 /**

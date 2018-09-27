@@ -6,7 +6,6 @@ import com.rosberry.android.sample.data.transformer.PostTransformer
 import com.rosberry.android.sample.di.data.DataScope
 import com.rosberry.android.sample.entity.Photo
 import com.rosberry.android.sample.entity.Post
-import io.reactivex.Flowable
 import io.reactivex.Single
 import javax.inject.Inject
 
