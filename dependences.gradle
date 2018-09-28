@@ -64,9 +64,9 @@ ext {
     moxy_version = '1.5.5'
 
     constants = [
-            baseDevUrl    : "https://jsonplaceholder.typicode.com/",
-            baseProdUrl    : "https://jsonplaceholder.typicode.com/",
-            random    : "52r5qqq8l"
+            baseDevUrl    : '"https://jsonplaceholder.typicode.com/"',
+            baseProdUrl    : '"https://jsonplaceholder.typicode.com/"',
+            random    : '"52r5qqq8l"'
     ]
 
     testDependencies = [

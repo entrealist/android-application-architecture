@@ -1,7 +1,6 @@
 package com.rosberry.android.sample.ui.base.model
 
 import android.support.annotation.StringRes
-import com.rosberry.android.sample.data.persistence.Callback
 
 /**
  * Created by dmitry on 30.10.18.
@@ -22,13 +21,13 @@ class DialogModel {
     var neutral: Int = 0
         private set
 
-    var positiveListener: Callback<Any>? = null
+    var positiveListener: ((Any) -> Unit?)? = null
         private set
-    var negativeListener: Callback<Boolean>? = null
+    var negativeListener: ((Any) -> Unit?)? = null
         private set
-    var neutralListener: Callback<Boolean>? = null
+    var neutralListener: ((Any) -> Unit?)? = null
         private set
-    var dismissListener: Callback<String>? = null
+    var dismissListener: ((Any) -> Unit?)? = null
         private set
 
     var isCancelable: Boolean = false
@@ -77,25 +76,25 @@ class DialogModel {
             return this
         }
 
-        fun positiveListener(listener: Callback<Any>): Builder {
+        fun positiveListener(listener: (result: Any) -> Unit): Builder {
             dialogModel.positiveListener = listener
 
             return this
         }
 
-        fun negativeListener(listener: Callback<Boolean>): Builder {
+        fun negativeListener(listener: (result: Any) -> Unit): Builder {
             dialogModel.negativeListener = listener
 
             return this
         }
 
-        fun neutralListener(listener: Callback<Boolean>): Builder {
+        fun neutralListener(listener: (result: Any) -> Unit): Builder {
             dialogModel.neutralListener = listener
 
             return this
         }
 
-        fun dismissListener(listener: Callback<String>): Builder {
+        fun dismissListener(listener: (result: Any) -> Unit): Builder {
             dialogModel.dismissListener = listener
 
             return this
