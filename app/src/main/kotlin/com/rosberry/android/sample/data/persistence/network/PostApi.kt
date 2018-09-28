@@ -20,7 +20,6 @@ interface PostApi {
     @GET("photos")
     fun getPhotos(): Single<PhotosResponse>
 
-    @FormUrlEncoded
     @POST("posts")
     fun addPost(@Body postRequest: PostRequest): Single<PostResponse>
 }
