@@ -52,18 +52,10 @@ android {
 
     buildTypes {
         debug {
-            postprocessing {
-                removeUnusedCode false
-                removeUnusedResources false
-                obfuscate false
-                optimizeCode false
-                proguardFiles 'proguard-rules.pro'
-            }
-
             versionNameSuffix "debug"
             debuggable true
 
-            signingConfig signingConfigs.release
+            signingConfig signingConfigs.debug
         }
 
         release {
