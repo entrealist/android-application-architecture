@@ -30,10 +30,9 @@ class NetworkModule {
     @Provides
     fun providesGson() = GsonBuilder().create()
 
-    @DataScope
     @Provides
     @AuthClient
-    fun provideNonAuthOkHttpClient(errorInterceptor: ErrorInterceptor): OkHttpClient {
+    fun provideAuthOkHttpClient(errorInterceptor: ErrorInterceptor): OkHttpClient {
         return OkHttpClient.Builder()
             .apply {
                 connectTimeout(timeoutTime, TimeUnit.SECONDS)
