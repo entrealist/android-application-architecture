@@ -1,6 +1,6 @@
 package com.rosberry.android.sample.data.persistence.network
 
-import com.rosberry.android.sample.data.persistence.network.dto.response.UsersResponse
+import android.service.autofill.UserData
 import io.reactivex.Single
 import retrofit2.http.GET
 
@@ -11,6 +11,6 @@ import retrofit2.http.GET
 interface UserApi {
 
     @GET("users")
-    fun getUsers(): Single<UsersResponse>
+    fun getUsers(): Single<List<UserData>>
 
 }
