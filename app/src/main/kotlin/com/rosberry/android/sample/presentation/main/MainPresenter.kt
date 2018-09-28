@@ -19,7 +19,7 @@ class MainPresenter @Inject constructor(viewData: MainViewData, val mainInteract
         loadPosts()
     }
 
-    fun clickRetryLoadPosts(){
+    fun clickRetryLoadPosts() {
         loadPosts()
     }
 
@@ -27,18 +27,17 @@ class MainPresenter @Inject constructor(viewData: MainViewData, val mainInteract
         LogUtil.d(this, "Post clicked: " + postItem.toString())
     }
 
-    private fun loadPosts(){
+    private fun loadPosts() {
         mainInteractor.getPosts()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe {
                 viewState.showRetry(false)
-                viewState.showProgress(true) }
+                viewState.showProgress(true)
+            }
             .doOnEvent { _, _ -> viewState.showProgress(false) }
             .map { posts ->
-                posts.also {
-                    viewData.posts = posts
-                }
+                posts.also { viewData.posts = posts }
                     .map { PostItem(it.id, it.title, it.description) }
             }
             .subscribe({
