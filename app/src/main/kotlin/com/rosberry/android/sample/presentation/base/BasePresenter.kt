@@ -26,8 +26,4 @@ open class BasePresenter<V : MvpView, D : ViewDataRepository>(val viewData: D ) 
         compositeDisposable.dispose()
     }
 
-    fun getAndroidAdapter(): FrameworkAdapter {
-        return frameworkAdapter
-    }
-
 }

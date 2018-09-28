@@ -15,7 +15,7 @@ import com.rosberry.android.sample.ui.base.model.DialogModel
 import com.rosberry.android.sample.ui.main.list.PostsAdapter
 import kotlinx.android.synthetic.main.a_main.*
 
-class MainActivity : BaseActivity(), MainView{
+class MainActivity : BaseActivity(), MainView {
 
     val postsAdapter = PostsAdapter(this)
 
@@ -42,16 +42,14 @@ class MainActivity : BaseActivity(), MainView{
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        presenter.getAndroidAdapter()
-            .restoreInstanceState(this, savedInstanceState)
+        presenter.frameworkAdapter.restoreInstanceState(this, savedInstanceState)
         recyclerPosts.adapter = postsAdapter
         buttonRetry.setOnClickListener { presenter.clickRetryLoadPosts() }
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        presenter.getAndroidAdapter()
-            .saveInstanceState(outState)
+        presenter.frameworkAdapter.saveInstanceState(outState)
     }
 
     override fun setTitle(text: String) {
