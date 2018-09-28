@@ -67,7 +67,6 @@ android {
                 proguardFile 'proguard-rules.pro'
             }
 
-            versionNameSuffix "release"
             debuggable false
 
             signingConfig signingConfigs.release
