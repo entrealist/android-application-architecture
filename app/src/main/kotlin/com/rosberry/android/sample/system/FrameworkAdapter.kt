@@ -45,8 +45,8 @@ class FrameworkAdapter @Inject constructor(val viewData: ViewDataRepository) {
         }
     }
 
-    fun attachFragmentManager(supportFragmentManager: FragmentManager?) {
-        fragmentManager = supportFragmentManager!!;
+    fun attachFragmentManager(supportFragmentManager: FragmentManager) {
+        fragmentManager = supportFragmentManager;
     }
 
     fun setIntentAndBundle(intent: Intent?, bundle: Bundle?) {
