@@ -80,16 +80,16 @@ android {
             dimension "default"
 
             minSdkVersion 21
-            buildConfigField 'String', 'BASE_URL', '"https://jsonplaceholder.typicode.com/"'
-            buildConfigField 'String', 'RANDOM', '"52r5qqq8l"'
+            buildConfigField 'String', 'BASE_URL', rootProject.ext.constants.baseDevUrl
+            buildConfigField 'String', 'RANDOM', rootProject.ext.constants.random
         }
 
         prod {
             dimension "default"
 
             minSdkVersion 19
-            buildConfigField 'String', 'BASE_URL', '"https://jsonplaceholder.typicode.com/"'
-            buildConfigField 'String', 'RANDOM', '"52r5qqq8l"'
+            buildConfigField 'String', 'BASE_URL', rootProject.ext.constants.baseProdUrl
+            buildConfigField 'String', 'RANDOM', rootProject.ext.constants.random
         }
     }
 
