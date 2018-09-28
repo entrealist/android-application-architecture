@@ -10,8 +10,6 @@ class MainInteractor @Inject constructor(private val postRepository: PostReposit
 
     fun getPosts(): Single<ArrayList<Post>>{
         return postRepository.getPosts()
-            .subscribeOn(Schedulers.io())
-            .observeOn(Schedulers.io())
     }
 
 }
