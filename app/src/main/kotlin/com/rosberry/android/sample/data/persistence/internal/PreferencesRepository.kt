@@ -8,8 +8,8 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class PreferencesRepository
-@Inject constructor(val prefs: SharedPreferences) {
+class PreferencesRepository @Inject constructor(val prefs: SharedPreferences) {
+
     val accessTokenKey = "access_token"
 
     fun getAccessToken() = getDecodedString(accessTokenKey, "")
@@ -30,7 +30,8 @@ class PreferencesRepository
 
     fun putInt(key: String, value: Int) = prefs.edit().putInt(key, value).apply()
 
-    fun getDouble(key: String, defValue: Double) = prefs.getFloat(key, defValue.toFloat()).toDouble()
+    fun getDouble(key: String, defValue: Double) =
+            prefs.getFloat(key, defValue.toFloat()).toDouble()
 
     fun putDouble(key: String, value: Double) = prefs.edit().putFloat(key, value.toFloat()).apply()
 
