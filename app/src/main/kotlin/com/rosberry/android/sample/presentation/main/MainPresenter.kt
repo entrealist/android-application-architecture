@@ -14,6 +14,11 @@ import javax.inject.Inject
 class MainPresenter @Inject constructor(viewData: MainViewData, val mainInteractor: MainInteractor)
     : BasePresenter<MainView, MainViewData>(viewData) {
 
+    override fun onFirstViewAttach() {
+        super.onFirstViewAttach()
+        loadPosts()
+    }
+
     fun clickRetryLoadPosts(){
         loadPosts()
     }
@@ -46,11 +51,6 @@ class MainPresenter @Inject constructor(viewData: MainViewData, val mainInteract
 
             })
             .connect()
-    }
-
-    override fun onFirstViewAttach() {
-        super.onFirstViewAttach()
-        loadPosts()
     }
 
 }
