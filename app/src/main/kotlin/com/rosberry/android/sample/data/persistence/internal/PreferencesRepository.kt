@@ -10,13 +10,13 @@ import javax.inject.Singleton
 @Singleton
 class PreferencesRepository @Inject constructor(val prefs: SharedPreferences) {
 
-    val accessTokenKey = "access_token"
+    private val accessTokenKey = "access_token"
 
-    fun getAccessToken() = getDecodedString(accessTokenKey, "")
+    private fun accessToken() = decodeString(accessTokenKey, "")
 
     fun putAccessToken(accessToken: String) = putEncodedString(accessTokenKey, accessToken)
 
-    fun hasToken() = !TextUtils.isEmpty(getAccessToken())
+    fun hasToken() = !TextUtils.isEmpty(accessToken())
 
     fun getBool(key: String, defValue: Boolean) = prefs.getBoolean(key, defValue)
 
@@ -47,7 +47,7 @@ class PreferencesRepository @Inject constructor(val prefs: SharedPreferences) {
         .putString(key, TextEncoder.encrypt(value, BuildConfig.RANDOM)).apply()
 
 
-    fun getDecodedString(key: String, defValue: String): String {
+    fun decodeString(key: String, defValue: String): String {
         val result = prefs.getString(key, defValue)
         if (result === defValue || result == null)
             return ""
