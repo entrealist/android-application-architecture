@@ -9,3 +9,4 @@
 .externalNativeBuild
 app/app-release.apk
 .DS_store
+local.properties
