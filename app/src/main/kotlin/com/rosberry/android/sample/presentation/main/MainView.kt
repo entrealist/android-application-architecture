@@ -7,7 +7,7 @@ import com.rosberry.android.sample.presentation.main.list.PostItem
 import com.rosberry.android.sample.ui.base.model.DialogModel
 import com.rosberry.android.sample.ui.main.list.PostsAdapter
 
-interface MainView : MvpView, PostsAdapter.OnItemClickListener {
+interface MainView : MvpView {
     fun setTitle(text: String)
 
     @StateStrategyType(AddToEndSingleStrategy::class)

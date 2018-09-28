@@ -15,7 +15,7 @@ import com.rosberry.android.sample.ui.base.model.DialogModel
 import com.rosberry.android.sample.ui.main.list.PostsAdapter
 import kotlinx.android.synthetic.main.a_main.*
 
-class MainActivity : BaseActivity(), MainView {
+class MainActivity : BaseActivity(), MainView,  PostsAdapter.OnItemClickListener {
 
     val postsAdapter = PostsAdapter(this)
 
