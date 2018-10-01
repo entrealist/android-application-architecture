@@ -5,6 +5,7 @@ import com.rosberry.android.sample.BuildConfig
 import com.rosberry.android.sample.di.app.ApplicationComponent
 import com.rosberry.android.sample.di.app.DaggerApplicationComponent
 import com.rosberry.android.sample.di.data.DataComponent
+import com.rosberry.android.sample.entity.Post
 
 object AndroidInjector {
 
@@ -31,6 +32,8 @@ object AndroidInjector {
     }
 
     fun openMainScope() = openDataScope().plusMainComponent()
+
+    fun openPostScope(userPost: Post) = openDataScope().plustPostComponent().post(userPost).build()
 
     fun closeDataScope() {
         dataComponent = null

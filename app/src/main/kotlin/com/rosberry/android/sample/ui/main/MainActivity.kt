@@ -1,21 +1,25 @@
 package com.rosberry.android.sample.ui.main
 
 import android.os.Bundle
+import android.view.MenuItem
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.rosberry.android.sample.R
 import com.rosberry.android.sample.di.AndroidInjector
+import com.rosberry.android.sample.entity.Post
 import com.rosberry.android.sample.presentation.main.MainPresenter
 import com.rosberry.android.sample.presentation.main.MainView
 import com.rosberry.android.sample.presentation.main.list.PostItem
+import com.rosberry.android.sample.presentation.post.PostView
 import com.rosberry.android.sample.system.gone
 import com.rosberry.android.sample.system.show
 import com.rosberry.android.sample.ui.base.BaseActivity
 import com.rosberry.android.sample.ui.base.model.DialogModel
 import com.rosberry.android.sample.ui.main.list.PostsAdapter
+import com.rosberry.android.sample.ui.post.PostDetailsFragment
 import kotlinx.android.synthetic.main.a_main.*
 
-class MainActivity : BaseActivity(), MainView,  PostsAdapter.OnItemClickListener {
+class MainActivity : BaseActivity(), MainView, PostsAdapter.OnItemClickListener {
 
     val postsAdapter = PostsAdapter(this)
 
@@ -38,6 +42,16 @@ class MainActivity : BaseActivity(), MainView,  PostsAdapter.OnItemClickListener
 
     override fun onPostClicked(postItem: PostItem, pos: Int) {
         presenter.clickPost(postItem)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.op_action -> {
+                // do something
+                return true
+            }
+            else -> return super.onOptionsItemSelected(item)
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -65,5 +79,10 @@ class MainActivity : BaseActivity(), MainView,  PostsAdapter.OnItemClickListener
             if (visible) buttonRetry.show() else buttonRetry.gone()
 
     override fun showToast(toastModel: DialogModel) {}
+
+    override fun showPostDetails(post: Post) {
+        PostDetailsFragment.newInstance(post)
+            .show(supportFragmentManager, PostView.TAG)
+    }
 
 }

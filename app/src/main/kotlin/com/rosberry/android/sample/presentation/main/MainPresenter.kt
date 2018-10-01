@@ -25,6 +25,8 @@ class MainPresenter @Inject constructor(viewData: MainViewData, val mainInteract
 
     fun clickPost(postItem: PostItem) {
         LogUtil.d(this, "Post clicked: " + postItem.toString())
+        viewState.showPostDetails(
+                viewData.posts.asSequence().filter { it -> it.id == postItem.id }.single())
     }
 
     private fun loadPosts() {

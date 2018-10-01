@@ -11,20 +11,18 @@ class DialogFragmentModel : FragmentModel() {
     var isCancelable = true
     var isCancelableOutside = false
     var style: Int = 0
-    var margin = 0
-    var width = -1
-    var height = -1
+    var themeId = -1;
 
     @AnimRes var animationId = 0
 
-    fun init(isDialog: Boolean, isCancelable: Boolean, style: Int) {
-        this.isDialog = isDialog
+    fun initDialog(style: Int, themeId: Int, cancellable: Boolean = false) {
+        this.isDialog = true
         this.isCancelable = isCancelable
         this.style = style
+        this.themeId = themeId
+        this.isCancelable = cancellable
     }
 
-    fun size(width: Int, height: Int) {
-        this.width = width
-        this.height = height
-    }
+
+    fun hasOptionMenu() = menuId != -1
 }
