@@ -12,7 +12,10 @@ class MovieDiffUtil(
 ) : DiffUtil.Callback() {
 
     override fun areItemsTheSame(oldPosition: Int, newPosition: Int): Boolean {
-        return oldItems[oldPosition].type == newItems[newPosition].type
+        val oldItem = oldItems[oldPosition]
+        val newItem = newItems[newPosition]
+
+        return oldItem == newItem
     }
 
     override fun getOldListSize(): Int = oldItems.size

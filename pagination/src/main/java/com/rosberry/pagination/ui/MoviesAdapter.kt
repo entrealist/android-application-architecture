@@ -25,8 +25,7 @@ class MoviesAdapter(
 
     override fun onBindViewHolder(holder: AbstractViewHolder<AbstractItem>, position: Int) {
         super.onBindViewHolder(holder, position)
-
-        if (position == itemCount - 1) loadNextPageListener()
+        if (position == itemCount - 2) loadNextPageListener()
     }
 
     fun showData(newData: List<AbstractItem>) {
