@@ -45,6 +45,7 @@ class MoviesActivity : MvpAppCompatActivity(), MoviesView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_movies)
         moviesListView.adapter = moviesAdapter
+        refreshMoviesView.setOnRefreshListener { presenter.onRefresh() }
     }
 
     override fun showEmptyProgress(show: Boolean) {

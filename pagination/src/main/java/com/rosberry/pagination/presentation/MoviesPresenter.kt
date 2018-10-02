@@ -50,4 +50,8 @@ class MoviesPresenter constructor(
     override fun showPageProgress(show: Boolean) {
         viewState.showPageProgress(show)
     }
+
+    fun onRefresh() {
+        paginator.refresh()
+    }
 }
