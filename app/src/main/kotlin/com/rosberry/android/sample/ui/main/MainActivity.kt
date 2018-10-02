@@ -33,7 +33,6 @@ class MainActivity : BaseActivity(), MainView, PostsAdapter.OnItemClickListener 
     }
 
     init {
-        model.backId = R.drawable.md_nav_back
         model.layoutId = R.layout.a_main
         model.menuId = R.menu.m_main
         model.title = R.string.app_name
@@ -81,7 +80,7 @@ class MainActivity : BaseActivity(), MainView, PostsAdapter.OnItemClickListener 
     override fun showToast(toastModel: DialogModel) {}
 
     override fun showPostDetails(post: Post) {
-        PostDetailsFragment.newInstance(post)
+        PostDetailsFragment.newInstance(post, true)
             .show(supportFragmentManager, PostView.TAG)
     }
 

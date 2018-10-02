@@ -33,7 +33,9 @@ object AndroidInjector {
 
     fun openMainScope() = openDataScope().plusMainComponent()
 
-    fun openPostScope(userPost: Post) = openDataScope().plustPostComponent().post(userPost).build()
+    fun openPostScope(userPost: Post) = openDataScope().plusPostComponent().post(userPost).build()
+
+    fun openAddPostScope(userPost: Post) = openDataScope().plusAddPostComponent().post(userPost).build()
 
     fun closeDataScope() {
         dataComponent = null

@@ -15,7 +15,7 @@ class DialogFragmentModel : FragmentModel() {
 
     @AnimRes var animationId = 0
 
-    fun initDialog(style: Int, themeId: Int, cancellable: Boolean = false) {
+    fun setDialogStyle(style: Int, themeId: Int, cancellable: Boolean = false) {
         this.isDialog = true
         this.isCancelable = isCancelable
         this.style = style

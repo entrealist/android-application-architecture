@@ -24,7 +24,7 @@ android {
             storePassword keystoreProperties['storePassword']
         }
 
-        debug{
+        debug {
             keyAlias keystoreProperties['debugKeyAlias']
             keyPassword keystoreProperties['debugKeyPassword']
             storeFile file(keystoreProperties['debugStoreFile'])
@@ -127,6 +127,7 @@ dependencies {
     def deps = rootProject.ext.dependencies
     def testDeps = rootProject.ext.testDependencies
 
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
     testImplementation testDeps.jUnit
 
     implementation fileTree(include: ['*.jar'], dir: 'libs')
@@ -178,5 +179,3 @@ dependencies {
     kapt deps.moxyCompiler
 
 }
-
-

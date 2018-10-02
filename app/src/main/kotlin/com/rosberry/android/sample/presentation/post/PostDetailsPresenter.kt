@@ -15,4 +15,9 @@ class PostDetailsPresenter @Inject constructor(viewData: PostViewData) :
             viewState.setPostDetails(title, description)
         }
     }
+
+    fun clickReply() {
+        viewState.showAddPost(viewData.post)
+    }
+
 }

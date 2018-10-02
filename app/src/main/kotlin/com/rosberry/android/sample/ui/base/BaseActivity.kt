@@ -36,7 +36,25 @@ abstract class BaseActivity : MvpAppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(model.layoutId)
+        setToolbar()
         stateSaved = false
+    }
+
+    private fun setToolbar() {
+        if (model.hasToolbar()) {
+            setSupportActionBar(findViewById(model.toolbarId))
+            supportActionBar?.apply {
+                if (model.hasTitle()) {
+                    setDisplayShowTitleEnabled(true)
+                    setTitle(model.title)
+                }
+                val hasBack = model.hasBack()
+                setHomeButtonEnabled(hasBack)
+                setDisplayShowHomeEnabled(hasBack)
+                setDisplayHomeAsUpEnabled(hasBack)
+            }
+        }
+
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
