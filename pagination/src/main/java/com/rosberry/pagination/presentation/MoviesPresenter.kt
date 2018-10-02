@@ -20,6 +20,11 @@ class MoviesPresenter constructor(
         paginator.refresh()
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        paginator.release()
+    }
+
     override fun showEmptyProgress(show: Boolean) {
         viewState.showEmptyProgress(show)
     }

@@ -12,8 +12,8 @@ class MoviesRepository constructor(
         private val moviesApi: MoviesApi
 ) {
 
-    fun movies(page: Int): Single<Movies> {
-        return moviesApi.getMovies()
+    fun movies(offset: Int): Single<Movies> {
+        return moviesApi.getMovies(offset = offset)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
     }
