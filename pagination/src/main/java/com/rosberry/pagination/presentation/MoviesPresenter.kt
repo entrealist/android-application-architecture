@@ -4,6 +4,7 @@ import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
 import com.rosberry.pagination.data.MoviesRepository
 import com.rosberry.pagination.entity.Movie
+import com.rosberry.pagination.system.Movies
 
 /**
  * @author Alexei Korshun on 28/09/2018.
@@ -37,7 +38,7 @@ class MoviesPresenter constructor(
         viewState.showEmptyView(show)
     }
 
-    override fun showData(show: Boolean, data: List<Movie>) {
+    override fun showData(show: Boolean, data: Movies) {
         val newData = data.asSequence()
             .map { movie -> MovieItem(movie) }
             .toList()

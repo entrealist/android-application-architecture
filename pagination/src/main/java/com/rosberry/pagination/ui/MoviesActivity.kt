@@ -9,9 +9,9 @@ import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.rosberry.pagination.R
 import com.rosberry.pagination.data.MoviesApi
 import com.rosberry.pagination.data.MoviesRepository
-import com.rosberry.pagination.presentation.MovieItem
 import com.rosberry.pagination.presentation.MoviesPresenter
 import com.rosberry.pagination.presentation.MoviesView
+import com.rosberry.pagination.system.MovieItems
 import com.rosberry.pagination.system.gone
 import com.rosberry.pagination.system.show
 import kotlinx.android.synthetic.main.activity_movies.*
@@ -69,7 +69,7 @@ class MoviesActivity : MvpAppCompatActivity(), MoviesView {
             .show()
     }
 
-    override fun showData(show: Boolean, data: List<MovieItem>) {
+    override fun showData(show: Boolean, data: MovieItems) {
         if (show) {
             moviesAdapter.showData(data)
             moviesListView.show()
