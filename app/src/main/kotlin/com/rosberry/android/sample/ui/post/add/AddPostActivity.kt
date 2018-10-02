@@ -11,6 +11,7 @@ import com.rosberry.android.sample.presentation.post.add.AddPostPresenter
 import com.rosberry.android.sample.presentation.post.add.AddPostView
 import com.rosberry.android.sample.ui.base.BaseActivity
 import com.rosberry.android.sample.ui.post.PostDetailsFragment
+import com.rosberry.android.sample.ui.post.edit.EditPostFragment
 
 class AddPostActivity : BaseActivity(), AddPostView {
 
@@ -44,6 +45,12 @@ class AddPostActivity : BaseActivity(), AddPostView {
     override fun showPostDetails(post: Post) {
         supportFragmentManager.beginTransaction()
             .replace(R.id.contentView1, PostDetailsFragment.newInstance(post, false))
+            .commit()
+    }
+
+    override fun showEditPost() {
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.contentView2, EditPostFragment.newInstance())
             .commit()
     }
 }

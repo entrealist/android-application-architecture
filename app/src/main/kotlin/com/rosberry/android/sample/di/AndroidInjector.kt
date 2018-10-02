@@ -41,4 +41,6 @@ object AndroidInjector {
         dataComponent = null
     }
 
+    fun openEditPostScope() = openDataScope().plusEditPostComponent()
+
 }

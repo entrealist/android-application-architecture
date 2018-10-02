@@ -11,6 +11,7 @@ interface AddPostView : MvpView {
     }
 
     fun showPostDetails(post: Post);
+    fun showEditPost()
 
     fun finish()
 }
