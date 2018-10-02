@@ -51,7 +51,7 @@ class MoviesPresenter constructor(
         viewState.showPageProgress(show)
     }
 
-    fun onRefresh() {
-        paginator.refresh()
-    }
+    fun onRefresh() = paginator.refresh()
+
+    fun loadNextPage() = paginator.loadNewPage()
 }

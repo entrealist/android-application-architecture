@@ -26,7 +26,7 @@ class MoviesActivity : MvpAppCompatActivity(), MoviesView {
 
     private val viewHandler = Handler()
 
-    private val moviesAdapter by lazy { MoviesAdapter(emptyList()) }
+    private val moviesAdapter by lazy { MoviesAdapter(emptyList()) { presenter.loadNextPage() } }
 
     @ProvidePresenter
     fun providePresenter(): MoviesPresenter {
@@ -83,6 +83,6 @@ class MoviesActivity : MvpAppCompatActivity(), MoviesView {
     }
 
     override fun showPageProgress(show: Boolean) {
-        moviesAdapter.showProgress(show)
+        viewHandler.post { moviesAdapter.showProgress(show) }
     }
 }
