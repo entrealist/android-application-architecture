@@ -4,6 +4,7 @@ import com.rosberry.android.sample.di.data.qualifier.BaseUrl
 import com.rosberry.android.sample.di.main.MainComponent
 import com.rosberry.android.sample.di.post.PostComponent
 import com.rosberry.android.sample.di.post.add.AddPostComponent
+import com.rosberry.android.sample.di.post.detail.PostDetailsComponent
 import com.rosberry.android.sample.di.post.edit.EditPostComponent
 import dagger.BindsInstance
 import dagger.Subcomponent
@@ -28,7 +29,4 @@ interface DataComponent {
 
     fun plusPostComponent(): PostComponent.Builder
 
-    fun plusAddPostComponent(): AddPostComponent.Builder
-
-    fun plusEditPostComponent(): EditPostComponent
 }

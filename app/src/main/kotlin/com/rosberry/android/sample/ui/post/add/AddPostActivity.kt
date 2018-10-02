@@ -6,12 +6,14 @@ import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.rosberry.android.sample.R
 import com.rosberry.android.sample.di.AndroidInjector
 import com.rosberry.android.sample.entity.Post
-import com.rosberry.android.sample.presentation.main.list.PostItem
 import com.rosberry.android.sample.presentation.post.add.AddPostPresenter
 import com.rosberry.android.sample.presentation.post.add.AddPostView
+import com.rosberry.android.sample.presentation.post.detail.PostDetailsView
+import com.rosberry.android.sample.presentation.post.edit.EditPostView
 import com.rosberry.android.sample.ui.base.BaseActivity
 import com.rosberry.android.sample.ui.post.PostDetailsFragment
 import com.rosberry.android.sample.ui.post.edit.EditPostFragment
+import kotlinx.android.synthetic.main.a_add_post.*
 
 class AddPostActivity : BaseActivity(), AddPostView {
 
@@ -22,7 +24,7 @@ class AddPostActivity : BaseActivity(), AddPostView {
     fun providePresenter(): AddPostPresenter {
         val post = intent.getSerializableExtra(PostDetailsFragment.ARG_USER_POST) as Post
         return AndroidInjector.openAddPostScope(post)
-            .getAddPostPresenter()
+            .provideAddPostPresenter()
     }
 
     init {
@@ -35,6 +37,7 @@ class AddPostActivity : BaseActivity(), AddPostView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         presenter.frameworkAdapter.restoreInstanceState(this, savedInstanceState)
+        buttonSend.setOnClickListener { presenter.clickSendPost() }
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -43,14 +46,22 @@ class AddPostActivity : BaseActivity(), AddPostView {
     }
 
     override fun showPostDetails(post: Post) {
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.contentView1, PostDetailsFragment.newInstance(post, false))
-            .commit()
+        if (supportFragmentManager.findFragmentByTag(EditPostView.TAG) == null)
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.contentView1, PostDetailsFragment.newInstance(post, false),
+                        PostDetailsView.TAG)
+                .commit()
     }
 
     override fun showEditPost() {
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.contentView2, EditPostFragment.newInstance())
-            .commit()
+        if (supportFragmentManager.findFragmentByTag(EditPostView.TAG) == null)
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.contentView2, EditPostFragment.newInstance(), EditPostView.TAG)
+                .commit()
     }
+
+    override fun setSendButtonEnabled(enabled: Boolean) {
+        buttonSend.isEnabled = enabled
+    }
+
 }

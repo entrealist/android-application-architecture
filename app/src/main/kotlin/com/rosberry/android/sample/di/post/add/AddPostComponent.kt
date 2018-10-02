@@ -1,8 +1,9 @@
 package com.rosberry.android.sample.di.post.add
 
+import com.rosberry.android.sample.di.post.PostScope
 import com.rosberry.android.sample.entity.Post
-import com.rosberry.android.sample.presentation.post.PostDetailsPresenter
 import com.rosberry.android.sample.presentation.post.add.AddPostPresenter
+import com.rosberry.android.sample.ui.post.add.AddPostActivity
 import dagger.BindsInstance
 import dagger.Subcomponent
 
@@ -14,14 +15,5 @@ import dagger.Subcomponent
 @Subcomponent
 interface AddPostComponent {
 
-    @Subcomponent.Builder
-    interface Builder {
-
-        @BindsInstance
-        fun post(post: Post): Builder
-
-        fun build(): AddPostComponent
-    }
-
-    fun getAddPostPresenter(): AddPostPresenter
+    fun provideAddPostPresenter(): AddPostPresenter
 }

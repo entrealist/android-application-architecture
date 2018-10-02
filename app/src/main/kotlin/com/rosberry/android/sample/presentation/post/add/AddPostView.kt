@@ -10,6 +10,8 @@ interface AddPostView : MvpView {
         const val TAG = "add_post_view"
     }
 
+    fun setSendButtonEnabled(enabled: Boolean)
+
     fun showPostDetails(post: Post);
     fun showEditPost()
 

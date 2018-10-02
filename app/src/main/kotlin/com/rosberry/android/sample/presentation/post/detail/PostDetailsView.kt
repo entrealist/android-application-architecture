@@ -1,9 +1,9 @@
-package com.rosberry.android.sample.presentation.post
+package com.rosberry.android.sample.presentation.post.detail
 
 import com.arellomobile.mvp.MvpView
 import com.rosberry.android.sample.entity.Post
 
-interface PostView : MvpView {
+interface PostDetailsView : MvpView {
 
     companion object {
         const val TAG = "post_view"

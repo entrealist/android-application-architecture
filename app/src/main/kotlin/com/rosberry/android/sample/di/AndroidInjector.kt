@@ -5,12 +5,14 @@ import com.rosberry.android.sample.BuildConfig
 import com.rosberry.android.sample.di.app.ApplicationComponent
 import com.rosberry.android.sample.di.app.DaggerApplicationComponent
 import com.rosberry.android.sample.di.data.DataComponent
+import com.rosberry.android.sample.di.post.PostComponent
 import com.rosberry.android.sample.entity.Post
 
 object AndroidInjector {
 
     private lateinit var appComponent: ApplicationComponent
     private var dataComponent: DataComponent? = null
+    private var postComponent: PostComponent? = null
 
     fun openAppScope(context: Context): ApplicationComponent {
         if (!::appComponent.isInitialized) {
@@ -33,14 +35,30 @@ object AndroidInjector {
 
     fun openMainScope() = openDataScope().plusMainComponent()
 
-    fun openPostScope(userPost: Post) = openDataScope().plusPostComponent().post(userPost).build()
+    fun openPostDetailsScope(post: Post) = openPostScope(post)
+        .plusPostDetailsComponent()
 
-    fun openAddPostScope(userPost: Post) = openDataScope().plusAddPostComponent().post(userPost).build()
+
+    fun openAddPostScope(post: Post) = openPostScope(post)
+        .plusAddPostComponent()
+
+    fun openEditPostScope() = openPostScope(null).plusEditPostComponent()
+
+    fun openPostScope(post: Post?): PostComponent {
+        if (postComponent == null) {
+            val postComponentBuilder = openDataScope().plusPostComponent()
+            if (post != null)
+                postComponent = postComponentBuilder.post(post)
+                    .build()
+            else postComponent = postComponentBuilder.build()
+        }
+
+        return postComponent!!
+    }
 
     fun closeDataScope() {
         dataComponent = null
     }
 
-    fun openEditPostScope() = openDataScope().plusEditPostComponent()
 
 }

@@ -10,7 +10,7 @@ import com.rosberry.android.sample.entity.Post
 import com.rosberry.android.sample.presentation.main.MainPresenter
 import com.rosberry.android.sample.presentation.main.MainView
 import com.rosberry.android.sample.presentation.main.list.PostItem
-import com.rosberry.android.sample.presentation.post.PostView
+import com.rosberry.android.sample.presentation.post.detail.PostDetailsView
 import com.rosberry.android.sample.system.gone
 import com.rosberry.android.sample.system.show
 import com.rosberry.android.sample.ui.base.BaseActivity
@@ -81,7 +81,7 @@ class MainActivity : BaseActivity(), MainView, PostsAdapter.OnItemClickListener 
 
     override fun showPostDetails(post: Post) {
         PostDetailsFragment.newInstance(post, true)
-            .show(supportFragmentManager, PostView.TAG)
+            .show(supportFragmentManager, PostDetailsView.TAG)
     }
 
 }

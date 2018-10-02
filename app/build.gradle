@@ -149,6 +149,7 @@ dependencies {
     implementation deps.rxJava
     implementation deps.rxPermissions
     implementation deps.rxKotlin
+    implementation deps.rxBinding
 
     //inject
     implementation deps.dagger

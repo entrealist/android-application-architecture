@@ -10,14 +10,15 @@ import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.rosberry.android.sample.R
 import com.rosberry.android.sample.di.AndroidInjector
 import com.rosberry.android.sample.entity.Post
-import com.rosberry.android.sample.presentation.post.PostDetailsPresenter
-import com.rosberry.android.sample.presentation.post.PostView
+import com.rosberry.android.sample.presentation.post.detail.PostDetailsPresenter
+import com.rosberry.android.sample.presentation.post.detail.PostDetailsView
 import com.rosberry.android.sample.system.show
 import com.rosberry.android.sample.ui.base.BaseFragment
 import com.rosberry.android.sample.ui.post.add.AddPostActivity
 import kotlinx.android.synthetic.main.f_post.*
 
-class PostDetailsFragment : BaseFragment(), PostView {
+class PostDetailsFragment : BaseFragment(),
+                            PostDetailsView {
 
     companion object {
         const val ARG_USER_POST = "user_post"
@@ -39,8 +40,9 @@ class PostDetailsFragment : BaseFragment(), PostView {
         val userPost = arguments?.getSerializable(PostDetailsFragment.ARG_USER_POST) as Post
         fragmentModel.isDialog = arguments?.getBoolean(PostDetailsFragment.ARG_IS_DIALOG,
                 false) as Boolean
-        return AndroidInjector.openPostScope(userPost)
-            .getPostPresenter()
+
+        return AndroidInjector.openPostDetailsScope(userPost)
+            .providePostDetailsPresenter()
     }
 
     init {

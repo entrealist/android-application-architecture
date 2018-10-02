@@ -1,20 +1,17 @@
 package com.rosberry.android.sample.ui.post.edit
 
-import android.content.Intent
+import android.annotation.SuppressLint
 import android.os.Bundle
-import android.support.v4.app.DialogFragment
 import android.view.View
-import android.widget.FrameLayout
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
+import com.jakewharton.rxbinding2.widget.RxTextView
 import com.rosberry.android.sample.R
 import com.rosberry.android.sample.di.AndroidInjector
 import com.rosberry.android.sample.presentation.post.edit.EditPostPresenter
 import com.rosberry.android.sample.presentation.post.edit.EditPostView
-import com.rosberry.android.sample.system.show
 import com.rosberry.android.sample.ui.base.BaseFragment
-import com.rosberry.android.sample.ui.post.add.AddPostActivity
-import kotlinx.android.synthetic.main.f_post.*
+import kotlinx.android.synthetic.main.f_edit_post.*
 
 class EditPostFragment : BaseFragment(), EditPostView {
 
@@ -29,7 +26,7 @@ class EditPostFragment : BaseFragment(), EditPostView {
     @ProvidePresenter
     fun providePresenter(): EditPostPresenter {
         return AndroidInjector.openEditPostScope()
-            .getEditPostPresenter()
+            .provideEditPostPresenter()
     }
 
     init {
@@ -46,8 +43,13 @@ class EditPostFragment : BaseFragment(), EditPostView {
         presenter.frameworkAdapter.saveInstanceState(outState)
     }
 
+    @SuppressLint("CheckResult")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        RxTextView.textChanges(editTitle)
+            .subscribe { presenter.changePostTitle(it?.toString() ?: "") }
+        RxTextView.textChanges(editDescription)
+            .subscribe { presenter.changePostDescription(it?.toString() ?: "") }
     }
 
     override fun close() {

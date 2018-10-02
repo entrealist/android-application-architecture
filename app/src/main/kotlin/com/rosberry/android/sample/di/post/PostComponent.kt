@@ -1,7 +1,11 @@
 package com.rosberry.android.sample.di.post
 
+import com.rosberry.android.sample.di.post.add.AddPostComponent
+import com.rosberry.android.sample.di.post.detail.PostDetailsComponent
+import com.rosberry.android.sample.di.post.edit.EditPostComponent
 import com.rosberry.android.sample.entity.Post
-import com.rosberry.android.sample.presentation.post.PostDetailsPresenter
+import com.rosberry.android.sample.presentation.post.add.AddPostPresenter
+import com.rosberry.android.sample.ui.post.add.AddPostActivity
 import dagger.BindsInstance
 import dagger.Subcomponent
 
@@ -10,6 +14,7 @@ import dagger.Subcomponent
  * Created by neestell on 01.10.2018.
  * Rosberry Ltd
  */
+@PostScope
 @Subcomponent
 interface PostComponent {
 
@@ -22,5 +27,10 @@ interface PostComponent {
         fun build(): PostComponent
     }
 
-    fun getPostPresenter(): PostDetailsPresenter
+    fun plusEditPostComponent(): EditPostComponent
+
+    fun plusPostDetailsComponent(): PostDetailsComponent
+
+    fun plusAddPostComponent(): AddPostComponent
+
 }

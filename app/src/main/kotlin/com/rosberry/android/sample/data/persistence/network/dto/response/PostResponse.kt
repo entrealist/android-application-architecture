@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 class PostResponse(@SerializedName("id") val id: Int,
                    @SerializedName("userId") val userId: Int,
-                   @SerializedName("title") val title: String,
-                   @SerializedName("body") val description: String) : BaseResponse() {
+                   @SerializedName("title") val title: String?,
+                   @SerializedName("body") val description: String?) : BaseResponse() {
 
 }
