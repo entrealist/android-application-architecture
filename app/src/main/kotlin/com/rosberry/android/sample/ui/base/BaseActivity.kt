@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import com.arellomobile.mvp.MvpAppCompatActivity
+import com.evernote.android.state.State
+import com.evernote.android.state.StateSaver
 import com.rosberry.android.sample.ui.base.model.ActivityModel
 
 abstract class BaseActivity : MvpAppCompatActivity() {
@@ -65,18 +67,6 @@ abstract class BaseActivity : MvpAppCompatActivity() {
     override fun onResume() {
         super.onResume()
         stateSaved = false
-    }
-
-    override fun onPause() {
-        super.onPause()
-    }
-
-    override fun onStop() {
-        super.onStop()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

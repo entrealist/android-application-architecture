@@ -4,16 +4,20 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.*
 import com.arellomobile.mvp.MvpAppCompatDialogFragment
+import com.evernote.android.state.State
+import com.evernote.android.state.StateSaver
 import com.rosberry.android.sample.system.LogUtil
 import com.rosberry.android.sample.ui.base.model.DialogFragmentModel
 
 open class BaseFragment : MvpAppCompatDialogFragment() {
 
-    protected var fragmentModel = DialogFragmentModel()
+    @State var fragmentModel = DialogFragmentModel()
     private var stateSaved: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        StateSaver.restoreInstanceState(this, savedInstanceState)
+
         setStyle(fragmentModel.style, fragmentModel.themeId)
         isCancelable = fragmentModel.isCancelable
     }
@@ -60,6 +64,8 @@ open class BaseFragment : MvpAppCompatDialogFragment() {
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
+        StateSaver.saveInstanceState(this, outState)
+
         stateSaved = true
     }
 

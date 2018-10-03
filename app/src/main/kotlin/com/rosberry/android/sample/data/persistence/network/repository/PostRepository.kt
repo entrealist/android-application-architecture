@@ -29,7 +29,7 @@ class PostRepository @Inject constructor(
     }
 
     fun addPost(post: Post): Single<Post>{
-        return postApi.addPost(PostRequest(post.userId, post.title, post.title))
+        return postApi.addPost(PostRequest(post.userId, post.title, post.description))
             .map { postTransformer.toPost(it) }
     }
 

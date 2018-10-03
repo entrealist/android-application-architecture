@@ -24,7 +24,7 @@ class ErrorInterceptor @Inject constructor(
         val code = response.code()
 
         when (code) {
-            200 -> {}
+            in 200..226 -> {}
             in 400..600 -> {
                 throw ServerException(retrofit2.Response.error<Any>(response.body()!!, response))
             }

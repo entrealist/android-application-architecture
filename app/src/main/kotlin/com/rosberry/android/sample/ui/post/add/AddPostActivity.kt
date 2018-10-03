@@ -1,6 +1,7 @@
 package com.rosberry.android.sample.ui.post.add
 
 import android.os.Bundle
+import com.afollestad.materialdialogs.MaterialDialog
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.rosberry.android.sample.R
@@ -11,11 +12,15 @@ import com.rosberry.android.sample.presentation.post.add.AddPostView
 import com.rosberry.android.sample.presentation.post.detail.PostDetailsView
 import com.rosberry.android.sample.presentation.post.edit.EditPostView
 import com.rosberry.android.sample.ui.base.BaseActivity
+import com.rosberry.android.sample.ui.base.model.DialogModel
 import com.rosberry.android.sample.ui.post.PostDetailsFragment
 import com.rosberry.android.sample.ui.post.edit.EditPostFragment
 import kotlinx.android.synthetic.main.a_add_post.*
+import org.jetbrains.anko.toast
 
 class AddPostActivity : BaseActivity(), AddPostView {
+
+    private var progressDialog: MaterialDialog? = null
 
     @InjectPresenter
     lateinit var presenter: AddPostPresenter
@@ -45,6 +50,10 @@ class AddPostActivity : BaseActivity(), AddPostView {
         presenter.frameworkAdapter.saveInstanceState(outState)
     }
 
+    override fun setSendButtonEnabled(enabled: Boolean) {
+        buttonSend.isEnabled = enabled
+    }
+
     override fun showPostDetails(post: Post) {
         if (supportFragmentManager.findFragmentByTag(EditPostView.TAG) == null)
             supportFragmentManager.beginTransaction()
@@ -60,8 +69,26 @@ class AddPostActivity : BaseActivity(), AddPostView {
                 .commit()
     }
 
-    override fun setSendButtonEnabled(enabled: Boolean) {
-        buttonSend.isEnabled = enabled
+    override fun showToast(model: DialogModel) {
+        toast(model.content)
+    }
+
+
+    override fun showProgress(visible: Boolean) {
+        progressDialog?.dismiss()
+        if (visible) {
+            progressDialog = MaterialDialog.Builder(this)
+                .progress(true, 0)
+                .content(R.string.please_wait)
+                .build()
+
+            progressDialog?.show()
+        }
+
+    }
+
+    override fun finish() {
+        super.finish()
     }
 
 }

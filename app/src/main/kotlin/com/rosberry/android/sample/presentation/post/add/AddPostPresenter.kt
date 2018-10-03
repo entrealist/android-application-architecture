@@ -4,7 +4,9 @@ import com.arellomobile.mvp.InjectViewState
 import com.rosberry.android.sample.domain.post.add.AddPostInteractor
 import com.rosberry.android.sample.entity.Post
 import com.rosberry.android.sample.presentation.base.BasePresenter
+import com.rosberry.android.sample.ui.base.model.DialogModel
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 @InjectViewState
@@ -46,7 +48,24 @@ class AddPostPresenter @Inject constructor(
 
 
     fun clickSendPost() {
-        //todo add post request
+        sendPost()
+    }
+
+    private fun sendPost() {
+        addPostInteractor.sendPost(viewData.post)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .doOnSubscribe { viewState.showProgress(true) }
+            .doOnEvent{_, _ -> viewState.showProgress(false)}
+            .subscribe(
+                    { viewState.finish() },
+                    {
+                        viewState.showToast(DialogModel.Builder()
+                            .content(it.message.toString())
+                            .build())
+                    })
+            .connect()
+
     }
 
 }
