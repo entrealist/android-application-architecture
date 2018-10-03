@@ -52,6 +52,10 @@ class EditPostFragment : BaseFragment(), EditPostView {
             .subscribe { presenter.changePostDescription(it?.toString() ?: "") }
     }
 
+    override fun showContextId(contextId: Int) {
+        textContextId.setText(getString(R.string.contextId, contextId))
+    }
+
     override fun close() {
         dismiss()
     }

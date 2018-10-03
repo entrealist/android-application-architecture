@@ -6,6 +6,8 @@ import com.rosberry.android.sample.entity.Post
 import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.subjects.PublishSubject
+import io.reactivex.subjects.ReplaySubject
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 
@@ -16,25 +18,26 @@ import javax.inject.Inject
 @PostScope
 class AddPostInteractor @Inject constructor(val postRepository: PostRepository) {
 
-    private val onTitleChange : PublishSubject<String> = PublishSubject.create<String>()
-    private val onDescriptionChange : PublishSubject<String> = PublishSubject.create<String>()
+    private val onTitleChange: PublishSubject<String> = PublishSubject.create<String>()
+    private val onDescriptionChange: PublishSubject<String> = PublishSubject.create<String>()
+    private val onPostContextIdChange: ReplaySubject<Int> = ReplaySubject.create<Int>()
 
-    fun listenTitleChange(): Observable<String> {
-        return onTitleChange
-    }
+    fun listenTitleChange(): Observable<String> =  onTitleChange
 
-    fun listenDescriptionChange(): Observable<String> {
-        return onDescriptionChange
-    }
+    fun listenDescriptionChange(): Observable<String> = onDescriptionChange
 
-    fun changeTitle(text: String){
-        onTitleChange.onNext(text)
-    }
+    fun changeTitle(text: String) = onTitleChange.onNext(text)
 
-    fun changeDescription(text: String){
-        onDescriptionChange.onNext(text)
-    }
+    fun changeDescription(text: String) = onDescriptionChange.onNext(text)
+
+    fun changeContextId(contextId: Int) = onPostContextIdChange.onNext(contextId)
 
     fun sendPost(post: Post): Single<Post> = postRepository.addPost(post)
+
+    fun generateContextId() =
+            Observable.timer(1, TimeUnit.SECONDS)
+                .map { it -> (Math.random() * 1000).toInt() }
+
+    fun listenContextId(): Observable<Int> = onPostContextIdChange
 
 }

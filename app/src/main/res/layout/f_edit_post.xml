@@ -1,17 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:padding="@dimen/dp16"
-    >
+    android:orientation="vertical">
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/textContextId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="ContexntId"
+        android:gravity="center_horizontal"
+        />
 
     <android.support.v7.widget.AppCompatEditText
         android:id="@+id/editTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Enter post title"
+        android:layout_marginTop="@dimen/dp16"
         />
+
     <android.support.v7.widget.AppCompatEditText
         android:id="@+id/editDescription"
         android:layout_width="match_parent"
@@ -21,4 +32,4 @@
         app:layout_constraintTop_toBottomOf="@+id/editTitle"
         />
 
-</android.support.constraint.ConstraintLayout>
+</LinearLayout>

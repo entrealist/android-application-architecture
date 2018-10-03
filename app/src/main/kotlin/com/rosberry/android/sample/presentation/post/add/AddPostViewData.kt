@@ -8,4 +8,5 @@ import javax.inject.Inject
 class AddPostViewData @Inject constructor(@State var post: Post) : ViewDataRepository() {
 
     @State var newPost: Post? = null
+    @State var contextId: Int = 0
 }

@@ -20,6 +20,22 @@ class AddPostPresenter @Inject constructor(
         viewState.showPostDetails(viewData.post)
         viewState.showEditPost()
         if (viewData.newPost == null) viewData.newPost = Post(0, 0, "", "")
+
+        restoreContextIdForPost()
+    }
+
+    private fun restoreContextIdForPost() {
+        if (viewData.contextId == 0)
+            addPostInteractor
+                .generateContextId()
+                .subscribe {
+                    viewData.contextId = it
+                    addPostInteractor.changeContextId(viewData.contextId)
+                }
+                .connect()
+        else {
+            addPostInteractor.changeContextId(viewData.contextId)
+        }
     }
 
     override fun attachView(view: AddPostView?) {
@@ -56,7 +72,7 @@ class AddPostPresenter @Inject constructor(
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe { viewState.showProgress(true) }
-            .doOnEvent{_, _ -> viewState.showProgress(false)}
+            .doOnEvent { _, _ -> viewState.showProgress(false) }
             .subscribe(
                     { viewState.finish() },
                     {

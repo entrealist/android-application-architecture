@@ -10,4 +10,5 @@ interface EditPostView : MvpView {
     }
 
     fun close()
+    fun showContextId(contextId: Int)
 }
