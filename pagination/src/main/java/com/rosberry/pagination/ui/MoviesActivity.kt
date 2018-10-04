@@ -2,6 +2,7 @@ package com.rosberry.pagination.ui
 
 import android.os.Bundle
 import android.os.Handler
+import android.view.View
 import android.widget.Toast
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
@@ -46,22 +47,24 @@ class MoviesActivity : MvpAppCompatActivity(), MoviesView {
         setContentView(R.layout.activity_movies)
         moviesListView.adapter = moviesAdapter
         refreshMoviesView.setOnRefreshListener { presenter.onRefresh() }
+        retryButton.setOnClickListener { presenter.onRefresh() }
     }
 
     override fun showEmptyProgress(show: Boolean) {
-        if (show) progressView.show()
-        else progressView.gone()
+        progressView.visible(show)
+
+        refreshMoviesView.visible(!show)
+        viewHandler.post { refreshMoviesView.isRefreshing = false }
     }
 
     override fun showEmptyError(show: Boolean, errorText: String?) {
         errorTextView.text = errorText
-        if (show) errorTextView.show()
-        else errorTextView.gone()
+        errorTextView.visible(show)
+        retryButton.visible(show)
     }
 
     override fun showEmptyView(show: Boolean) {
-        if (show) emptyImageView.show()
-        else emptyImageView.gone()
+        emptyImageView.visible(show)
     }
 
     override fun showError(errorDescription: String?) {
@@ -70,12 +73,8 @@ class MoviesActivity : MvpAppCompatActivity(), MoviesView {
     }
 
     override fun showData(show: Boolean, data: MovieItems) {
-        if (show) {
-            moviesAdapter.showData(data)
-            moviesListView.show()
-        } else {
-            moviesListView.gone()
-        }
+        if (show) moviesAdapter.showData(data)
+        moviesListView.visible(show)
     }
 
     override fun showRefreshProgress(show: Boolean) {
@@ -84,5 +83,10 @@ class MoviesActivity : MvpAppCompatActivity(), MoviesView {
 
     override fun showPageProgress(show: Boolean) {
         viewHandler.post { moviesAdapter.showProgress(show) }
+    }
+
+    private fun View.visible(show: Boolean) {
+        if (show) this.show()
+        else this.gone()
     }
 }

@@ -8,9 +8,7 @@ import io.reactivex.schedulers.Schedulers
 /**
  * @author Alexei Korshun on 28/09/2018.
  */
-class MoviesRepository constructor(
-        private val moviesApi: MoviesApi
-) {
+class MoviesRepository constructor(private val moviesApi: MoviesApi) {
 
     fun movies(offset: Int): Single<Movies> {
         return moviesApi.getMovies(offset = offset)

@@ -31,7 +31,7 @@ class MoviesPresenter constructor(
     }
 
     override fun showEmptyError(show: Boolean, error: Throwable?) {
-        viewState.showEmptyError(show, error?.let { it::class.simpleName })
+        viewState.showEmptyError(show, "Error")
     }
 
     override fun showEmptyView(show: Boolean) {
