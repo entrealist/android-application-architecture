@@ -61,7 +61,7 @@ ext {
     pageIndicator_version = "0.2.6"
     stickyHeaders_version = "0.4.3@aar"
 
-    moxy_version = '1.5.5'
+    moxy_version = '1.5.3'
 
     constants = [
             baseDevUrl    : '"https://jsonplaceholder.typicode.com/"',
