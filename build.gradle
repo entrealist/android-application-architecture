@@ -1,6 +1,5 @@
 apply from: 'dependences.gradle'
 
-
 buildscript {
     ext.kotlin_version = '1.2.71'
     configurations.classpath.exclude group: 'com.android.tools.external.lombok'
@@ -24,7 +23,7 @@ buildscript {
         classpath "com.android.tools.build:gradle:$gradle_version"
         classpath "io.fabric.tools:gradle:$fabric_plugin_version"
         classpath "com.google.gms:google-services:$play_services"
-        classpath 'com.github.ben-manes:gradle-versions-plugin:+'
+        classpath 'com.github.ben-manes:gradle-versions-plugin:0.20.0'
 
     }
 }

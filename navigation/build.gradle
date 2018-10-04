@@ -1,0 +1,108 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'com.github.ben-manes.versions'
+defaultTasks 'dependencyUpdates'
+
+android {
+
+    buildToolsVersion rootProject.ext.buildToolsVersion
+    compileSdkVersion rootProject.ext.compileSdkVersion
+
+    defaultConfig {
+        applicationId "com.rosberry.navigation"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
+        multiDexEnabled true
+
+    }
+
+    buildTypes {
+        debug {
+            postprocessing {
+                removeUnusedCode false
+                removeUnusedResources false
+                obfuscate false
+                optimizeCode false
+                proguardFiles 'proguard-rules.pro'
+            }
+
+            versionNameSuffix "debug"
+            debuggable true
+
+        }
+
+        release {
+            postprocessing {
+                removeUnusedCode true
+                removeUnusedResources true
+                obfuscate true
+                optimizeCode true
+                proguardFile 'proguard-rules.pro'
+            }
+
+            versionNameSuffix "release"
+            debuggable false
+
+        }
+    }
+
+    flavorDimensions "default"
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    def deps = rootProject.ext.dependencies
+    def testDeps = rootProject.ext.testDependencies
+
+    testImplementation testDeps.jUnit
+
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation deps.supportAppCompat
+    implementation deps.supportDesign
+    implementation deps.supportv13
+    implementation deps.supportRecyclerView
+    implementation deps.supportCardView
+    implementation deps.supportConstraintLayout
+    implementation deps.supportMultidex
+    implementation deps.supportMultidexInst
+
+    //kotlin
+    implementation deps.kotlin
+    implementation deps.ankoCommons
+    implementation deps.ankoCoroutines
+
+    //rx
+    implementation deps.rxAndroid
+    implementation deps.rxJava
+    implementation deps.rxPermissions
+    implementation deps.rxKotlin
+
+    //inject
+    implementation deps.dagger
+    kapt deps.daggerCompiler
+    kapt deps.daggerAnnotation
+
+    //ui
+    implementation deps.pagerIndicator
+
+    //moxy
+    implementation deps.moxy
+    implementation deps.moxySupport
+    kapt deps.moxyCompiler
+
+    //navigation
+    implementation deps.cicerone
+    implementation deps.bottomNavigationBar
+}
+
+

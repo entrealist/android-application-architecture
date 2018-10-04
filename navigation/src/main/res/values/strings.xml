@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">AndroidApplicationSample</string>
+
+    <string name="launch_tab_label_about">About</string>
+    <string name="launch_tab_label_items">Items</string>
+    <string name="launch_tab_label_profile">Profile</string>
+    <string name="profile_page_details_title">Details</string>
+    <string name="profile_page_notif_title">Notifs</string>
+    <string name="profile_page_privacy_title">Privacy</string>
+</resources>
