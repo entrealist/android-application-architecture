@@ -35,8 +35,8 @@ class AddPostInteractor @Inject constructor(val postRepository: PostRepository) 
     fun sendPost(post: Post): Single<Post> = postRepository.addPost(post)
 
     fun generateContextId() =
-            Observable.timer(1, TimeUnit.SECONDS)
-                .map { it -> (Math.random() * 1000).toInt() }
+            Observable.timer(3, TimeUnit.SECONDS)
+                .map { it -> (Math.random() * 2000).toInt() }
 
     fun listenContextId(): Observable<Int> = onPostContextIdChange
 
