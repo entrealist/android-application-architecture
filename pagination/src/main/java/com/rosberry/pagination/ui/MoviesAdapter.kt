@@ -12,8 +12,7 @@ import ru.rosberry.abstractrecycler.AbstractViewHolder
  * @author Alexei Korshun on 02/10/2018.
  */
 class MoviesAdapter(
-        movies: List<AbstractItem>,
-        private val loadNextPageListener: () -> Unit
+        movies: List<AbstractItem>
 ) : AbstractRecyclerAdapter(movies) {
 
     override fun createViewHolder(view: View, viewType: Int): AbstractViewHolder<*> {
@@ -21,11 +20,6 @@ class MoviesAdapter(
             R.layout.i_movie -> MovieViewHolder(view)
             else -> ProgressViewHolder(view)
         }
-    }
-
-    override fun onBindViewHolder(holder: AbstractViewHolder<AbstractItem>, position: Int) {
-        super.onBindViewHolder(holder, position)
-        if (position == itemCount - 2) loadNextPageListener()
     }
 
     fun showData(newData: List<AbstractItem>) {

@@ -2,6 +2,8 @@ package com.rosberry.pagination.ui
 
 import android.os.Bundle
 import android.os.Handler
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.widget.Toast
 import com.arellomobile.mvp.MvpAppCompatActivity
@@ -27,7 +29,9 @@ class MoviesActivity : MvpAppCompatActivity(), MoviesView {
 
     private val viewHandler = Handler()
 
-    private val moviesAdapter by lazy { MoviesAdapter(emptyList()) { presenter.loadNextPage() } }
+    private val moviesLayoutManager by lazy { LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false) }
+    private val moviesAdapter by lazy { MoviesAdapter(emptyList()) }
+    private val moviesEndlessScrollListener by lazy { MoviesEndlessScrollListener() }
 
     @ProvidePresenter
     fun providePresenter(): MoviesPresenter {
@@ -46,6 +50,9 @@ class MoviesActivity : MvpAppCompatActivity(), MoviesView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_movies)
         moviesListView.adapter = moviesAdapter
+        moviesListView.layoutManager = moviesLayoutManager
+        moviesListView.addOnScrollListener(moviesEndlessScrollListener)
+
         refreshMoviesView.setOnRefreshListener { presenter.onRefresh() }
         retryButton.setOnClickListener { presenter.onRefresh() }
     }
@@ -55,6 +62,8 @@ class MoviesActivity : MvpAppCompatActivity(), MoviesView {
 
         refreshMoviesView.visible(!show)
         viewHandler.post { refreshMoviesView.isRefreshing = false }
+
+        moviesEndlessScrollListener.resetState()
     }
 
     override fun showEmptyError(show: Boolean, errorText: String?) {
@@ -79,6 +88,7 @@ class MoviesActivity : MvpAppCompatActivity(), MoviesView {
 
     override fun showRefreshProgress(show: Boolean) {
         viewHandler.post { refreshMoviesView.isRefreshing = show }
+        moviesEndlessScrollListener.resetState()
     }
 
     override fun showPageProgress(show: Boolean) {
@@ -88,5 +98,14 @@ class MoviesActivity : MvpAppCompatActivity(), MoviesView {
     private fun View.visible(show: Boolean) {
         if (show) this.show()
         else this.gone()
+    }
+
+    private inner class MoviesEndlessScrollListener :
+            EndlessRecyclerViewScrollListener(moviesListView.layoutManager!!) {
+
+        override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView) {
+            presenter.loadNextPage()
+        }
+
     }
 }
