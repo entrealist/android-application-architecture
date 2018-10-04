@@ -32,7 +32,7 @@ object TextEncoder {
         return decryptedValue
     }
 
-    private fun getKet(secret: String): Key {
+    private fun getKey(secret: String): Key {
         var key: Key? = null
         var correctSecret = ""
         if (secret.length >= 16) {
@@ -62,7 +62,7 @@ object TextEncoder {
     fun encrypt(value: String, secret: String): String {
         var result = "" + value
         try {
-            result = encrypt(value, getKet(secret))
+            result = encrypt(value, getKey(secret))
         } catch (e: Exception) {
             //Crashlytics.logException(e)
             e.printStackTrace()
@@ -74,7 +74,7 @@ object TextEncoder {
     fun decrypt(encryptedValue: String, secret: String): String {
         var result = ""
         try {
-            result = decrypt(encryptedValue, getKet(secret))
+            result = decrypt(encryptedValue, getKey(secret))
         } catch (e: Exception) {
             e.printStackTrace()
             // Crashlytics.logException(e)
