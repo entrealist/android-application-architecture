@@ -4,8 +4,8 @@ import android.view.ViewGroup
 import com.rosberry.android.sample.presentation.main.list.PostItem
 import com.rosberry.android.sample.ui.base.BaseAdapter
 
-class PostsAdapter(itemClickListener: OnItemClickListener? = null) :
-        BaseAdapter<PostViewHolder, PostItem, PostsAdapter.OnItemClickListener>() {
+class PostsAdapter(itemClickListener: OnItemClickListener? = null)
+    : BaseAdapter<PostViewHolder, PostItem, PostsAdapter.OnItemClickListener>() {
 
     init {
         this.itemClickListener = itemClickListener
