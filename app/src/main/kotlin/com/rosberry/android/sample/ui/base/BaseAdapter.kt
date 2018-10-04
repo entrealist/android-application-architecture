@@ -89,7 +89,7 @@ abstract class BaseAdapter<V, M, L> : RecyclerView.Adapter<V> where V : BaseView
         }
 
         override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-            return oldList[oldItemPosition]!!.equals(newList[newItemPosition])
+            return oldList[oldItemPosition]?.equals(newList[newItemPosition])?: false
         }
 
     }
