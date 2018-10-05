@@ -9,7 +9,7 @@ import com.evernote.android.state.StateSaver
 import com.rosberry.android.sample.system.LogUtil
 import com.rosberry.android.sample.ui.base.model.DialogFragmentModel
 
-open class BaseFragment : MvpAppCompatDialogFragment() {
+abstract class BaseFragment : MvpAppCompatDialogFragment() {
 
     @State var fragmentModel = DialogFragmentModel()
     private var stateSaved: Boolean = false
