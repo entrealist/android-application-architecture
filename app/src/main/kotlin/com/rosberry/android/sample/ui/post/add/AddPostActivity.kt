@@ -20,6 +20,10 @@ import org.jetbrains.anko.toast
 
 class AddPostActivity : BaseActivity(), AddPostView {
 
+    companion object {
+        private const val ARG_USER_POST = "user_post"
+    }
+
     private var progressDialog: MaterialDialog? = null
 
     @InjectPresenter
@@ -27,7 +31,7 @@ class AddPostActivity : BaseActivity(), AddPostView {
 
     @ProvidePresenter
     fun providePresenter(): AddPostPresenter {
-        val post = intent.getSerializableExtra(PostDetailsFragment.ARG_USER_POST) as Post
+        val post = intent.getSerializableExtra(AddPostActivity.ARG_USER_POST) as Post
         return AndroidInjector.openAddPostScope(post)
             .provideAddPostPresenter()
     }
