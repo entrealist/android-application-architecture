@@ -73,7 +73,7 @@ class Paginator<T>(
         }
 
         override fun release() {
-            currentState = RELEASED()
+            currentState = Released()
             disposable?.dispose()
         }
     }
@@ -106,7 +106,7 @@ class Paginator<T>(
         }
 
         override fun release() {
-            currentState = RELEASED()
+            currentState = Released()
             disposable?.dispose()
         }
     }
@@ -130,7 +130,7 @@ class Paginator<T>(
         }
 
         override fun release() {
-            currentState = RELEASED()
+            currentState = Released()
             disposable?.dispose()
         }
     }
@@ -154,7 +154,7 @@ class Paginator<T>(
         }
 
         override fun release() {
-            currentState = RELEASED()
+            currentState = Released()
             disposable?.dispose()
         }
     }
@@ -183,7 +183,7 @@ class Paginator<T>(
         }
 
         override fun release() {
-            currentState = RELEASED()
+            currentState = Released()
             disposable?.dispose()
         }
     }
@@ -222,7 +222,7 @@ class Paginator<T>(
         }
 
         override fun release() {
-            currentState = RELEASED()
+            currentState = Released()
             disposable?.dispose()
         }
     }
@@ -265,7 +265,7 @@ class Paginator<T>(
         }
 
         override fun release() {
-            currentState = RELEASED()
+            currentState = Released()
             disposable?.dispose()
         }
     }
@@ -288,10 +288,10 @@ class Paginator<T>(
         }
 
         override fun release() {
-            currentState = RELEASED()
+            currentState = Released()
             disposable?.dispose()
         }
     }
 
-    private inner class RELEASED : State<T>
+    private inner class Released : State<T>
 }
