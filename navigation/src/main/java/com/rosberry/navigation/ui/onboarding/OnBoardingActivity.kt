@@ -12,7 +12,6 @@ import com.rosberry.navigation.presentation.onboarding.OnBoardingPresenter
 import com.rosberry.navigation.presentation.onboarding.OnBoardingView
 import com.rosberry.navigation.ui.base.BaseActivity
 import com.rosberry.navigation.ui.base.BaseFragment
-import ru.terrakok.cicerone.Navigator
 import ru.terrakok.cicerone.NavigatorHolder
 import ru.terrakok.cicerone.android.support.SupportAppNavigator
 import javax.inject.Inject
@@ -31,16 +30,10 @@ class OnBoardingActivity : BaseActivity(), OnBoardingView, OnBoardingCompleteLis
     @field:OnBoardingNavigationQualifier
     lateinit var navigatorHolder: NavigatorHolder
 
-    private var globalNavigator: Navigator = SupportAppNavigator(this, -1)
+    private var globalNavigator = SupportAppNavigator(this, -1)
 
-    private var navigator: SupportAppNavigator? = null
-        get() {
-            if (field == null) {
-                field = SupportAppNavigator(this, supportFragmentManager, R.id.fragmentContainer)
-            }
+    private val navigator by lazy { SupportAppNavigator(this, supportFragmentManager, R.id.fragmentContainer) }
 
-            return field
-        }
     @InjectPresenter
     lateinit var presenter: OnBoardingPresenter
 

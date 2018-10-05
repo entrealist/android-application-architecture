@@ -14,7 +14,6 @@ import com.rosberry.navigation.presentation.main.BottomNavigationView
 import com.rosberry.navigation.ui.base.BaseActivity
 import com.rosberry.navigation.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.a_bottom_navigation.*
-import ru.terrakok.cicerone.Navigator
 import ru.terrakok.cicerone.NavigatorHolder
 import ru.terrakok.cicerone.android.support.SupportAppNavigator
 import ru.terrakok.cicerone.android.support.SupportAppScreen
@@ -31,7 +30,7 @@ class BottomNavigationActivity : BaseActivity(), BottomNavigationView {
     @field:GlobalNavigationQualifier
     lateinit var globalNavigatorHolder: NavigatorHolder
 
-    private var globalNavigator: Navigator = SupportAppNavigator(this, -1)
+    private var globalNavigator = SupportAppNavigator(this, -1)
 
     @InjectPresenter
     lateinit var presenter: BottomNavigationPresenter

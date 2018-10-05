@@ -26,14 +26,7 @@ class ItemsContainerFragment : BaseFragment(), ItemsContainerView {
 
     override val layoutRes = R.layout.f_items_container
 
-    private var navigator: SupportAppNavigator? = null
-        get() {
-            if (field == null) {
-                field = SupportAppNavigator(activity, childFragmentManager, R.id.fragmentContainer)
-            }
-
-            return field
-        }
+    private val navigator by lazy { SupportAppNavigator(activity, childFragmentManager, R.id.fragmentContainer) }
 
     @Inject
     @field:ItemsNavigationQualifier
@@ -50,10 +43,10 @@ class ItemsContainerFragment : BaseFragment(), ItemsContainerView {
     }
 
     override fun onAttach(context: Context?) {
-        super.onAttach(context)
         AndroidInjector
             .openItemsScope()
             .inject(this)
+        super.onAttach(context)
     }
 
     override fun onResume() {

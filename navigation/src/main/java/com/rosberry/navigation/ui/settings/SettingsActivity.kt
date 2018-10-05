@@ -9,7 +9,6 @@ import com.rosberry.navigation.di.app.GlobalNavigationQualifier
 import com.rosberry.navigation.presentation.settings.SettingsPresenter
 import com.rosberry.navigation.presentation.settings.SettingsView
 import com.rosberry.navigation.ui.base.BaseActivity
-import ru.terrakok.cicerone.Navigator
 import ru.terrakok.cicerone.NavigatorHolder
 import ru.terrakok.cicerone.android.support.SupportAppNavigator
 import javax.inject.Inject
@@ -25,7 +24,7 @@ class SettingsActivity : BaseActivity(), SettingsView {
     @field:GlobalNavigationQualifier
     lateinit var globalNavigatorHolder: NavigatorHolder
 
-    private var globalNavigator: Navigator = SupportAppNavigator(this, -1)
+    private var globalNavigator = SupportAppNavigator(this, -1)
 
     @InjectPresenter
     lateinit var presenter: SettingsPresenter
