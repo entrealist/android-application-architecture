@@ -23,6 +23,7 @@ class PostDetailsFragment : BaseFragment(),
     companion object {
         private const val ARG_USER_POST = "user_post"
         private const val ARG_IS_DIALOG = "is_dialog"
+        const val TAG = "post_view"
 
         fun newInstance(post: Post, isDialog: Boolean) = PostDetailsFragment().apply {
             arguments = Bundle().apply {

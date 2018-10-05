@@ -62,7 +62,7 @@ class AddPostActivity : BaseActivity(), AddPostView {
         if (supportFragmentManager.findFragmentByTag(EditPostView.TAG) == null)
             supportFragmentManager.beginTransaction()
                 .replace(R.id.contentView1, PostDetailsFragment.newInstance(post, false),
-                        PostDetailsView.TAG)
+                        PostDetailsFragment.TAG)
                 .commit()
     }
 

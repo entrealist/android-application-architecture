@@ -81,7 +81,7 @@ class MainActivity : BaseActivity(), MainView, PostsAdapter.OnItemClickListener 
 
     override fun showPostDetails(post: Post) {
         PostDetailsFragment.newInstance(post, true)
-            .show(supportFragmentManager, PostDetailsView.TAG)
+            .show(supportFragmentManager, PostDetailsFragment.TAG)
     }
 
 }
