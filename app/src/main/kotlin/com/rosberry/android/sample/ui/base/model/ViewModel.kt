@@ -10,5 +10,5 @@ import java.io.Serializable
 abstract class ViewModel : Serializable {
 
     @LayoutRes var layoutId: Int = 0
-    @MenuRes var menuId = -1
+    @MenuRes var menuId = 0
 }

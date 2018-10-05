@@ -11,7 +11,7 @@ class DialogFragmentModel : FragmentModel() {
     var isCancelable = true
     var isCancelableOutside = false
     var style: Int = 0
-    var themeId = -1;
+    var themeId = 0;
 
     @AnimRes var animationId = 0
 
@@ -24,5 +24,5 @@ class DialogFragmentModel : FragmentModel() {
     }
 
 
-    fun hasOptionMenu() = menuId != -1
+    fun hasOptionMenu() = menuId != 0
 }

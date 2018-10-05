@@ -83,7 +83,7 @@ abstract class BaseActivity : MvpAppCompatActivity() {
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
 
         when (model.menuId) {
-            -1 -> return super.onCreateOptionsMenu(menu)
+            0 -> return super.onCreateOptionsMenu(menu)
             else -> menuInflater.inflate(model.menuId, menu)
         }
 
