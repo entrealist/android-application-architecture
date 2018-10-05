@@ -10,7 +10,6 @@ import com.rosberry.navigation.presentation.login.LoginPresenter
 import com.rosberry.navigation.presentation.login.LoginView
 import com.rosberry.navigation.ui.base.BaseActivity
 import kotlinx.android.synthetic.main.a_login.*
-import ru.terrakok.cicerone.Navigator
 import ru.terrakok.cicerone.NavigatorHolder
 import ru.terrakok.cicerone.android.support.SupportAppNavigator
 import javax.inject.Inject
@@ -26,7 +25,7 @@ class LoginActivity : BaseActivity(), LoginView {
     @field:GlobalNavigationQualifier
     lateinit var globalNavigatorHolder: NavigatorHolder
 
-    private var globalNavigator: Navigator = SupportAppNavigator(this, -1)
+    private var globalNavigator = SupportAppNavigator(this, -1)
 
     @InjectPresenter
     lateinit var presenter: LoginPresenter

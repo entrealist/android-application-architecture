@@ -36,10 +36,10 @@ class ProfileContainerFragment : BaseFragment(), ProfileContainerView {
     }
 
     override fun onAttach(context: Context?) {
-        super.onAttach(context)
         AndroidInjector
             .openProfileScope()
             .inject(this)
+        super.onAttach(context)
     }
 
     override fun onBackPressed(): Boolean {
