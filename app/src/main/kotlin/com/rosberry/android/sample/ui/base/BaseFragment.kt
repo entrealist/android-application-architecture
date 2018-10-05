@@ -30,12 +30,12 @@ open class BaseFragment : MvpAppCompatDialogFragment() {
             retainInstance = fragmentModel.retainInstance
             setHasOptionsMenu(fragmentModel.retainInstance && fragmentModel.hasOptionMenu())
         } else {
-            with(dialog.window!!) {
-                setBackgroundDrawable(ColorDrawable(0))
-                setFlags(
+            with(dialog.window) {
+                this?.setBackgroundDrawable(ColorDrawable(0))
+                this?.setFlags(
                         dialog.window!!.attributes.flags and WindowManager.LayoutParams.FLAG_DIM_BEHIND.inv(),
                         0)
-                if (fragmentModel.animationId != 0) setWindowAnimations(fragmentModel.animationId)
+                if (fragmentModel.animationId != 0)  this?.setWindowAnimations(fragmentModel.animationId)
 
             }
             dialog.setCanceledOnTouchOutside(fragmentModel.isCancelableOutside)
