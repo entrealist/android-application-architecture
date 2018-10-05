@@ -25,8 +25,6 @@ open class BaseFragment : MvpAppCompatDialogFragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(fragmentModel.layoutId, container, false)
-        retainInstance = fragmentModel.retainInstance
-        setHasOptionsMenu(fragmentModel.retainInstance && fragmentModel.menuId != -1)
 
         if (!fragmentModel.isDialog) {
             retainInstance = fragmentModel.retainInstance
