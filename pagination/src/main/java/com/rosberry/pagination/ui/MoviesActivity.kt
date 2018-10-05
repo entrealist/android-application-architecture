@@ -101,7 +101,7 @@ class MoviesActivity : MvpAppCompatActivity(), MoviesView {
     }
 
     private inner class MoviesEndlessScrollListener :
-            EndlessRecyclerViewScrollListener(moviesListView.layoutManager!!) {
+            EndlessRecyclerViewScrollListener(moviesLayoutManager) {
 
         override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView) {
             presenter.loadNextPage()
