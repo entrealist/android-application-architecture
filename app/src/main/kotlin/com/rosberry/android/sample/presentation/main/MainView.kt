@@ -1,8 +1,7 @@
 package com.rosberry.android.sample.presentation.main
 
 import com.arellomobile.mvp.MvpView
-import com.arellomobile.mvp.viewstate.strategy.AddToEndSingleStrategy
-import com.arellomobile.mvp.viewstate.strategy.StateStrategyType
+import com.arellomobile.mvp.viewstate.strategy.*
 import com.rosberry.android.sample.entity.Post
 import com.rosberry.android.sample.presentation.main.list.PostItem
 import com.rosberry.android.sample.ui.base.model.DialogModel
@@ -19,6 +18,6 @@ interface MainView : MvpView {
 
     fun showToast(toastModel: DialogModel)
 
-    @StateStrategyType(AddToEndSingleStrategy::class)
+    @StateStrategyType(OneExecutionStateStrategy::class)
     fun showPostDetails(post: Post)
 }
