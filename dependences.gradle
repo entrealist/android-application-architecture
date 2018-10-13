@@ -1,42 +1,43 @@
 ext {
-    buildToolsVersion = '27.0.3'
-    minSdkVersion = 19
-    compileSdkVersion = 27
-    targetSdkVersion = 27
+    buildToolsVersion = '28.0.2'
+    minSdkVersion = 21
+    compileSdkVersion = 28
+    targetSdkVersion = 28
 
     junit_version = "4.12"
     espresso_version = "2.2.2"
     play_services = "15.0.1"
 
-    supportLib_version = "27.1.1"
+    supportLib_version = "28.0.0"
 
     constraint_version = "1.0.2"
 
-    anko_version = "0.10.1"
+    anko_version = "0.10.5"
 
     okhttp3downloader_version = "1.1.0"
-    okHttp_version = "3.6.0"
-    retrofit_version = "2.3.0"
-    gson_version = "2.8.1"
+    okHttp_version = "3.11.0"
+    retrofit_version = "2.4.0"
+    gson_version = "2.8.5"
 
-    evernoteState_version = "1.2.1"
+    evernoteState_version = "1.3.1"
 
-    rxAndroid_version = "2.0.1"
-    rxJava_version = "2.1.0"
-    rxKotlin_version = "2.0.3"
-    rxpermission_version = "0.9.4@aar"
+    rxAndroid_version = "2.1.0"
+    rxJava_version = "2.2.1"
+    rxKotlin_version = "2.3.0"
+    rxpermission_version = "0.9.5@aar"
 
     roomRuntime_version = '1.0.0-beta2'
     roomCompiler_version = roomRuntime_version
 
-    dagger2_version = "2.14.1"
+    dagger2_version = "2.17"
     javaxAnnotation_version = "1.0"
 
     fabric_version = "2.9.1@aar"
     androidProcesses_version = "1.0.9"
     materialDialog_version = "0.9.6.0"
     multidex_version = "1.0.3"
-    picasso_version = "2.5.2"
+    supportLint_version = "26.3.0-alpha08"
+    picasso_version = "2.71828"
     smartRefreshVersion = "1.0.3"
     gestureViews_version = "2.3.2"
     videoPlayer_version = "1.2.1"
@@ -58,7 +59,14 @@ ext {
     timesSquare_version = "1.7.9@aar"
     maskedEditText_version = "1.0.5"
     pageIndicator_version = "0.2.6"
+    pagerIndicator_version = "1.0.10"
     stickyHeaders_version = "0.4.3@aar"
+
+    moxy_version = '1.5.3'
+
+    cicerone_version = '4.0.2'
+    bottom_bar_version = '2.0.5'
+
     testDependencies = [
             jUnit      : "junit:junit:$junit_version",
             espresso   : "com.android.support.test.espresso:espresso-core:$espresso_version",
@@ -72,6 +80,9 @@ ext {
             supportDesign           : "com.android.support:design:$supportLib_version",
             supportCardView         : "com.android.support:cardview-v7:$supportLib_version",
             supportMultidex         : "com.android.support:multidex:$multidex_version",
+            supportMultidexInst     : "com.android.support:multidex-instrumentation:$multidex_version",
+            supportLint             : "com.android.tools.lint:lint-gradle:$supportLint_version",
+
             supportDynamicAnimations: "com.android.support:support-dynamic-animation:$supportLib_version",
             supportConstraintLayout : "com.android.support.constraint:constraint-layout:$constraint_version",
             supportv13              : "com.android.support:support-v13:$supportLib_version",
@@ -140,6 +151,7 @@ ext {
             gestureImageView        : "com.alexvasilkov:gesture-views:$gestureViews_version",
             bottomNavigationEx      : "com.github.ittianyu:BottomNavigationViewEx:$bottomNavigationEx_version",
             softKeyboardHelper      : "net.yslibrary.keyboardvisibilityevent:keyboardvisibilityevent:$softKeyboardHelper_version",
+            pagerIndicator          : "com.ryanjeffreybrooks:indefinitepagerindicator:$pagerIndicator_version",
 
             //media
             mediaPicker             : "com.github.neestell:mediapicker:$mediaPicker_version",
@@ -149,6 +161,16 @@ ext {
             maskedEditText          : "ru.egslava:MaskedEditText:$maskedEditText_version",
             pageIndicator           : "com.github.chahine:pageindicator:$pageIndicator_version",
 
-            stickyHeaders           : "com.timehop.stickyheadersrecyclerview:library:$stickyHeaders_version"
+            stickyHeaders           : "com.timehop.stickyheadersrecyclerview:library:$stickyHeaders_version",
+
+            //moxy
+            moxy                    : "com.arello-mobile:moxy:$moxy_version",
+            moxyCompiler            : "com.arello-mobile:moxy-compiler:$moxy_version",
+            moxySupport             : "com.arello-mobile:moxy-app-compat:$moxy_version",
+
+            //Navigation
+            cicerone                : "ru.terrakok.cicerone:cicerone:$cicerone_version",
+            bottomNavigationBar     : "com.ashokvarma.android:bottom-navigation-bar:$bottom_bar_version"
+
     ]
 }
