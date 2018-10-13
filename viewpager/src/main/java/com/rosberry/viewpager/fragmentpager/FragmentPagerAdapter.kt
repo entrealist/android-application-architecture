@@ -49,18 +49,6 @@ class FragmentPagerAdapter(
         return createdFragment
     }
 
-    fun doSmthInTab1() {
-        tab1Fragment?.doSmth()
-    }
-
-    fun doSmthInTab2() {
-        tab2Fragment?.doSmth()
-    }
-
-    fun doSmthInTab3() {
-        tab3Fragment?.doSmth()
-    }
-
     override fun getPageTitle(position: Int): CharSequence {
         val pageTabTitleRes = when (position) {
             Constant.POSITION_TAB_1 -> R.string.tab1
@@ -83,5 +71,17 @@ class FragmentPagerAdapter(
         } else {
             pageTabTitle
         }
+    }
+
+    fun doSmthInTab1() {
+        tab1Fragment?.doSmth()
+    }
+
+    fun doSmthInTab2() {
+        tab2Fragment?.doSmth()
+    }
+
+    fun doSmthInTab3() {
+        tab3Fragment?.doSmth()
     }
 }

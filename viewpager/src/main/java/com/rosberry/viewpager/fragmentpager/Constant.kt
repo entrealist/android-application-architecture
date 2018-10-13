@@ -10,7 +10,7 @@ object Constant {
     const val POSITION_TAB_2 = 1
     const val POSITION_TAB_3 = 2
 
-    const val IMAGE_RES_TAB = R.drawable.ic_launcher_foreground
+    const val IMAGE_RES_TAB = R.drawable.ic_android_black_24dp
 
     const val TAB_COUNT = 3
 }
