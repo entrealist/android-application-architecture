@@ -16,11 +16,11 @@ class ItemListPresenter @Inject constructor(
         @ItemsNavigationQualifier private val itemsRouter: Router
 ) : BasePresenter<ItemListView>() {
 
-    private fun openItemDetailsScreen(id: String) {
-        itemsRouter.navigateTo(Screens.ItemDetailsScreen(id))
-    }
-
     fun clickOnButton() {
         openItemDetailsScreen(Random().nextInt().toString())
+    }
+
+    private fun openItemDetailsScreen(id: String) {
+        itemsRouter.navigateTo(Screens.ItemDetailsScreen(id))
     }
 }
