@@ -1,1 +1,1 @@
-include ':app', ':pagination', ':errorhandler'
+include ':app', ':pagination', ':errorhandler', ':barcodescanner'

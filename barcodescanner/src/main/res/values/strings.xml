@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">barcodescanner</string>
+
+    <string name="nav_scanner">Сканнер</string>
+    <string name="action_torch">Фонарик</string>
+    <string name="need_permissions">Требуется разрешение</string>
+    <string name="need_permissions_camera_rationale">Приложение использует камеру для сканирования штрих-кодов. Разрешить?</string>
+    <string name="need_permissions_camera_to_continue">Приложение не может продолжать работу без доступа к камере</string>
+    <string name="title_permissions_never">Отказано в разрешении</string>
+    <string name="msg_permissions_camera_never">Для продолжения работы перейдите в настройки системы и разрешите приложению доступ к камере</string>
+    <string name="scanner_label">Чтобы сканировать QR-код,\nпоместите его в прямоугольник\nвидоискателя</string>
+
+</resources>
