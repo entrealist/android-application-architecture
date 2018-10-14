@@ -92,9 +92,6 @@ dependencies {
     kapt deps.daggerCompiler
     kapt deps.daggerAnnotation
 
-    //ui
-    implementation deps.pagerIndicator
-
     //moxy
     implementation deps.moxy
     implementation deps.moxySupport

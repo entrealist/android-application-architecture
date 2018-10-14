@@ -5,11 +5,12 @@ import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.rosberry.navigation.R
 import com.rosberry.navigation.di.AndroidInjector
-import com.rosberry.navigation.presentation.profile.PageTabModel
+import com.rosberry.navigation.di.profile.ProfileNavigationQualifier
 import com.rosberry.navigation.presentation.profile.ProfileContainerPresenter
-import com.rosberry.navigation.presentation.profile.ProfilePagerAdapter
 import com.rosberry.navigation.ui.base.BaseFragment
-import kotlinx.android.synthetic.main.f_profile_container.*
+import ru.terrakok.cicerone.NavigatorHolder
+import ru.terrakok.cicerone.android.support.SupportAppNavigator
+import javax.inject.Inject
 
 
 /**
@@ -24,6 +25,12 @@ class ProfileContainerFragment : BaseFragment(), ProfileContainerView {
     }
 
     override val layoutRes = R.layout.f_profile_container
+
+    private val navigator by lazy { SupportAppNavigator(activity, childFragmentManager, R.id.fragmentContainer) }
+
+    @Inject
+    @field:ProfileNavigationQualifier
+    lateinit var navigatorHolder: NavigatorHolder
 
     @InjectPresenter
     lateinit var presenter: ProfileContainerPresenter
@@ -42,13 +49,18 @@ class ProfileContainerFragment : BaseFragment(), ProfileContainerView {
         super.onAttach(context)
     }
 
+    override fun onResume() {
+        super.onResume()
+        navigatorHolder.setNavigator(navigator)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        navigatorHolder.removeNavigator()
+    }
+
     override fun onBackPressed(): Boolean {
         presenter.pressBack()
         return true
-    }
-
-    override fun initPagerAdapter(models: ArrayList<PageTabModel>) {
-        viewPager.adapter = ProfilePagerAdapter(childFragmentManager, requireContext(), models)
-        tabLayout.setupWithViewPager(viewPager)
     }
 }
