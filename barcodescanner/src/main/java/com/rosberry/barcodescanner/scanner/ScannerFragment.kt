@@ -21,6 +21,7 @@ import android.view.ViewGroup
 import com.arellomobile.mvp.MvpAppCompatFragment
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.google.zxing.Result
+import com.rosberry.barcodescanner.MainActivity
 import com.rosberry.barcodescanner.R
 import kotlinx.android.synthetic.main.fragment_scanner.*
 import me.dm7.barcodescanner.zxing.ZXingScannerView
@@ -113,6 +114,7 @@ class ScannerFragment : MvpAppCompatFragment(), ScannerView, ZXingScannerView.Re
 
     override fun displayBarCode(text: String) {
         Log.d(TAG, "displayBarCode::displaying text: $text")
+        (activity as MainActivity).showResult(text)
     }
 
     @SuppressLint("NewApi")
