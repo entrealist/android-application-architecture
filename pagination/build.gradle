@@ -1,0 +1,49 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+
+    defaultConfig {
+        applicationId "com.rosberry.pagination"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.*'])
+
+    def deps = rootProject.ext.dependencies
+
+    implementation deps.kotlin
+
+    implementation deps.supportAppCompat
+    implementation deps.supportRecyclerView
+
+    implementation deps.rxJava
+    implementation deps.rxAndroid
+    implementation deps.retrofit
+    implementation deps.retrofitRxJavaAdapter
+    implementation deps.retrofitGsonConverter
+    implementation deps.googleGson
+
+    implementation deps.picasso
+
+    implementation deps.moxy
+    implementation deps.moxySupport
+    kapt deps.moxyCompiler
+}
