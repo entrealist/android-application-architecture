@@ -4,17 +4,15 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
         applicationId "com.rosberry.barcodescanner"
-        minSdkVersion 21
-        targetSdkVersion 28
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
-
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
     }
 
     buildTypes {
@@ -27,23 +25,20 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.*'])
-
     def deps = rootProject.ext.dependencies
 
     implementation deps.kotlin
-    implementation deps.supportAppCompat
-    implementation deps.supportRecyclerView
-    implementation deps.supportConstraintLayout
 
+    implementation deps.supportAppCompat
+    implementation deps.supportConstraintLayout
 
     implementation deps.moxy
     implementation deps.moxySupport
     kapt deps.moxyCompiler
 
-    implementation 'me.dm7.barcodescanner:zxing:1.9.8'
-    implementation('com.github.hotchemi:permissionsdispatcher:3.3.1') {
+    implementation deps.barcodescanner
+    implementation(deps.permissiondispatcher) {
         exclude module: "support-v13"
     }
-    kapt "com.github.hotchemi:permissionsdispatcher-processor:3.3.1"
+    kapt deps.permissiondispatcherProcessor
 }
