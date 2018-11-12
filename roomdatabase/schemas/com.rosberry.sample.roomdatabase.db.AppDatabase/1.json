@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "197d8bfa82262a0505cf870e70991844",
+    "identityHash": "8bcedfbfb12b4e551b550ff1be1cc433",
     "entities": [
       {
         "tableName": "article",
@@ -50,7 +50,7 @@
       },
       {
         "tableName": "comment",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `text` TEXT NOT NULL, `postedAt` INTEGER NOT NULL, `userId` INTEGER NOT NULL, `articleId` INTEGER NOT NULL, FOREIGN KEY(`userId`) REFERENCES `user`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`articleId`) REFERENCES `article`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `text` TEXT NOT NULL, `postedAt` INTEGER NOT NULL, `user_id` INTEGER NOT NULL, `article_id` INTEGER NOT NULL, FOREIGN KEY(`user_id`) REFERENCES `user`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`article_id`) REFERENCES `article`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
         "fields": [
           {
             "fieldPath": "id",
@@ -72,13 +72,13 @@
           },
           {
             "fieldPath": "userId",
-            "columnName": "userId",
+            "columnName": "user_id",
             "affinity": "INTEGER",
             "notNull": true
           },
           {
             "fieldPath": "articleId",
-            "columnName": "articleId",
+            "columnName": "article_id",
             "affinity": "INTEGER",
             "notNull": true
           }
@@ -91,20 +91,20 @@
         },
         "indices": [
           {
-            "name": "index_comment_userId",
+            "name": "index_comment_user_id",
             "unique": false,
             "columnNames": [
-              "userId"
+              "user_id"
             ],
-            "createSql": "CREATE  INDEX `index_comment_userId` ON `${TABLE_NAME}` (`userId`)"
+            "createSql": "CREATE  INDEX `index_comment_user_id` ON `${TABLE_NAME}` (`user_id`)"
           },
           {
-            "name": "index_comment_articleId",
+            "name": "index_comment_article_id",
             "unique": false,
             "columnNames": [
-              "articleId"
+              "article_id"
             ],
-            "createSql": "CREATE  INDEX `index_comment_articleId` ON `${TABLE_NAME}` (`articleId`)"
+            "createSql": "CREATE  INDEX `index_comment_article_id` ON `${TABLE_NAME}` (`article_id`)"
           }
         ],
         "foreignKeys": [
@@ -113,7 +113,7 @@
             "onDelete": "NO ACTION",
             "onUpdate": "NO ACTION",
             "columns": [
-              "userId"
+              "user_id"
             ],
             "referencedColumns": [
               "id"
@@ -124,7 +124,7 @@
             "onDelete": "NO ACTION",
             "onUpdate": "NO ACTION",
             "columns": [
-              "articleId"
+              "article_id"
             ],
             "referencedColumns": [
               "id"
@@ -134,7 +134,7 @@
       },
       {
         "tableName": "user",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `email` TEXT NOT NULL, `firstName` TEXT, `lastName` TEXT, `birthday` TEXT, `commentsPosted` INTEGER NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `email` TEXT NOT NULL, `firstName` TEXT, `lastName` TEXT, `birthDay` TEXT, `commentsPosted` INTEGER NOT NULL)",
         "fields": [
           {
             "fieldPath": "id",
@@ -162,7 +162,7 @@
           },
           {
             "fieldPath": "birthDay",
-            "columnName": "birthday",
+            "columnName": "birthDay",
             "affinity": "TEXT",
             "notNull": false
           },
@@ -194,7 +194,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"197d8bfa82262a0505cf870e70991844\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"8bcedfbfb12b4e551b550ff1be1cc433\")"
     ]
   }
 }

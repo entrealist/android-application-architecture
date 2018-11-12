@@ -15,32 +15,31 @@ import org.threeten.bp.Instant
  * @author mmikhailov on 11.11.2018.
  */
 @Entity(
-        tableName = DbConstants.Comment.tableName,
+        tableName = "comment",
         foreignKeys = [
             ForeignKey(
                     entity = User::class,
-                    parentColumns = [DbConstants.id],
-                    childColumns = [DbConstants.Comment.userId]
+                    parentColumns = ["id"],
+                    childColumns = ["user_id"]
             ),
             ForeignKey(
                     entity = Article::class,
-                    parentColumns = [DbConstants.id],
-                    childColumns = [DbConstants.Comment.articleId]
+                    parentColumns = ["id"],
+                    childColumns = ["article_id"]
             )
         ],
         indices = [
-            Index(DbConstants.Comment.userId),
-            Index(DbConstants.Comment.articleId)
+            Index("user_id"),
+            Index("article_id")
         ]
 )
 data class Comment(
         @PrimaryKey(autoGenerate = true)
-        @ColumnInfo(name = DbConstants.id)
         var id: Long,
-        @ColumnInfo(name = DbConstants.Comment.text) var text: String,
-        @ColumnInfo(name = DbConstants.Comment.postedAt) var postedAt: Instant,
-        @ColumnInfo(name = DbConstants.Comment.userId) var userId: Long,
-        @ColumnInfo(name = DbConstants.Comment.articleId) var articleId: Long
+        var text: String,
+        var postedAt: Instant,
+        @ColumnInfo(name = "user_id") var userId: Long,
+        @ColumnInfo(name = "article_id") var articleId: Long
 )
 
 @Dao

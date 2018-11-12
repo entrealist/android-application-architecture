@@ -19,7 +19,7 @@ import org.threeten.bp.format.DateTimeFormatter
             Comment::class,
             User::class
         ],
-        version = DbConstants.schemaVersion
+        version = 1
 )
 @TypeConverters(DbConverters::class)
 abstract class AppDatabase : RoomDatabase() {
@@ -35,7 +35,7 @@ abstract class AppDatabase : RoomDatabase() {
         fun getDatabase(context: Context): AppDatabase {
             return INSTANCE ?: Room.databaseBuilder(context.applicationContext,
                     AppDatabase::class.java,
-                    DbConstants.databaseName)
+                    "app-database")
                 .fallbackToDestructiveMigration()
                 .build()
                 .also { INSTANCE = it }
