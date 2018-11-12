@@ -30,15 +30,15 @@ abstract class AppDatabase : RoomDatabase() {
 
     companion object {
 
-        private var INSTANCE: AppDatabase? = null
+        private var instance: AppDatabase? = null
 
         fun getDatabase(context: Context): AppDatabase {
-            return INSTANCE ?: Room.databaseBuilder(context.applicationContext,
+            return instance ?: Room.databaseBuilder(context.applicationContext,
                     AppDatabase::class.java,
                     DbConstants.databaseName)
                 .fallbackToDestructiveMigration()
                 .build()
-                .also { INSTANCE = it }
+                .also { instance = it }
         }
     }
 }

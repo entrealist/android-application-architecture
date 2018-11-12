@@ -26,7 +26,7 @@ data class Article(
 @Dao
 interface ArticleDao {
 
-    @Insert
+    @Insert // todo проверить на дефолтной стратегии что будет если, например, 1 из 20 записей будет повторяться.
     fun insertAll(vararg articles: Article)
 
     @Delete
