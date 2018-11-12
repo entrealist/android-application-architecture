@@ -1,11 +1,11 @@
 ext {
-    buildToolsVersion = '28.0.2'
-    minSdkVersion = 19
+    buildToolsVersion = '28.0.3'
+    minSdkVersion = 21
     compileSdkVersion = 28
     targetSdkVersion = 28
 
     junit_version = "4.12"
-    espresso_version = "2.2.2"
+    espresso_version = "3.1.0"
     play_services = "15.0.1"
 
     supportLib_version = "28.0.0"
@@ -21,13 +21,14 @@ ext {
 
     evernoteState_version = "1.2.1"
 
-    rxAndroid_version = "2.0.1"
-    rxJava_version = "2.1.0"
+    rxAndroid_version = "2.1.0"
+    rxJava_version = "2.2.2"
     rxKotlin_version = "2.0.3"
     rxpermission_version = "0.9.4@aar"
 
-    roomRuntime_version = '1.0.0-beta2'
-    roomCompiler_version = roomRuntime_version
+    room_version = "1.1.0"
+
+    threetenabp_version = "1.1.1"
 
     dagger2_version = "2.14.1"
     javaxAnnotation_version = "1.0"
@@ -124,9 +125,9 @@ ext {
             androidStateCompiler    : "com.evernote:android-state-processor:$evernoteState_version",
 
             //data
-            roomRuntime             : "android.arch.persistence.room:runtime:$roomCompiler_version",
-            roomCompiler            : "android.arch.persistence.room:compiler:$roomRuntime_version",
-            roomRx2                 : "android.arch.persistence.room:rxjava2:$roomRuntime_version",
+            roomRuntime             : "android.arch.persistence.room:runtime:$room_version",
+            roomCompiler            : "android.arch.persistence.room:compiler:$room_version",
+            roomRx2                 : "android.arch.persistence.room:rxjava2:$room_version",
 
             //ui
             materialDialogs         : "com.afollestad.material-dialogs:core:$materialDialog_version",
@@ -155,6 +156,9 @@ ext {
             //moxy
             moxy                    : "com.arello-mobile:moxy:$moxy_version",
             moxyCompiler            : "com.arello-mobile:moxy-compiler:$moxy_version",
-            moxySupport             : "com.arello-mobile:moxy-app-compat:$moxy_version"
+            moxySupport             : "com.arello-mobile:moxy-app-compat:$moxy_version",
+
+            //time
+            threetenabp             : "com.jakewharton.threetenabp:threetenabp:$threetenabp_version"
     ]
 }

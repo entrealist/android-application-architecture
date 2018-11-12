@@ -1,0 +1,58 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+
+    defaultConfig {
+        applicationId "com.rosberry.sample.roomdatabase"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        kapt {
+            arguments {
+                arg("room.schemaLocation", "$projectDir/schemas".toString())
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    sourceSets {
+        androidTest.assets.srcDirs += files("$projectDir/schemas".toString())
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.*'], dir: 'libs')
+    def deps = rootProject.ext.dependencies
+    def testDeps = rootProject.ext.testDependencies
+
+    testImplementation testDeps.jUnit
+
+    implementation deps.kotlin
+    implementation deps.supportAppCompat
+    implementation deps.supportRecyclerView
+    implementation deps.supportConstraintLayout
+    implementation deps.supportDesign
+    implementation deps.rxJava
+    implementation deps.rxAndroid
+    implementation deps.googleGson
+    implementation deps.roomRuntime
+    implementation deps.roomRx2
+    kapt deps.roomCompiler
+    implementation deps.threetenabp
+}
