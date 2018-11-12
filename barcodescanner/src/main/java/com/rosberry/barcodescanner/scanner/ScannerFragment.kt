@@ -54,13 +54,16 @@ class ScannerFragment : MvpAppCompatFragment(), ScannerView, ZXingScannerView.Re
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (activity!! as AppCompatActivity).supportActionBar?.setTitle(R.string.nav_scanner)
+
+        (requireActivity() as AppCompatActivity).supportActionBar?.setTitle(R.string.nav_scanner)
+
         setHasOptionsMenu(true)
         scanner.setResultHandler(this)
     }
 
     override fun onStart() {
         super.onStart()
+
         startCameraWithPermissionCheck()
     }
 
@@ -73,6 +76,7 @@ class ScannerFragment : MvpAppCompatFragment(), ScannerView, ZXingScannerView.Re
         } else {
             Log.d(TAG, "Camera wasn't started")
         }
+
         super.onStop()
     }
 
@@ -82,6 +86,7 @@ class ScannerFragment : MvpAppCompatFragment(), ScannerView, ZXingScannerView.Re
 
     override fun onPrepareOptionsMenu(menu: Menu?) {
         super.onPrepareOptionsMenu(menu)
+
         menu?.findItem(R.id.action_torch_on)
             ?.isVisible = !scanner.flash
         menu?.findItem(R.id.action_torch_off)
@@ -92,14 +97,15 @@ class ScannerFragment : MvpAppCompatFragment(), ScannerView, ZXingScannerView.Re
         when (item?.itemId ?: 0) {
             R.id.action_torch_on -> {
                 scanner.flash = true
-                activity!!.invalidateOptionsMenu()
+                requireActivity().invalidateOptionsMenu()
 
             }
             R.id.action_torch_off -> {
                 scanner.flash = false
-                activity!!.invalidateOptionsMenu()
+                requireActivity().invalidateOptionsMenu()
             }
         }
+
         return super.onOptionsItemSelected(item)
     }
 
@@ -114,13 +120,13 @@ class ScannerFragment : MvpAppCompatFragment(), ScannerView, ZXingScannerView.Re
 
     override fun displayBarCode(text: String) {
         Log.d(TAG, "displayBarCode::displaying text: $text")
-        (activity as MainActivity).showResult(text)
+        (requireActivity() as MainActivity).showResult(text)
     }
 
     @SuppressLint("NewApi")
     @Suppress("DEPRECATION")
     override fun vibrate() {
-        val vibrator = activity!!.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+        val vibrator = requireActivity().getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
         if (vibrator.hasVibrator()) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 val audioAttributes = AudioAttributes.Builder()
