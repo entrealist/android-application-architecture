@@ -16,12 +16,13 @@ import org.threeten.bp.Instant
  */
 @Entity(tableName = "article")
 data class Article(
-        @PrimaryKey(autoGenerate = true) var id: Long,
         var title: String,
         var text: String,
         var postedAt: Instant,
         var views: Long = 0L
-)
+) {
+    @PrimaryKey(autoGenerate = true) var id: Long? = null
+}
 
 @Dao
 interface ArticleDao {

@@ -38,13 +38,13 @@ import org.threeten.bp.Instant
         ]
 )
 data class Comment(
-        @PrimaryKey(autoGenerate = true)
-        var id: Long,
         var text: String,
         var postedAt: Instant,
         @ColumnInfo(name = "user_id") var userId: Long,
         @ColumnInfo(name = "article_id") var articleId: Long
-)
+) {
+    @PrimaryKey(autoGenerate = true) var id: Long? = null
+}
 
 @Dao
 interface CommentDao {
@@ -55,8 +55,11 @@ interface CommentDao {
     @get:Query("SELECT comment.id, article.title, user.firstName, user.lastName, user.email, comment.postedAt FROM comment INNER JOIN article ON comment.article_id = article.id INNER JOIN user ON comment.user_id = user.id ")
     val allCommentsAsSearchModel: Flowable<List<CommentSearchModel>>
 
-    @Query("SELECT comment.id, article.title AS title, user.firstName AS firstName, user.lastName AS lastName, user.email AS email, comment.postedAt FROM article INNER JOIN comment ON comment.article_id = article.id INNER JOIN user ON user.id = comment.user_id WHERE user.email LIKE :userEmail AND comment.postedAt > :after ")
-    fun findCommentsByUserNameAfterDate(userEmail: String, after: Instant): List<CommentSearchModel>
+    @Query("SELECT comment.id, article.title AS title, user.firstName AS firstName, user.lastName AS lastName, user.email AS email, comment.postedAt FROM article INNER JOIN comment ON comment.article_id = article.id INNER JOIN user ON user.id = comment.user_id WHERE user.email LIKE :userEmail AND comment.postedAt > :after")
+    fun findCommentsAsSearchModelByUserNameAfterDate(userEmail: String, after: Instant): List<CommentSearchModel>
+
+    @Query("SELECT comment.* FROM comment INNER JOIN user ON user.id = comment.user_id WHERE user.id = :userId")
+    fun findCommentsOfUser(userId: Long): List<Comment>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(comment: Comment): Long

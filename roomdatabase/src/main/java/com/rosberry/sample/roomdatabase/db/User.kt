@@ -23,25 +23,22 @@ import org.threeten.bp.LocalDate
         indices = [ Index("email", unique = true) ]
 )
 data class User(
-        @PrimaryKey(autoGenerate = true)
-        var id: Long,
         var email: String,
         var firstName: String?,
         var lastName: String?,
         var birthDay: LocalDate?,
-        var commentsPosted: Long = 0L,
         @Ignore var picture: Bitmap?
 ) {
+    @PrimaryKey(autoGenerate = true) var id: Long? = null
+
     // Secondary constructor is needed due to Room cannot match ignored nullable parameter with field.
     // Setting the parameter null does not affect.
     constructor(
-            id: Long,
             email: String,
             firstName: String?,
             lastName: String?,
-            birthDay: LocalDate?,
-            commentsPosted: Long
-    ) : this(id, email, firstName, lastName, birthDay, commentsPosted, null)
+            birthDay: LocalDate?
+    ) : this(email, firstName, lastName, birthDay, null)
 }
 
 @Dao
