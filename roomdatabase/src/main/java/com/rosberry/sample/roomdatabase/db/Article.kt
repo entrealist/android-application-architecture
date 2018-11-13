@@ -56,7 +56,7 @@ interface ArticleDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(article: Article): Long
 
-    @Insert
+    @Insert // todo проверить на дефолтной стратегии что будет если, например, 1 из 20 записей будет повторяться.
     fun insertAll(vararg articles: Article): List<Long>
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
