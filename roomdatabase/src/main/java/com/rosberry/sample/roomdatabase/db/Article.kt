@@ -44,13 +44,13 @@ interface ArticleDao {
     @Query("SELECT * FROM article WHERE article.views > 0")
     fun findArticlesWithViews(): List<Article>
 
-    @Query("SELECT * FROM article INNER JOIN comment ON comment.article_id = article.id")
+    @Query("SELECT article.id, article.title, article.text, article.postedAt, article.views FROM article INNER JOIN comment ON comment.article_id = article.id")
     fun findArticlesWithComments(): List<Article>
 
-    @Query("SELECT * FROM article INNER JOIN comment ON comment.article_id LIKE article.id WHERE comment.user_id LIKE :userId")
+    @Query("SELECT article.id, article.title, article.text, article.postedAt, article.views FROM article INNER JOIN comment ON comment.article_id LIKE article.id WHERE comment.user_id LIKE :userId")
     fun findArticlesWithCommentsFromUserById(userId: Long): List<Article>
 
-    @Query("SELECT * FROM article INNER JOIN comment ON comment.article_id = article.id INNER JOIN user ON comment.user_id = user.id WHERE user.email LIKE :userEmail")
+    @Query("SELECT article.id, article.title, article.text, article.postedAt, article.views FROM article INNER JOIN comment ON comment.article_id = article.id INNER JOIN user ON comment.user_id = user.id WHERE user.email LIKE :userEmail")
     fun findArticlesWithCommentsFromUserByEmail(userEmail: String): List<Article>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
