@@ -65,7 +65,7 @@ interface CommentDao {
     fun insert(comment: Comment): Long
 
     @Insert
-    fun insertAll(vararg comments: Comment): List<Long>
+    fun insertAll(comments: List<Comment>): List<Long>
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
     fun updateComment(comment: Comment)

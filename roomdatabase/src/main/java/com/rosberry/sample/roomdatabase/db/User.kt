@@ -8,11 +8,13 @@ import android.arch.persistence.room.Index
 import android.arch.persistence.room.Insert
 import android.arch.persistence.room.OnConflictStrategy
 import android.arch.persistence.room.OnConflictStrategy.IGNORE
+import android.arch.persistence.room.OnConflictStrategy.REPLACE
 import android.arch.persistence.room.PrimaryKey
 import android.arch.persistence.room.Query
 import android.arch.persistence.room.Update
 import android.graphics.Bitmap
 import io.reactivex.Flowable
+import io.reactivex.Maybe
 import org.threeten.bp.LocalDate
 
 /**
@@ -48,22 +50,22 @@ interface UserDao {
     val allUsers: Flowable<List<User>>
 
     @Query("SELECT * FROM user WHERE firstName = :firstName AND lastName = :lastName")
-    fun findUserByFullName(firstName: String, lastName: String): List<User>
+    fun findUserByFullName(firstName: String, lastName: String): Maybe<List<User>>
 
-    @Query("SELECT user.* FROM user INNER JOIN comment ON comment.user_id = user.id INNER JOIN article ON article.id = comment.article_id WHERE article.id LIKE :articleId")
-    fun findUsersCommentedArticle(articleId: Long): List<User>
+    @Query("SELECT DISTINCT user.* FROM user INNER JOIN comment ON comment.user_id = user.id INNER JOIN article ON article.id = comment.article_id WHERE article.id LIKE :articleId")
+    fun findUsersCommentedArticle(articleId: Long): Maybe<List<User>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(user: User): Long
 
     @Insert(onConflict = IGNORE)
-    fun insertOrReplace(vararg users: User): List<Long>
+    fun insertAllOrIgnore(users: List<User>): List<Long>
 
-    @Insert
-    fun insertAll(vararg users: User): List<Long>
+    @Insert(onConflict = REPLACE)
+    fun insertAll(users: List<User>): List<Long>
 
-    @Update(onConflict = OnConflictStrategy.REPLACE)
-    fun updateComment(user: User)
+    @Update
+    fun update(user: User)
 
     @Delete
     fun delete(user: User): Int

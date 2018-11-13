@@ -58,7 +58,7 @@ interface ArticleDao {
     fun insert(article: Article): Long
 
     @Insert
-    fun insertAll(vararg articles: Article): List<Long>
+    fun insertAll(articles: List<Article>): List<Long>
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
     fun updateArticle(article: Article)
