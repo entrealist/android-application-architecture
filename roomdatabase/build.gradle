@@ -45,6 +45,7 @@ dependencies {
     androidTestImplementation testDeps.jUnit
     androidTestImplementation testDeps.runner
     androidTestImplementation testDeps.archCoreTesting
+    androidTestImplementation testDeps.roomTesting
 
     implementation deps.kotlin
     implementation deps.supportAppCompat

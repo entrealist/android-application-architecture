@@ -118,7 +118,7 @@ class UserDaoTest {
         val insertedUserId = db.userDao()
             .insert(user)
 
-        val updatedUser = User(user.email, "newFirstName", user.lastName, user.birthDay).apply { id = insertedUserId }
+        val updatedUser = User(user.email, "newFirstName", user.lastName, user.birthday).apply { id = insertedUserId }
         val updatedUserId = db.userDao()
             .insert(updatedUser)
 

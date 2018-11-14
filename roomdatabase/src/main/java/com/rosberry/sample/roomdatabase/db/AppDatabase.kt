@@ -6,6 +6,7 @@ import android.arch.persistence.room.RoomDatabase
 import android.arch.persistence.room.TypeConverter
 import android.arch.persistence.room.TypeConverters
 import android.content.Context
+import com.rosberry.sample.roomdatabase.data.Gender
 import org.threeten.bp.Instant
 import org.threeten.bp.LocalDate
 import org.threeten.bp.format.DateTimeFormatter
@@ -19,7 +20,7 @@ import org.threeten.bp.format.DateTimeFormatter
             Comment::class,
             User::class
         ],
-        version = 1
+        version = 2
 )
 @TypeConverters(DbConverters::class)
 abstract class AppDatabase : RoomDatabase() {
@@ -36,7 +37,7 @@ abstract class AppDatabase : RoomDatabase() {
             return instance ?: Room.databaseBuilder(context.applicationContext,
                     AppDatabase::class.java,
                     "app-database")
-                .fallbackToDestructiveMigration()
+                .addMigrations(Migrations.MIGRATION_1_2)
                 .build()
                 .also { instance = it }
         }
@@ -58,4 +59,10 @@ internal class DbConverters {
 
     @TypeConverter
     fun toLongMillis(instant: Instant?) = instant?.toEpochMilli()
+
+    @TypeConverter
+    fun genderToString(gender: Gender) = gender.name
+
+    @TypeConverter
+    fun stringToGender(string: String) = Gender.valueOf(string)
 }

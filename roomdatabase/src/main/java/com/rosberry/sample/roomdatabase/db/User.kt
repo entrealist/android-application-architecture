@@ -12,6 +12,7 @@ import android.arch.persistence.room.PrimaryKey
 import android.arch.persistence.room.Query
 import android.arch.persistence.room.Update
 import android.graphics.Bitmap
+import com.rosberry.sample.roomdatabase.data.Gender
 import io.reactivex.Flowable
 import io.reactivex.Maybe
 import org.threeten.bp.LocalDate
@@ -25,21 +26,16 @@ import org.threeten.bp.LocalDate
 )
 data class User(
         var email: String,
-        var firstName: String?,
-        var lastName: String?,
-        var birthDay: LocalDate?,
-        @Ignore var picture: Bitmap?
+        var firstName: String? = null,
+        var lastName: String? = null,
+        var birthday: LocalDate? = null,
+        var gender: Gender = Gender.UNKNOWN,
+        @Ignore var picture: Bitmap? = null
 ) {
     @PrimaryKey(autoGenerate = true) var id: Long? = null
 
     // Secondary constructor is needed due to Room cannot match ignored nullable parameter with field.
-    // Setting the parameter null does not affect.
-    constructor(
-            email: String,
-            firstName: String?,
-            lastName: String?,
-            birthDay: LocalDate?
-    ) : this(email, firstName, lastName, birthDay, null)
+    constructor(email: String) : this(email, picture = null)
 }
 
 @Dao
