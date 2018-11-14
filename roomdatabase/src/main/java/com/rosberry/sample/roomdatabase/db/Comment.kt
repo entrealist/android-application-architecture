@@ -7,12 +7,14 @@ import android.arch.persistence.room.Entity
 import android.arch.persistence.room.ForeignKey
 import android.arch.persistence.room.Index
 import android.arch.persistence.room.Insert
-import android.arch.persistence.room.OnConflictStrategy
+import android.arch.persistence.room.OnConflictStrategy.IGNORE
+import android.arch.persistence.room.OnConflictStrategy.REPLACE
 import android.arch.persistence.room.PrimaryKey
 import android.arch.persistence.room.Query
 import android.arch.persistence.room.Update
 import com.rosberry.sample.roomdatabase.ui.model.CommentSearchModel
 import io.reactivex.Flowable
+import io.reactivex.Maybe
 import org.threeten.bp.Instant
 
 /**
@@ -56,19 +58,22 @@ interface CommentDao {
     val allCommentsAsSearchModel: Flowable<List<CommentSearchModel>>
 
     @Query("SELECT comment.id, article.title AS title, user.firstName AS firstName, user.lastName AS lastName, user.email AS email, comment.postedAt FROM article INNER JOIN comment ON comment.article_id = article.id INNER JOIN user ON user.id = comment.user_id WHERE user.email LIKE :userEmail AND comment.postedAt > :after")
-    fun findCommentsAsSearchModelByUserNameAfterDate(userEmail: String, after: Instant): List<CommentSearchModel>
+    fun findCommentsAsSearchModelByUserNameAfterDate(userEmail: String, after: Instant): Maybe<List<CommentSearchModel>>
 
     @Query("SELECT comment.* FROM comment INNER JOIN user ON user.id = comment.user_id WHERE user.id = :userId")
-    fun findCommentsOfUser(userId: Long): List<Comment>
+    fun findCommentsOfUser(userId: Long): Maybe<List<Comment>>
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = REPLACE)
     fun insert(comment: Comment): Long
 
-    @Insert
+    @Insert(onConflict = IGNORE)
+    fun insertAllOrIgnore(users: List<Comment>): List<Long>
+
+    @Insert(onConflict = REPLACE)
     fun insertAll(comments: List<Comment>): List<Long>
 
-    @Update(onConflict = OnConflictStrategy.REPLACE)
-    fun updateComment(comment: Comment)
+    @Update
+    fun update(comment: Comment)
 
     @Delete
     fun delete(comment: Comment): Int

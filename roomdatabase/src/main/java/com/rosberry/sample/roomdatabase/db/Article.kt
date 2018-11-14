@@ -4,11 +4,14 @@ import android.arch.persistence.room.Dao
 import android.arch.persistence.room.Delete
 import android.arch.persistence.room.Entity
 import android.arch.persistence.room.Insert
-import android.arch.persistence.room.OnConflictStrategy
+import android.arch.persistence.room.OnConflictStrategy.IGNORE
+import android.arch.persistence.room.OnConflictStrategy.REPLACE
 import android.arch.persistence.room.PrimaryKey
 import android.arch.persistence.room.Query
 import android.arch.persistence.room.Update
 import io.reactivex.Flowable
+import io.reactivex.Maybe
+import io.reactivex.Single
 import org.threeten.bp.Instant
 
 /**
@@ -34,34 +37,37 @@ interface ArticleDao {
     val allArticlesOrderedByDate: Flowable<List<Article>>
 
     @Query("SELECT * FROM article WHERE article.id = :id")
-    fun findArticleById(id: Long): Article
+    fun findArticleById(id: Long): Single<Article>
 
     @Query("SELECT * FROM article WHERE article.title LIKE '%' || :query || '%'")
-    fun findArticlesByTitle(query: String): List<Article>
+    fun findArticlesByTitle(query: String): Maybe<List<Article>>
 
-    @Query("SELECT * FROM article WHERE article.postedAt >= :from AND article.postedAt <= :to")
-    fun findArticlesWithinDates(from: Instant, to: Instant): List<Article>
+    @Query("SELECT * FROM article WHERE article.postedAt >= :from AND article.postedAt <= :to ORDER BY article.title ASC")
+    fun findArticlesWithinDates(from: Instant, to: Instant): Maybe<List<Article>>
 
-    @Query("SELECT * FROM article WHERE article.views > 0")
-    fun findArticlesWithViews(): List<Article>
+    @Query("SELECT * FROM article WHERE article.views > 0 ORDER BY article.title ASC")
+    fun findArticlesWithViews(): Maybe<List<Article>>
 
-    @Query("SELECT article.* FROM article INNER JOIN comment ON comment.article_id = article.id")
-    fun findArticlesWithComments(): List<Article>
+    @Query("SELECT DISTINCT article.* FROM article INNER JOIN comment ON comment.article_id = article.id ORDER BY article.title ASC")
+    fun findArticlesWithComments(): Maybe<List<Article>>
 
-    @Query("SELECT article.* FROM article INNER JOIN comment ON comment.article_id LIKE article.id WHERE comment.user_id LIKE :userId")
-    fun findArticlesWithCommentsFromUserById(userId: Long): List<Article>
+    @Query("SELECT DISTINCT article.* FROM article INNER JOIN comment ON comment.article_id LIKE article.id WHERE comment.user_id LIKE :userId ORDER BY article.title ASC")
+    fun findArticlesWithCommentsByUserId(userId: Long): Maybe<List<Article>>
 
-    @Query("SELECT article.* FROM article INNER JOIN comment ON comment.article_id = article.id INNER JOIN user ON comment.user_id = user.id WHERE user.email LIKE :userEmail")
-    fun findArticlesWithCommentsFromUserByEmail(userEmail: String): List<Article>
+    @Query("SELECT DISTINCT article.* FROM article INNER JOIN comment ON comment.article_id = article.id INNER JOIN user ON comment.user_id = user.id WHERE user.email LIKE :userEmail ORDER BY article.title ASC")
+    fun findArticlesWithCommentsByUserEmail(userEmail: String): Maybe<List<Article>>
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = REPLACE)
     fun insert(article: Article): Long
 
-    @Insert
+    @Insert(onConflict = IGNORE)
+    fun insertAllOrIgnore(articles: List<Article>): List<Long>
+
+    @Insert(onConflict = REPLACE)
     fun insertAll(articles: List<Article>): List<Long>
 
-    @Update(onConflict = OnConflictStrategy.REPLACE)
-    fun updateArticle(article: Article)
+    @Update
+    fun update(article: Article)
 
     @Delete
     fun delete(article: Article): Int
