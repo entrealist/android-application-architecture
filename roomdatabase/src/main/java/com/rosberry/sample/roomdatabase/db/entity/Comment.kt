@@ -1,4 +1,4 @@
-package com.rosberry.sample.roomdatabase.db
+package com.rosberry.sample.roomdatabase.db.entity
 
 import android.arch.persistence.room.ColumnInfo
 import android.arch.persistence.room.Dao
@@ -14,7 +14,7 @@ import android.arch.persistence.room.Query
 import android.arch.persistence.room.Update
 import com.rosberry.sample.roomdatabase.ui.model.CommentSearchModel
 import io.reactivex.Flowable
-import io.reactivex.Maybe
+import io.reactivex.Single
 import org.threeten.bp.Instant
 
 /**
@@ -58,10 +58,10 @@ interface CommentDao {
     val allCommentsAsSearchModel: Flowable<List<CommentSearchModel>>
 
     @Query("SELECT comment.id, article.title AS title, user.firstName AS firstName, user.lastName AS lastName, user.email AS email, comment.postedAt FROM article INNER JOIN comment ON comment.article_id = article.id INNER JOIN user ON user.id = comment.user_id WHERE user.email LIKE :userEmail AND comment.postedAt > :after")
-    fun findCommentsAsSearchModelByUserNameAfterDate(userEmail: String, after: Instant): Maybe<List<CommentSearchModel>>
+    fun findCommentsAsSearchModelByUserNameAfterDate(userEmail: String, after: Instant): Single<List<CommentSearchModel>>
 
     @Query("SELECT comment.* FROM comment INNER JOIN user ON user.id = comment.user_id WHERE user.id = :userId")
-    fun findCommentsOfUser(userId: Long): Maybe<List<Comment>>
+    fun findCommentsOfUser(userId: Long): Single<List<Comment>>
 
     @Insert(onConflict = REPLACE)
     fun insert(comment: Comment): Long

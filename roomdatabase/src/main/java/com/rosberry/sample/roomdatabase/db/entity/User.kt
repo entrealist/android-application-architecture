@@ -1,4 +1,4 @@
-package com.rosberry.sample.roomdatabase.db
+package com.rosberry.sample.roomdatabase.db.entity
 
 import android.arch.persistence.room.Dao
 import android.arch.persistence.room.Delete
@@ -14,7 +14,7 @@ import android.arch.persistence.room.Update
 import android.graphics.Bitmap
 import com.rosberry.sample.roomdatabase.data.Gender
 import io.reactivex.Flowable
-import io.reactivex.Maybe
+import io.reactivex.Single
 import org.threeten.bp.LocalDate
 
 /**
@@ -45,10 +45,10 @@ interface UserDao {
     val allUsers: Flowable<List<User>>
 
     @Query("SELECT * FROM user WHERE firstName = :firstName AND lastName = :lastName")
-    fun findUserByFullName(firstName: String, lastName: String): Maybe<List<User>>
+    fun findUserByFullName(firstName: String, lastName: String): Single<List<User>>
 
     @Query("SELECT DISTINCT user.* FROM user INNER JOIN comment ON comment.user_id = user.id INNER JOIN article ON article.id = comment.article_id WHERE article.id LIKE :articleId")
-    fun findUsersCommentedArticle(articleId: Long): Maybe<List<User>>
+    fun findUsersCommentedArticle(articleId: Long): Single<List<User>>
 
     @Insert(onConflict = REPLACE)
     fun insert(user: User): Long
