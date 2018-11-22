@@ -8,7 +8,7 @@ import com.rosberry.sample.roomdatabase.db.AppDatabase
 
 class MainActivity : AppCompatActivity() {
 
-    private val db: AppDatabase = AppDatabase.getDatabase(applicationContext)
+    private val db: AppDatabase by lazy { AppDatabase.getDatabase(applicationContext) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
