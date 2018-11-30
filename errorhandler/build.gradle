@@ -30,11 +30,11 @@ dependencies {
 
     implementation deps.kotlin
 
-    implementation deps.supportAppCompat
+    implementation deps.support.appCompat
 
-    implementation deps.moxy
-    implementation deps.moxySupport
-    kapt deps.moxyCompiler
+    implementation deps.moxy.library
+    implementation deps.moxy.support
+    kapt deps.moxy.compiler
 
-    implementation deps.rxJava
+    implementation deps.rx.java
 }
