@@ -138,11 +138,6 @@ dependencies {
 
     testImplementation testDeps.jUnit
 
-
     implementation deps.support.appCompat
     implementation deps.kotlin
-
-
 }
-
-

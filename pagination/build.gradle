@@ -46,4 +46,7 @@ dependencies {
     implementation deps.moxy.library
     implementation deps.moxy.support
     kapt deps.moxy.compiler
+
+    implementation deps.rosberry.core
+    implementation deps.abstractRecyclerView
 }

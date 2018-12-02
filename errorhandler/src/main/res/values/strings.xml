@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">Error Handler</string>
+
+    <string name="core_illegal_state_title">Illegal state title</string>
+    <string name="core_unknown_host_title">Unknown host title</string>
+    <string name="core_network_error_title">Network error title</string>
+
+    <string name="core_illegal_state_description">Illegal state description</string>
+    <string name="core_unknown_host_description">Unknown host description</string>
+    <string name="core_network_error_description">Network error description</string>
+
+    <string name="core_unknown_error_title">Unknown error title</string>
+    <string name="core_unknown_error_description">Unknown error description</string>
+
+    <string name="core_error_handler_success_result">It is good result!</string>
 </resources>

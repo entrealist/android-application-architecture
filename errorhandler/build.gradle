@@ -11,6 +11,7 @@ android {
         applicationId "com.rosberry.sample.errorhandler"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
+        compileSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
     }
@@ -30,4 +31,10 @@ dependencies {
     implementation deps.kotlin
 
     implementation deps.support.appCompat
+
+    implementation deps.moxy.library
+    implementation deps.moxy.support
+    kapt deps.moxy.compiler
+
+    implementation deps.rx.java
 }
