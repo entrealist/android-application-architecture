@@ -2,11 +2,11 @@ package com.rosberry.pagination.ui
 
 import android.support.v7.util.DiffUtil
 import android.view.View
+import com.rosberry.abstractrecycler.AbstractItem
+import com.rosberry.abstractrecycler.AbstractRecyclerAdapter
+import com.rosberry.abstractrecycler.AbstractViewHolder
 import com.rosberry.pagination.R
 import com.rosberry.pagination.presentation.ProgressItem
-import ru.rosberry.abstractrecycler.AbstractItem
-import ru.rosberry.abstractrecycler.AbstractRecyclerAdapter
-import ru.rosberry.abstractrecycler.AbstractViewHolder
 
 /**
  * @author Alexei Korshun on 02/10/2018.

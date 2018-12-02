@@ -120,7 +120,7 @@ android {
     }
 
     configurations.all {
-        resolutionStrategy.force rootProject.ext.dependencies.supportv13
+        resolutionStrategy.force rootProject.ext.dependencies.support.v13
 
     }
     compileOptions {
@@ -136,11 +136,6 @@ dependencies {
 
     testImplementation testDeps.jUnit
 
-
-    implementation deps.supportAppCompat
+    implementation deps.support.appCompat
     implementation deps.kotlin
-
-
 }
-
-

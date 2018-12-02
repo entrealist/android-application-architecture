@@ -1,5 +1,5 @@
 ext {
-    buildToolsVersion = '28.0.2'
+    buildToolsVersion = '28.0.3'
     minSdkVersion = 21
     compileSdkVersion = 28
     targetSdkVersion = 28
@@ -73,30 +73,44 @@ ext {
             annotations: "com.android.support:support-annotations:$supportLib_version"
     ]
 
-    dependencies = [
-            //Android Support
-            supportAppCompat        : "com.android.support:appcompat-v7:$supportLib_version",
-            supportRecyclerView     : "com.android.support:recyclerview-v7:$supportLib_version",
-            supportDesign           : "com.android.support:design:$supportLib_version",
-            supportCardView         : "com.android.support:cardview-v7:$supportLib_version",
-            supportMultidex         : "com.android.support:multidex:$multidex_version",
-            supportMultidexInst     : "com.android.support:multidex-instrumentation:$multidex_version",
-            supportLint             : "com.android.tools.lint:lint-gradle:$supportLint_version",
+    rosberry_core_version = "0.1.1@aar"
+    abstract_recycler_view_version = "0.1.0@aar"
 
-            supportDynamicAnimations: "com.android.support:support-dynamic-animation:$supportLib_version",
-            supportConstraintLayout : "com.android.support.constraint:constraint-layout:$constraint_version",
-            supportv13              : "com.android.support:support-v13:$supportLib_version",
+    dependencies = [
+
+            rosberry : [
+                    core : "com.rosberry.android:core:$rosberry_core_version"
+            ],
+
+            abstractRecyclerView   : "com.github.alexeykorshun:abstractrecyclerview:$abstract_recycler_view_version",
+
+            //Android Support
+            support : [
+                    appCompat        : "com.android.support:appcompat-v7:$supportLib_version",
+                    recyclerView     : "com.android.support:recyclerview-v7:$supportLib_version",
+                    design           : "com.android.support:design:$supportLib_version",
+                    cardView         : "com.android.support:cardview-v7:$supportLib_version",
+                    multidex         : "com.android.support:multidex:$multidex_version",
+                    dynamicAnimations: "com.android.support:support-dynamic-animation:$supportLib_version",
+                    constraintLayout : "com.android.support.constraint:constraint-layout:$constraint_version",
+                    v13              : "com.android.support:support-v13:$supportLib_version",
+            ],
 
             //play services
-            playServicesLocation    : "com.google.android.gms:play-services-location:$play_services",
-            playServicesMap         : "com.google.android.gms:play-services-maps:$play_services",
-            firebaseCore            : "com.google.firebase:firebase-core:$play_services",
-            firebaseMessaging       : "com.google.firebase:firebase-messaging:$play_services",
-            firebaseDatabase        : "com.google.firebase:firebase-database:$play_services",
-            firebaseAuth            : "com.google.firebase:firebase-auth:$play_services",
-            firebaseStorage         : "com.google.firebase:firebase-storage:$play_services",
-            firebaseConfig          : "com.google.firebase:firebase-config:$play_services",
-            firebaseUi              : "com.firebaseui:firebase-ui-storage:$firebaseUi_version",
+            playServices : [
+                    servicesLocation    : "com.google.android.gms:play-services-location:$play_services",
+                    servicesMap         : "com.google.android.gms:play-services-maps:$play_services",
+            ],
+
+            firebase : [
+                    core            : "com.google.firebase:firebase-core:$play_services",
+                    messaging       : "com.google.firebase:firebase-messaging:$play_services",
+                    database        : "com.google.firebase:firebase-database:$play_services",
+                    auth            : "com.google.firebase:firebase-auth:$play_services",
+                    storage         : "com.google.firebase:firebase-storage:$play_services",
+                    config          : "com.google.firebase:firebase-config:$play_services",
+                    ui              : "com.firebaseui:firebase-ui-storage:$firebaseUi_version",
+            ],
 
             //kotlin libs
             kotlin                  : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version",
@@ -104,26 +118,36 @@ ext {
             ankoCoroutines          : "org.jetbrains.anko:anko-coroutines:$anko_version",
 
             //rest
-            retrofit                : "com.squareup.retrofit2:retrofit:$retrofit_version",
-            retrofitRxJavaAdapter   : "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version",
-            retrofitGsonConverter   : "com.squareup.retrofit2:converter-gson:$retrofit_version",
-            okHttpLoggingInterceptor: "com.squareup.okhttp3:logging-interceptor:$okHttp_version",
-            okHttp                  : "com.squareup.okhttp3:okhttp:$okHttp_version",
+            retrofit : [
+                    library                : "com.squareup.retrofit2:retrofit:$retrofit_version",
+                    rxJavaAdapter   : "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version",
+                    gsonConverter   : "com.squareup.retrofit2:converter-gson:$retrofit_version",
+            ],
+
+            okhttp : [
+                    loggingInterceptor: "com.squareup.okhttp3:logging-interceptor:$okHttp_version",
+                    library           : "com.squareup.okhttp3:okhttp:$okHttp_version",
+            ],
+
             googleGson              : "com.google.code.gson:gson:$gson_version",
 
             //rx
-            rxAndroid               : "io.reactivex.rxjava2:rxandroid:$rxAndroid_version",
-            rxJava                  : "io.reactivex.rxjava2:rxjava:$rxJava_version",
-            rxKotlin                : "io.reactivex.rxjava2:rxkotlin:$rxKotlin_version",
-            rxPermissions           : "com.tbruyelle.rxpermissions2:rxpermissions:$rxpermission_version",
-            rxBinding               : "com.jakewharton.rxbinding2:rxbinding-kotlin:$rxBinding_version",
+            rx : [
+                    android               : "io.reactivex.rxjava2:rxandroid:$rxAndroid_version",
+                    java                  : "io.reactivex.rxjava2:rxjava:$rxJava_version",
+                    kotlin                : "io.reactivex.rxjava2:rxkotlin:$rxKotlin_version",
+                    permissions           : "com.tbruyelle.rxpermissions2:rxpermissions:$rxpermission_version",
+                    binding               : "com.jakewharton.rxbinding2:rxbinding-kotlin:$rxBinding_version",
+            ],
 
             //inject
-            dagger                  : "com.google.dagger:dagger:$dagger2_version",
-            daggerAndroid           : "com.google.dagger:dagger-android:$dagger2_version",
-            daggerSupportLib        : "com.google.dagger:dagger-android-support:$dagger2_version",
-            daggerCompiler          : "com.google.dagger:dagger-compiler:$dagger2_version",
-            daggerAnnotation        : "com.google.dagger:dagger-android-processor:$dagger2_version",
+            dagger : [
+                    library           : "com.google.dagger:dagger:$dagger2_version",
+                    android           : "com.google.dagger:dagger-android:$dagger2_version",
+                    supportLib        : "com.google.dagger:dagger-android-support:$dagger2_version",
+                    compiler          : "com.google.dagger:dagger-compiler:$dagger2_version",
+                    annotation        : "com.google.dagger:dagger-android-processor:$dagger2_version",
+            ],
 
             //analytics
             crashlytics             : "com.crashlytics.sdk.android:crashlytics:$fabric_version",
@@ -134,17 +158,22 @@ ext {
             androidStateCompiler    : "com.evernote:android-state-processor:$evernoteState_version",
 
             //data
-            roomRuntime             : "android.arch.persistence.room:runtime:$roomCompiler_version",
-            roomCompiler            : "android.arch.persistence.room:compiler:$roomRuntime_version",
-            roomRx2                 : "android.arch.persistence.room:rxjava2:$roomRuntime_version",
+            room : [
+                    runtime             : "android.arch.persistence.room:runtime:$roomCompiler_version",
+                    compiler            : "android.arch.persistence.room:compiler:$roomRuntime_version",
+                    rx2                 : "android.arch.persistence.room:rxjava2:$roomRuntime_version",
+            ],
 
             //ui
             materialDialogs         : "com.afollestad.material-dialogs:core:$materialDialog_version",
             glide                   : "com.github.bumptech.glide:glide:$glide_version",
             glideCompiler           : "com.github.bumptech.glide:compiler:$glide_version",
-            picasso                 : "com.squareup.picasso:picasso:$picasso_version",
-            picassoDownloader       : "com.jakewharton.picasso:picasso2-okhttp3-downloader:$okhttp3downloader_version",
-            picassoTransformations  : "jp.wasabeef:picasso-transformations:$picassoTransformations_version",
+
+            picasso : [
+                    library          : "com.squareup.picasso:picasso:$picasso_version",
+                    downloader       : "com.jakewharton.picasso:picasso2-okhttp3-downloader:$okhttp3downloader_version",
+                    transformations  : "jp.wasabeef:picasso-transformations:$picassoTransformations_version",
+            ],
 
             gestureViews            : "com.alexvasilkov:gesture-views:$gestureViews_version",
             videoPlayer             : "com.sprylab.android.texturevideoview:texturevideoview:$videoPlayer_version",
@@ -171,6 +200,5 @@ ext {
             //Navigation
             cicerone                : "ru.terrakok.cicerone:cicerone:$cicerone_version",
             bottomNavigationBar     : "com.ashokvarma.android:bottom-navigation-bar:$bottom_bar_version"
-
     ]
 }
