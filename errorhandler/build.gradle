@@ -29,5 +29,5 @@ dependencies {
 
     implementation deps.kotlin
 
-    implementation deps.supportAppCompat
+    implementation deps.support.appCompat
 }
