@@ -17,8 +17,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun startScanner() {
         supportFragmentManager.beginTransaction().apply {
-            add(R.id.fragmentContainer, ScannerFragment(), ScannerFragment.TAG)
-            commitNow()
+            replace(R.id.fragmentContainer, ScannerFragment(), ScannerFragment.TAG)
+            addToBackStack(null)
+            commit()
         }
 
         scan.visibility = View.GONE
@@ -28,7 +29,7 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.findFragmentByTag(ScannerFragment.TAG)?.let {
             supportFragmentManager.beginTransaction().apply {
                 remove(it)
-                commitNow()
+                commit()
             }
         }
 
