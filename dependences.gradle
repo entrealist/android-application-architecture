@@ -154,9 +154,9 @@ ext {
 
             //data
             room : [
-                    runtime             : "android.arch.persistence.room:runtime:$roomCompiler_version",
-                    compiler            : "android.arch.persistence.room:compiler:$roomRuntime_version",
-                    rx2                 : "android.arch.persistence.room:rxjava2:$roomRuntime_version",
+                    runtime             : "android.arch.persistence.room:runtime:$room_version",
+                    compiler            : "android.arch.persistence.room:compiler:$room_version",
+                    rx2                 : "android.arch.persistence.room:rxjava2:$room_version",
             ],
 
             //ui
