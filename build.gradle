@@ -1,6 +1,5 @@
 apply from: 'dependences.gradle'
 
-
 buildscript {
     ext.kotlin_version = '1.2.71'
     configurations.classpath.exclude group: 'com.android.tools.external.lombok'

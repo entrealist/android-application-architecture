@@ -61,8 +61,7 @@ ext {
     pageIndicator_version = "0.2.6"
     pagerIndicator_version = "1.0.10"
     stickyHeaders_version = "0.4.3@aar"
-
-    moxy_version = '1.5.3'
+    moxy_version = "1.5.3"
 
     cicerone_version = '4.0.0'
     bottom_bar_version = '2.0.5'
@@ -95,6 +94,9 @@ ext {
                     constraintLayout : "com.android.support.constraint:constraint-layout:$constraint_version",
                     v13              : "com.android.support:support-v13:$supportLib_version",
             ],
+
+            supportMultidexInst     : "com.android.support:multidex-instrumentation:$multidex_version",
+            supportLint             : "com.android.tools.lint:lint-gradle:$supportLint_version",
 
             //play services
             playServices : [
@@ -193,12 +195,15 @@ ext {
             stickyHeaders           : "com.timehop.stickyheadersrecyclerview:library:$stickyHeaders_version",
 
             //moxy
-            moxy                    : "com.arello-mobile:moxy:$moxy_version",
-            moxyCompiler            : "com.arello-mobile:moxy-compiler:$moxy_version",
-            moxySupport             : "com.arello-mobile:moxy-app-compat:$moxy_version",
+            moxy : [
+                    library         : "com.arello-mobile:moxy:$moxy_version",
+                    compiler        : "com.arello-mobile:moxy-compiler:$moxy_version",
+                    support         : "com.arello-mobile:moxy-app-compat:$moxy_version"
+            ],
 
             //Navigation
             cicerone                : "ru.terrakok.cicerone:cicerone:$cicerone_version",
             bottomNavigationBar     : "com.ashokvarma.android:bottom-navigation-bar:$bottom_bar_version"
+
     ]
 }
