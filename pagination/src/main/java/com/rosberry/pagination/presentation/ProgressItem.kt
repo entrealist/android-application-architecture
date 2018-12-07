@@ -1,7 +1,7 @@
 package com.rosberry.pagination.presentation
 
+import com.rosberry.abstractrecycler.AbstractItem
 import com.rosberry.pagination.R
-import ru.rosberry.abstractrecycler.AbstractItem
 
 /**
  * @author Alexei Korshun on 02/10/2018.
