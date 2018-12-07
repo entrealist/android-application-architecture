@@ -6,12 +6,6 @@ import android.arch.persistence.room.RoomDatabase
 import android.arch.persistence.room.TypeConverter
 import android.arch.persistence.room.TypeConverters
 import android.content.Context
-import com.rosberry.sample.roomdatabase.db.dao.ArticleDao
-import com.rosberry.sample.roomdatabase.db.dao.CommentDao
-import com.rosberry.sample.roomdatabase.db.dao.UserDao
-import com.rosberry.sample.roomdatabase.db.entity.Article
-import com.rosberry.sample.roomdatabase.db.entity.Comment
-import com.rosberry.sample.roomdatabase.db.entity.User
 import org.threeten.bp.Instant
 import org.threeten.bp.LocalDate
 import org.threeten.bp.format.DateTimeFormatter

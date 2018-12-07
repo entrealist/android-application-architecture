@@ -1,18 +1,28 @@
-package com.rosberry.sample.roomdatabase.db.dao
+package com.rosberry.sample.roomdatabase.db
 
 import android.arch.persistence.room.Dao
 import android.arch.persistence.room.Delete
+import android.arch.persistence.room.Entity
 import android.arch.persistence.room.Insert
 import android.arch.persistence.room.OnConflictStrategy
+import android.arch.persistence.room.PrimaryKey
 import android.arch.persistence.room.Query
 import android.arch.persistence.room.Update
-import com.rosberry.sample.roomdatabase.db.entity.Article
 import io.reactivex.Flowable
 import org.threeten.bp.Instant
 
 /**
- * @author mmikhailov on 07/12/2018.
+ * @author mmikhailov on 11.11.2018.
  */
+@Entity(tableName = "article")
+data class Article(
+        @PrimaryKey(autoGenerate = true) var id: Long,
+        var title: String,
+        var text: String,
+        var postedAt: Instant,
+        var views: Long = 0L
+)
+
 @Dao
 interface ArticleDao {
 
