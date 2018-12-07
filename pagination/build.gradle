@@ -31,19 +31,22 @@ dependencies {
 
     implementation deps.kotlin
 
-    implementation deps.supportAppCompat
-    implementation deps.supportRecyclerView
+    implementation deps.support.appCompat
+    implementation deps.support.recyclerView
 
-    implementation deps.rxJava
-    implementation deps.rxAndroid
-    implementation deps.retrofit
-    implementation deps.retrofitRxJavaAdapter
-    implementation deps.retrofitGsonConverter
+    implementation deps.rx.java
+    implementation deps.rx.android
+    implementation deps.retrofit.library
+    implementation deps.retrofit.rxJavaAdapter
+    implementation deps.retrofit.gsonConverter
     implementation deps.googleGson
 
-    implementation deps.picasso
+    implementation deps.picasso.library
 
-    implementation deps.moxy
-    implementation deps.moxySupport
-    kapt deps.moxyCompiler
+    implementation deps.moxy.library
+    implementation deps.moxy.support
+    kapt deps.moxy.compiler
+
+    implementation deps.rosberry.core
+    implementation deps.abstractRecyclerView
 }
