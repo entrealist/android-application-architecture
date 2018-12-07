@@ -7,6 +7,7 @@ package com.rosberry.sample.errorhandler.domain
 import com.rosberry.sample.errorhandler.R
 import com.rosberry.sample.errorhandler.data.system.ResourceManager
 import com.rosberry.sample.errorhandler.entity.State
+import io.reactivex.Single
 import java.io.IOException
 import java.net.UnknownHostException
 

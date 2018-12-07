@@ -1,11 +1,15 @@
 package com.rosberry.sample.errorhandler.ui
 
 import android.os.Bundle
+import com.arellomobile.mvp.MvpAppCompatActivity
+import com.arellomobile.mvp.presenter.InjectPresenter
+import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.rosberry.sample.errorhandler.R
 import com.rosberry.sample.errorhandler.di.Component
 import com.rosberry.sample.errorhandler.entity.State
 import com.rosberry.sample.errorhandler.presentation.ErrorPresenter
 import com.rosberry.sample.errorhandler.presentation.ErrorView
+import kotlinx.android.synthetic.main.a_error_handler.*
 
 /**
  * @author Alexei Korshun on 12/10/2018.
