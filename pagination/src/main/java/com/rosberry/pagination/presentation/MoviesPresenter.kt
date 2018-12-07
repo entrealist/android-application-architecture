@@ -2,7 +2,6 @@ package com.rosberry.pagination.presentation
 
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
-import com.rosberry.android.core.presentation.Paginator
 import com.rosberry.pagination.data.MoviesRepository
 import com.rosberry.pagination.entity.Movie
 import com.rosberry.pagination.system.Movies

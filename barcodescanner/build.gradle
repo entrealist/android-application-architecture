@@ -29,16 +29,17 @@ dependencies {
 
     implementation deps.kotlin
 
-    implementation deps.supportAppCompat
-    implementation deps.supportConstraintLayout
+    implementation deps.support.appCompat
+    implementation deps.support.constraintLayout
 
-    implementation deps.moxy
-    implementation deps.moxySupport
-    kapt deps.moxyCompiler
+    implementation deps.moxy.library
+    implementation deps.moxy.support
+    kapt deps.moxy.compiler
 
     implementation deps.barcodescanner
     implementation(deps.permissiondispatcher) {
         exclude module: "support-v13"
     }
+
     kapt deps.permissiondispatcherProcessor
 }

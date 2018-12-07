@@ -1,7 +1,6 @@
 package com.rosberry.pagination.ui
 
 import android.view.View
-import com.rosberry.abstractrecycler.AbstractViewHolder
 import com.rosberry.pagination.presentation.ProgressItem
 
 /**

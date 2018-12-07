@@ -1,6 +1,5 @@
 package com.rosberry.pagination.presentation
 
-import com.rosberry.abstractrecycler.AbstractItem
 import com.rosberry.pagination.R
 
 /**
