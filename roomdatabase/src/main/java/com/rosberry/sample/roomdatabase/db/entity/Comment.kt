@@ -1,14 +1,11 @@
-package com.rosberry.sample.roomdatabase.db
+package com.rosberry.sample.roomdatabase.db.entity
 
 import android.arch.persistence.room.ColumnInfo
-import android.arch.persistence.room.Dao
-import android.arch.persistence.room.Delete
 import android.arch.persistence.room.Entity
 import android.arch.persistence.room.ForeignKey
 import android.arch.persistence.room.Index
-import android.arch.persistence.room.Insert
 import android.arch.persistence.room.PrimaryKey
-import android.arch.persistence.room.Query
+import com.rosberry.sample.roomdatabase.db.DbConstants
 import org.threeten.bp.Instant
 
 /**
@@ -37,21 +34,12 @@ data class Comment(
         @PrimaryKey(autoGenerate = true)
         @ColumnInfo(name = DbConstants.id)
         var id: Long,
-        @ColumnInfo(name = DbConstants.Comment.text) var text: String,
-        @ColumnInfo(name = DbConstants.Comment.postedAt) var postedAt: Instant,
-        @ColumnInfo(name = DbConstants.Comment.userId) var userId: Long,
-        @ColumnInfo(name = DbConstants.Comment.articleId) var articleId: Long
+        @ColumnInfo(name = DbConstants.Comment.text)
+        var text: String,
+        @ColumnInfo(name = DbConstants.Comment.postedAt)
+        var postedAt: Instant,
+        @ColumnInfo(name = DbConstants.Comment.userId)
+        var userId: Long,
+        @ColumnInfo(name = DbConstants.Comment.articleId)
+        var articleId: Long
 )
-
-@Dao
-interface CommentDao {
-
-    @Insert
-    fun insertAll(vararg comments: Comment)
-
-    @Delete
-    fun delete(comment: Comment)
-
-    @Query("DELETE FROM comment")
-    fun nukeComments()
-}
