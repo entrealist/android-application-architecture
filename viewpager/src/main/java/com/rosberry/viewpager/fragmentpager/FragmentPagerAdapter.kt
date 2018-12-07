@@ -82,16 +82,4 @@ class FragmentPagerAdapter(
             pageTabTitle
         }
     }
-
-    fun doSmthInTab1() {
-        tab1Fragment?.doSmth()
-    }
-
-    fun doSmthInTab2() {
-        tab2Fragment?.doSmth()
-    }
-
-    fun doSmthInTab3() {
-        tab3Fragment?.doSmth()
-    }
 }
