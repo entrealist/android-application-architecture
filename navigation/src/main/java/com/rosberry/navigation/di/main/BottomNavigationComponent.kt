@@ -11,7 +11,7 @@ import dagger.Subcomponent
 /**
  * @author mmikhailov on 27.09.2018.
  */
-@Subcomponent
+@Subcomponent(modules = [NavigationModule::class])
 interface BottomNavigationComponent {
 
     fun providePresenter(): BottomNavigationPresenter

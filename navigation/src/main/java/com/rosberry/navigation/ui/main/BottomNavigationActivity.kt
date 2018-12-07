@@ -9,14 +9,15 @@ import com.ashokvarma.bottomnavigation.BottomNavigationItem
 import com.rosberry.navigation.R
 import com.rosberry.navigation.di.AndroidInjector
 import com.rosberry.navigation.di.app.GlobalNavigationQualifier
+import com.rosberry.navigation.di.main.TabsNavigationQualifier
 import com.rosberry.navigation.presentation.main.BottomNavigationPresenter
 import com.rosberry.navigation.presentation.main.BottomNavigationView
+import com.rosberry.navigation.presentation.main.navigation.SupportTabsNavigator
 import com.rosberry.navigation.ui.base.BaseActivity
 import com.rosberry.navigation.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.a_bottom_navigation.*
 import ru.terrakok.cicerone.NavigatorHolder
 import ru.terrakok.cicerone.android.support.SupportAppNavigator
-import ru.terrakok.cicerone.android.support.SupportAppScreen
 import javax.inject.Inject
 
 /**
@@ -31,6 +32,12 @@ class BottomNavigationActivity : BaseActivity(), BottomNavigationView {
     lateinit var globalNavigatorHolder: NavigatorHolder
 
     private var globalNavigator = SupportAppNavigator(this, -1)
+
+    @Inject
+    @field:TabsNavigationQualifier
+    lateinit var tabsNavigatorHolder: NavigatorHolder
+
+    private val tabsNavigator by lazy { SupportTabsNavigator(supportFragmentManager, R.id.fragmentContainer) }
 
     @InjectPresenter
     lateinit var presenter: BottomNavigationPresenter
@@ -60,10 +67,12 @@ class BottomNavigationActivity : BaseActivity(), BottomNavigationView {
     override fun onResumeFragments() {
         super.onResumeFragments()
         globalNavigatorHolder.setNavigator(globalNavigator)
+        tabsNavigatorHolder.setNavigator(tabsNavigator)
     }
 
     override fun onPause() {
         globalNavigatorHolder.removeNavigator()
+        tabsNavigatorHolder.removeNavigator()
         super.onPause()
     }
 
@@ -76,34 +85,6 @@ class BottomNavigationActivity : BaseActivity(), BottomNavigationView {
 
     override fun selectTab(position: Int, shouldCallListener: Boolean) {
         bottomNavigationBar.selectTab(position, shouldCallListener)
-    }
-
-    override fun openTab(tabScreen: SupportAppScreen) {
-        var currentFragment: Fragment? = null
-        for (f in supportFragmentManager.fragments) {
-            if (f.isVisible) {
-                currentFragment = f
-                break
-            }
-        }
-        val newFragment = supportFragmentManager.findFragmentByTag(tabScreen.screenKey)
-
-        if (currentFragment != null && newFragment != null && currentFragment === newFragment) return
-
-        val transaction = supportFragmentManager.beginTransaction()
-        if (newFragment == null) {
-            transaction.add(R.id.fragmentContainer, tabScreen.fragment, tabScreen.screenKey)
-        }
-
-        if (currentFragment != null) {
-            transaction.hide(currentFragment)
-        }
-
-        if (newFragment != null) {
-            transaction.show(newFragment)
-        }
-
-        transaction.commitNow()
     }
 
     private fun initBottomNavigationBar() {

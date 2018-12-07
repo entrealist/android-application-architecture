@@ -3,7 +3,9 @@ package com.rosberry.navigation.presentation.main
 import com.arellomobile.mvp.InjectViewState
 import com.rosberry.navigation.Screens
 import com.rosberry.navigation.di.app.GlobalNavigationQualifier
+import com.rosberry.navigation.di.main.TabsNavigationQualifier
 import com.rosberry.navigation.presentation.base.BasePresenter
+import com.rosberry.navigation.presentation.main.navigation.TabsRouter
 import ru.terrakok.cicerone.Router
 import javax.inject.Inject
 
@@ -12,7 +14,8 @@ import javax.inject.Inject
  */
 @InjectViewState
 class BottomNavigationPresenter @Inject constructor(
-        @GlobalNavigationQualifier private val router: Router
+        @GlobalNavigationQualifier private val router: Router,
+        @TabsNavigationQualifier private val tabsRouter: TabsRouter
 ) : BasePresenter<BottomNavigationView>() {
 
     fun clickBottomTab(position: Int) {
@@ -25,7 +28,7 @@ class BottomNavigationPresenter @Inject constructor(
 
         tab?.let {
             viewState.selectTab(position, false)
-            viewState.openTab(it)
+            tabsRouter.openTab(tab)
         }
     }
 
