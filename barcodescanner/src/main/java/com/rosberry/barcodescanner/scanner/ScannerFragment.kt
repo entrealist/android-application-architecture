@@ -147,10 +147,10 @@ class ScannerFragment : MvpAppCompatFragment(), ScannerView, ZXingScannerView.Re
 
     @NeedsPermission(Manifest.permission.CAMERA)
     fun startCamera() {
-        handler.postDelayed({
+        handler.post {
             cameraStarted = true
             scanner.startCamera()
-        }, 250)
+        }
     }
 
     @OnShowRationale(Manifest.permission.CAMERA)
