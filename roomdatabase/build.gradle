@@ -44,15 +44,15 @@ dependencies {
     testImplementation testDeps.jUnit
 
     implementation deps.kotlin
-    implementation deps.supportAppCompat
-    implementation deps.supportRecyclerView
-    implementation deps.supportConstraintLayout
-    implementation deps.supportDesign
-    implementation deps.rxJava
-    implementation deps.rxAndroid
+    implementation deps.support.appCompat
+    implementation deps.support.recyclerView
+    implementation deps.support.constraintLayout
+    implementation deps.support.design
+    implementation deps.rx.java
+    implementation deps.rx.android
     implementation deps.googleGson
-    implementation deps.roomRuntime
-    implementation deps.roomRx2
-    kapt deps.roomCompiler
+    implementation deps.room.runtime
+    implementation deps.room.rx2
+    kapt deps.room.compiler
     implementation deps.threetenabp
 }
