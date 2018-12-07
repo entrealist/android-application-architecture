@@ -11,8 +11,8 @@ import com.rosberry.viewpager.itempager.ItemPagerFragment
 
 class MainActivity : AppCompatActivity() {
 
-    private val itemsFragmentTag = "itemsFragmentTag"
-    private val fragmentsFragmentTag = "fragmentsFragmentTag"
+    private val itemsFragment = ItemPagerFragment()
+    private val fragmentsFragment = FragmentPagerFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,51 +25,24 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-
         return when (item.itemId) {
             R.id.op_items -> {
-                openFragment(itemsFragmentTag); true
+                openFragment(itemsFragment); true
             }
             R.id.op_fragments -> {
-                openFragment(fragmentsFragmentTag); true
+                openFragment(fragmentsFragment); true
             }
 
             else -> super.onOptionsItemSelected(item)
         }
     }
 
-    private fun openFragment(tag: String) {
-        var currentFragment: Fragment? = null
-        for (f in supportFragmentManager.fragments) {
-            if (f.isVisible) {
-                currentFragment = f
-                break
-            }
-        }
-
-        val newFragment = supportFragmentManager.findFragmentByTag(tag)
-
-        if (currentFragment != null && newFragment != null && currentFragment === newFragment) return
-
-        val transaction = supportFragmentManager.beginTransaction()
-        if (newFragment == null) {
-            val f = when (tag) {
-                itemsFragmentTag -> ItemPagerFragment()
-                fragmentsFragmentTag -> FragmentPagerFragment()
-                else -> ItemPagerFragment()
-            }
-            transaction.add(R.id.fragmentContainer, f, tag)
-        }
-
-        if (currentFragment != null) {
-            transaction.hide(currentFragment)
-        }
-
-        if (newFragment != null) {
-            transaction.show(newFragment)
-        }
-
-        transaction.commitNow()
+    private fun openFragment(f: Fragment) {
+            supportFragmentManager.beginTransaction()
+                .apply {
+                    replace(R.id.fragmentContainer, f)
+                    addToBackStack(null)
+                    commit()
+                }
     }
-
 }
