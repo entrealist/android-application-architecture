@@ -1,6 +1,7 @@
 package com.rosberry.pagination.ui
 
 import android.support.v7.util.DiffUtil
+import com.rosberry.abstractrecycler.AbstractItem
 
 /**
  * @author Alexei Korshun on 02/10/2018.
