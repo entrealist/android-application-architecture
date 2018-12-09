@@ -13,7 +13,7 @@ import kotlinx.android.synthetic.main.f_item_pager.*
  */
 class ItemPagerFragment : Fragment() {
 
-    private lateinit var pagerAdapter: ItemPagerAdapter
+    private val pagerAdapter: ItemPagerAdapter by lazy { ItemPagerAdapter(requireContext()) }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.f_item_pager, container, false)
@@ -26,16 +26,16 @@ class ItemPagerFragment : Fragment() {
     }
 
     private fun setupViews() {
-        pagerAdapter = ItemPagerAdapter(requireContext())
         viewPager.adapter = pagerAdapter
         viewPagerIndicator.attachToViewPager(viewPager)
     }
 
     private fun floodAdapter() {
-        val items = ArrayList<Item>()
+        val items = mutableListOf<Item>()
+        val alphabet = "abcdefghijk"
         for (i in 0..10) {
-            items.add(Item(i.toString()))
+            items.add(Item(i.toString(), alphabet[i].toString()))
         }
-        pagerAdapter.setItems(items.toMutableList())
+        pagerAdapter.setItems(items)
     }
 }

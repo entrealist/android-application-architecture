@@ -5,8 +5,8 @@ import android.support.v4.view.PagerAdapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import com.rosberry.viewpager.R
+import kotlinx.android.synthetic.main.i_card.view.*
 
 /**
  * @author mmikhailov on 12.10.2018.
@@ -21,8 +21,8 @@ class ItemPagerAdapter(
             .inflate(R.layout.i_card, container, false)
         val item = items[position]
 
-        view.findViewById<TextView>(R.id.label)
-            .text = item.label
+        view.label.text = item.label
+        view.subLabel.text = item.subLabel
 
         container.addView(view)
         return view
