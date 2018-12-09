@@ -58,7 +58,8 @@ class SettingsActivity : BaseActivity(), SettingsView {
         }
     }
 
-    override fun onBackPressed() {
+    override fun handleBackPress(): Boolean {
         presenter.pressBack()
+        return true
     }
 }

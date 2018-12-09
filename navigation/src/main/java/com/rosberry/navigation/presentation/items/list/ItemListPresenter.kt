@@ -1,11 +1,12 @@
 package com.rosberry.navigation.presentation.items.list
 
 import com.arellomobile.mvp.InjectViewState
+import com.arellomobile.mvp.MvpView
 import com.rosberry.navigation.Screens
 import com.rosberry.navigation.di.items.ItemsNavigationQualifier
 import com.rosberry.navigation.presentation.base.BasePresenter
 import ru.terrakok.cicerone.Router
-import java.util.*
+import java.util.Random
 import javax.inject.Inject
 
 /**
@@ -14,7 +15,7 @@ import javax.inject.Inject
 @InjectViewState
 class ItemListPresenter @Inject constructor(
         @ItemsNavigationQualifier private val itemsRouter: Router
-) : BasePresenter<ItemListView>() {
+) : BasePresenter<MvpView>() {
 
     fun clickOnButton() {
         openItemDetailsScreen(Random().nextInt().toString())

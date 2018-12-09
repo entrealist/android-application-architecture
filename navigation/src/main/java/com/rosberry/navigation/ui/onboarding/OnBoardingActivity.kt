@@ -1,7 +1,6 @@
 package com.rosberry.navigation.ui.onboarding
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.rosberry.navigation.R
@@ -11,7 +10,6 @@ import com.rosberry.navigation.di.onboarding.OnBoardingNavigationQualifier
 import com.rosberry.navigation.presentation.onboarding.OnBoardingPresenter
 import com.rosberry.navigation.presentation.onboarding.OnBoardingView
 import com.rosberry.navigation.ui.base.BaseActivity
-import com.rosberry.navigation.ui.base.BaseFragment
 import ru.terrakok.cicerone.NavigatorHolder
 import ru.terrakok.cicerone.android.support.SupportAppNavigator
 import javax.inject.Inject
@@ -68,20 +66,9 @@ class OnBoardingActivity : BaseActivity(), OnBoardingView, OnBoardingCompleteLis
         }
     }
 
-    override fun onBackPressed() {
-        var fragment: Fragment? = null
-        for (f in supportFragmentManager.fragments) {
-            if (f.isVisible) {
-                fragment = f
-                break
-            }
-        }
-
-        if (fragment != null && fragment is BaseFragment && fragment.onBackPressed()) {
-            return
-        } else {
-            presenter.pressBack()
-        }
+    override fun handleBackPress(): Boolean {
+        presenter.pressBack()
+        return true
     }
 
     override fun onOnBoardingComplete() {

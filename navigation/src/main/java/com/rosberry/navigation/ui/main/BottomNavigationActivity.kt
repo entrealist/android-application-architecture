@@ -1,7 +1,6 @@
 package com.rosberry.navigation.ui.main
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.ashokvarma.bottomnavigation.BottomNavigationBar
@@ -14,7 +13,6 @@ import com.rosberry.navigation.presentation.main.BottomNavigationPresenter
 import com.rosberry.navigation.presentation.main.BottomNavigationView
 import com.rosberry.navigation.presentation.main.navigation.SupportTabsNavigator
 import com.rosberry.navigation.ui.base.BaseActivity
-import com.rosberry.navigation.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.a_bottom_navigation.*
 import ru.terrakok.cicerone.NavigatorHolder
 import ru.terrakok.cicerone.android.support.SupportAppNavigator
@@ -87,6 +85,11 @@ class BottomNavigationActivity : BaseActivity(), BottomNavigationView {
         bottomNavigationBar.selectTab(position, shouldCallListener)
     }
 
+    override fun handleBackPress(): Boolean {
+        presenter.pressBack()
+        return true
+    }
+
     private fun initBottomNavigationBar() {
         bottomNavigationBar
             .addItem(BottomNavigationItem(R.drawable.ic_android_black_24dp, R.string.launch_tab_label_about))
@@ -106,21 +109,5 @@ class BottomNavigationActivity : BaseActivity(), BottomNavigationView {
                 onTabSelected(position)
             }
         })
-    }
-
-    override fun onBackPressed() {
-        var fragment: Fragment? = null
-        for (f in supportFragmentManager.fragments) {
-            if (f.isVisible) {
-                fragment = f
-                break
-            }
-        }
-
-        if (fragment != null && fragment is BaseFragment && fragment.onBackPressed()) {
-            return
-        } else {
-            presenter.pressBack()
-        }
     }
 }
