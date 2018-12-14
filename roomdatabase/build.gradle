@@ -42,6 +42,10 @@ dependencies {
     def testDeps = rootProject.ext.testDependencies
 
     testImplementation testDeps.jUnit
+    androidTestImplementation testDeps.jUnit
+    androidTestImplementation testDeps.runner
+    androidTestImplementation testDeps.archCoreTesting
+    androidTestImplementation testDeps.roomTesting
 
     implementation deps.kotlin
     implementation deps.support.appCompat
