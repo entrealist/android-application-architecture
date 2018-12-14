@@ -67,7 +67,8 @@ ext {
             espresso       : "com.android.support.test.espresso:espresso-core:$espresso_version",
             annotations    : "com.android.support:support-annotations:$supportLib_version",
             runner         : "com.android.support.test:runner:$runner_version",
-            archCoreTesting: "android.arch.core:core-testing:$room_version"
+            archCoreTesting: "android.arch.core:core-testing:$room_version",
+            roomTesting    : "android.arch.persistence.room:testing:$room_version"
     ]
 
     dependencies = [

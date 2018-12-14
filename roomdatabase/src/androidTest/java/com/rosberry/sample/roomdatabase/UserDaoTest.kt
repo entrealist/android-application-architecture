@@ -5,9 +5,9 @@ import android.arch.persistence.room.Room
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4
 import com.rosberry.sample.roomdatabase.db.AppDatabase
-import com.rosberry.sample.roomdatabase.db.Article
-import com.rosberry.sample.roomdatabase.db.Comment
-import com.rosberry.sample.roomdatabase.db.User
+import com.rosberry.sample.roomdatabase.db.entity.Article
+import com.rosberry.sample.roomdatabase.db.entity.Comment
+import com.rosberry.sample.roomdatabase.db.entity.User
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
@@ -59,7 +59,8 @@ class UserDaoTest {
                 "u1@e.com",
                 "u1FName", "u1LName",
                 LocalDate.of(2018, 1, 1)
-        ).apply { id = 1 }
+        )
+            .apply { id = 1 }
 
         // when inserting a new user in the data source
         db.userDao()
@@ -85,13 +86,15 @@ class UserDaoTest {
                 "u1@e.com",
                 "badName", "u1LName",
                 LocalDate.of(2018, 1, 1)
-        ).apply { id = 1 }
+        )
+            .apply { id = 1 }
 
         val user2 = User(
                 "u2@e.com",
                 "u2FName", "badName",
                 LocalDate.of(2018, 1, 1)
-        ).apply { id = 2 }
+        )
+            .apply { id = 2 }
 
         // when
         db.userDao()
@@ -113,12 +116,15 @@ class UserDaoTest {
                 "u1@e.com",
                 "u1FName", "u1LName",
                 LocalDate.of(2018, 1, 1)
-        ).apply { id = 1 }
+        )
+            .apply { id = 1 }
 
         val insertedUserId = db.userDao()
             .insert(user)
 
-        val updatedUser = User(user.email, "newFirstName", user.lastName, user.birthDay).apply { id = insertedUserId }
+        val updatedUser = User(user.email, "newFirstName", user.lastName,
+                user.birthday)
+            .apply { id = insertedUserId }
         val updatedUserId = db.userDao()
             .insert(updatedUser)
 
@@ -140,7 +146,8 @@ class UserDaoTest {
                 "u1@e.com",
                 "u1FName", "u1LName",
                 LocalDate.of(2018, 1, 1)
-        ).apply { id = 1 }
+        )
+            .apply { id = 1 }
 
         // when
         db.userDao()
@@ -165,7 +172,8 @@ class UserDaoTest {
                 "u1@e.com",
                 "u1FName", "u1LName",
                 LocalDate.of(2018, 1, 1)
-        ).apply { id = 1 }
+        )
+            .apply { id = 1 }
 
         // when
         db.userDao()
@@ -190,13 +198,15 @@ class UserDaoTest {
                 "u1@e.com",
                 "u1FName", "u1LName",
                 LocalDate.of(2018, 1, 1)
-        ).apply { id = 1 }
+        )
+            .apply { id = 1 }
 
         val updatedUser = User(
                 "u1@e.com_new",
                 "u1FName_new", "u1LName_new",
                 LocalDate.of(2000, 10, 10)
-        ).apply { id = 1 }
+        )
+            .apply { id = 1 }
 
         // when
         db.userDao()
@@ -225,7 +235,8 @@ class UserDaoTest {
                 "u1@e.com_new",
                 "u1FName_new", "u1LName_new",
                 LocalDate.of(2000, 10, 10)
-        ).apply { id = 1 }
+        )
+            .apply { id = 1 }
 
         // when
         db.userDao()
@@ -246,25 +257,29 @@ class UserDaoTest {
                 "fake-u1@e.com",
                 "fake-u1FName", "fake-u1LName",
                 LocalDate.of(2018, 1, 1)
-        ).apply { id = 1 }
+        )
+            .apply { id = 1 }
 
         val user1 = User(
                 "u1@e.com",
                 "u1FName", "u1LName",
                 LocalDate.of(2018, 1, 1)
-        ).apply { id = 1 }
+        )
+            .apply { id = 1 }
 
         val user2 = User(
                 "u2@e.com",
                 "u2FName", "u2LName",
                 LocalDate.of(2018, 1, 1)
-        ).apply { id = 2 }
+        )
+            .apply { id = 2 }
 
         val user3 = User(
                 "u3@e.com",
                 "u3FName", "u3LName",
                 LocalDate.of(2018, 1, 1)
-        ).apply { id = 3 }
+        )
+            .apply { id = 3 }
 
         // when adding single user
         db.userDao()
@@ -292,25 +307,29 @@ class UserDaoTest {
                 "fake-u1@e.com",
                 "fake-u1FName", "fake-u1LName",
                 LocalDate.of(2018, 1, 1)
-        ).apply { id = 1 }
+        )
+            .apply { id = 1 }
 
         val user1 = User(
                 "u1@e.com",
                 "u1FName", "u1LName",
                 LocalDate.of(2018, 1, 1)
-        ).apply { id = 1 }
+        )
+            .apply { id = 1 }
 
         val user2 = User(
                 "u2@e.com",
                 "u2FName", "u2LName",
                 LocalDate.of(2018, 1, 1)
-        ).apply { id = 2 }
+        )
+            .apply { id = 2 }
 
         val user3 = User(
                 "u3@e.com",
                 "u3FName", "u3LName",
                 LocalDate.of(2018, 1, 1)
-        ).apply { id = 3 }
+        )
+            .apply { id = 3 }
 
         // when adding single user
         db.userDao()
@@ -338,44 +357,55 @@ class UserDaoTest {
                 "u1@e.com",
                 "u1FName", "u1LName",
                 LocalDate.of(2018, 1, 1)
-        ).apply { id = 1 }
+        )
+            .apply { id = 1 }
 
         val user2 = User(
                 "u2@e.com",
                 "u2FName", "u2LName",
                 LocalDate.of(2018, 1, 1)
-        ).apply { id = 2 }
+        )
+            .apply { id = 2 }
 
         val user3 = User(
                 "u3@e.com",
                 "u3FName", "u3LName",
                 LocalDate.of(2018, 1, 1)
-        ).apply { id = 3 }
+        )
+            .apply { id = 3 }
 
         val article1 = Article(
                 "Article 1", "article 1 text",
                 Instant.now(),
                 78
-        ).apply { id = 1 }
+        )
+            .apply { id = 1 }
 
         val article2 = Article(
                 "Article 2", "article 2 text",
                 Instant.now(),
                 79
-        ).apply { id = 2 }
+        )
+            .apply { id = 2 }
 
         val article3 = Article(
                 "Article 3", "article 3 text",
                 Instant.now(),
                 80
-        ).apply { id = 3 }
+        )
+            .apply { id = 3 }
 
         val comments = listOf(
-                Comment("comment 1 text", Instant.now(), user1.id!!, article1.id!!),
-                Comment("comment 2 text", Instant.now(), user2.id!!, article1.id!!),
-                Comment("comment 3 text", Instant.now(), user2.id!!, article1.id!!),
-                Comment("comment 4 text", Instant.now(), user2.id!!, article1.id!!),
-                Comment("comment 5 text", Instant.now(), user3.id!!, article2.id!!)
+                Comment("comment 1 text", Instant.now(), user1.id!!,
+                        article1.id!!),
+                Comment("comment 2 text", Instant.now(), user2.id!!,
+                        article1.id!!),
+                Comment("comment 3 text", Instant.now(), user2.id!!,
+                        article1.id!!),
+                Comment("comment 4 text", Instant.now(), user2.id!!,
+                        article1.id!!),
+                Comment("comment 5 text", Instant.now(), user3.id!!,
+                        article2.id!!)
         )
 
         // when
