@@ -6,6 +6,7 @@ ext {
 
     junit_version = "4.12"
     espresso_version = "3.1.0"
+    runner_version = "1.0.2"
     play_services = "15.0.1"
 
     supportLib_version = "28.0.0"
@@ -63,9 +64,12 @@ ext {
     moxy_version = "1.5.3"
 
     testDependencies = [
-            jUnit      : "junit:junit:$junit_version",
-            espresso   : "com.android.support.test.espresso:espresso-core:$espresso_version",
-            annotations: "com.android.support:support-annotations:$supportLib_version"
+            jUnit          : "junit:junit:$junit_version",
+            espresso       : "com.android.support.test.espresso:espresso-core:$espresso_version",
+            annotations    : "com.android.support:support-annotations:$supportLib_version",
+            runner         : "com.android.support.test:runner:$runner_version",
+            archCoreTesting: "android.arch.core:core-testing:$room_version",
+            roomTesting    : "android.arch.persistence.room:testing:$room_version"
     ]
 
     rosberry_core_version = "0.1.1@aar"
