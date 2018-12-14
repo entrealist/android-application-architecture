@@ -2,9 +2,9 @@ package com.rosberry.sample.roomdatabase.db.utils
 
 import android.os.AsyncTask
 import com.rosberry.sample.roomdatabase.db.AppDatabase
-import com.rosberry.sample.roomdatabase.db.Article
-import com.rosberry.sample.roomdatabase.db.Comment
-import com.rosberry.sample.roomdatabase.db.User
+import com.rosberry.sample.roomdatabase.db.entity.Article
+import com.rosberry.sample.roomdatabase.db.entity.Comment
+import com.rosberry.sample.roomdatabase.db.entity.User
 import org.threeten.bp.Instant
 import org.threeten.bp.LocalDate
 import org.threeten.bp.LocalDateTime
@@ -24,7 +24,8 @@ object DatabaseInitializer {
     private fun addComment(db: AppDatabase, commentText: String,
                            user: User, article: Article, timestamp: Instant) {
 
-        val comment = Comment(commentText, timestamp, user.id!!, article.id!!)
+        val comment = Comment(commentText, timestamp, user.id!!,
+                article.id!!)
         db.commentDao()
             .insert(comment)
     }

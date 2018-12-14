@@ -6,9 +6,9 @@ import android.arch.persistence.room.Room
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4
 import com.rosberry.sample.roomdatabase.db.AppDatabase
-import com.rosberry.sample.roomdatabase.db.Article
-import com.rosberry.sample.roomdatabase.db.Comment
-import com.rosberry.sample.roomdatabase.db.User
+import com.rosberry.sample.roomdatabase.db.entity.Article
+import com.rosberry.sample.roomdatabase.db.entity.Comment
+import com.rosberry.sample.roomdatabase.db.entity.User
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
@@ -53,25 +53,29 @@ class ArticleDaoTest {
                 "c", "article 1 text",
                 Instant.now(),
                 78
-        ).apply { id = 1 }
+        )
+            .apply { id = 1 }
 
         val article2 = Article(
                 "b", "article 2 text",
                 Instant.now(),
                 79
-        ).apply { id = 2 }
+        )
+            .apply { id = 2 }
 
         val article3 = Article(
                 "a", "article 3 text",
                 Instant.now(),
                 80
-        ).apply { id = 3 }
+        )
+            .apply { id = 3 }
 
         val article4 = Article(
                 "d", "article 4 text",
                 Instant.now(),
                 81
-        ).apply { id = 4 }
+        )
+            .apply { id = 4 }
 
         // when
         db.articleDao()
@@ -103,25 +107,29 @@ class ArticleDaoTest {
                 "article 1 title", "article 1 text",
                 secondAgoTimestamp,
                 78
-        ).apply { id = 1 }
+        )
+            .apply { id = 1 }
 
         val article2 = Article(
                 "article 2 title", "article 2 text",
                 baseTimestamp,
                 79
-        ).apply { id = 2 }
+        )
+            .apply { id = 2 }
 
         val article3 = Article(
                 "article 3 title", "article 3 text",
                 secondAfterTimestamp,
                 80
-        ).apply { id = 3 }
+        )
+            .apply { id = 3 }
 
         val article4 = Article(
                 "article 4 title", "article 4 text",
                 dayAgoTimestamp,
                 81
-        ).apply { id = 4 }
+        )
+            .apply { id = 4 }
 
         // when
         db.articleDao()
@@ -148,7 +156,8 @@ class ArticleDaoTest {
                 "title", "article text",
                 Instant.now(),
                 78
-        ).apply { id = 1 }
+        )
+            .apply { id = 1 }
 
         // when
         db.articleDao()
@@ -169,7 +178,8 @@ class ArticleDaoTest {
                 "title", "article text",
                 Instant.now(),
                 78
-        ).apply { id = 1 }
+        )
+            .apply { id = 1 }
 
         // when
         db.articleDao()
@@ -190,25 +200,29 @@ class ArticleDaoTest {
                 "article 1 title", "article 1 text",
                 Instant.now(),
                 78
-        ).apply { id = 1 }
+        )
+            .apply { id = 1 }
 
         val article2 = Article(
                 "search text", "article 2 text",
                 Instant.now(),
                 79
-        ).apply { id = 2 }
+        )
+            .apply { id = 2 }
 
         val article3 = Article(
                 "text search android", "article 3 text",
                 Instant.now(),
                 80
-        ).apply { id = 3 }
+        )
+            .apply { id = 3 }
 
         val article4 = Article(
                 "title of article 4", "article 4 text",
                 Instant.now(),
                 81
-        ).apply { id = 4 }
+        )
+            .apply { id = 4 }
 
         // when
         db.articleDao()
@@ -272,25 +286,29 @@ class ArticleDaoTest {
                 "article 1 title", "article 1 text",
                 secondAgoTimestamp,
                 78
-        ).apply { id = 1 }
+        )
+            .apply { id = 1 }
 
         val article2 = Article(
                 "article 2 title", "article 2 text",
                 baseTimestamp,
                 79
-        ).apply { id = 2 }
+        )
+            .apply { id = 2 }
 
         val article3 = Article(
                 "article 3 title", "article 3 text",
                 secondAfterTimestamp,
                 80
-        ).apply { id = 3 }
+        )
+            .apply { id = 3 }
 
         val article4 = Article(
                 "article 4 title", "article 4 text",
                 dayAgoTimestamp,
                 81
-        ).apply { id = 4 }
+        )
+            .apply { id = 4 }
 
         // when
         db.articleDao()
@@ -323,25 +341,29 @@ class ArticleDaoTest {
                 "article 1 title", "article 1 text",
                 Instant.now(),
                 78
-        ).apply { id = 1 }
+        )
+            .apply { id = 1 }
 
         val article2 = Article(
                 "article 2 title", "article 2 text",
                 Instant.now(),
                 0
-        ).apply { id = 2 }
+        )
+            .apply { id = 2 }
 
         val article3 = Article(
                 "article 3 title", "article 3 text",
                 Instant.now(),
                 0
-        ).apply { id = 3 }
+        )
+            .apply { id = 3 }
 
         val article4 = Article(
                 "article 4 title", "article 4 text",
                 Instant.now(),
                 81
-        ).apply { id = 4 }
+        )
+            .apply { id = 4 }
 
         // when
         db.articleDao()
@@ -366,50 +388,62 @@ class ArticleDaoTest {
                 "u1@e.com",
                 "u1FName", "u1LName",
                 LocalDate.of(2018, 1, 1)
-        ).apply { id = 1 }
+        )
+            .apply { id = 1 }
 
         val user2 = User(
                 "u2@e.com",
                 "u2FName", "u2LName",
                 LocalDate.of(2018, 1, 1)
-        ).apply { id = 2 }
+        )
+            .apply { id = 2 }
 
         val user3 = User(
                 "u3@e.com",
                 "u3FName", "u3LName",
                 LocalDate.of(2018, 1, 1)
-        ).apply { id = 3 }
+        )
+            .apply { id = 3 }
 
         val article1 = Article(
                 "Article 1", "article 1 text",
                 Instant.now(),
                 78
-        ).apply { id = 1 }
+        )
+            .apply { id = 1 }
 
         val article2 = Article(
                 "Article 2", "article 2 text",
                 Instant.now(),
                 79
-        ).apply { id = 2 }
+        )
+            .apply { id = 2 }
 
         val article3 = Article(
                 "Article 3", "article 3 text",
                 Instant.now(),
                 80
-        ).apply { id = 3 }
+        )
+            .apply { id = 3 }
 
         val article4 = Article(
                 "Article 4", "article 4 text",
                 Instant.now(),
                 81
-        ).apply { id = 4 }
+        )
+            .apply { id = 4 }
 
         val comments = listOf(
-                Comment("comment 1 text", Instant.now(), user1.id!!, article1.id!!).apply { id = 1 },
-                Comment("comment 2 text", Instant.now(), user2.id!!, article2.id!!).apply { id = 2 },
-                Comment("comment 3 text", Instant.now(), user2.id!!, article1.id!!).apply { id = 3 },
-                Comment("comment 4 text", Instant.now(), user3.id!!, article2.id!!).apply { id = 4 },
-                Comment("comment 5 text", Instant.now(), user2.id!!, article1.id!!).apply { id = 5 }
+                Comment("comment 1 text", Instant.now(), user1.id!!,
+                        article1.id!!).apply { id = 1 },
+                Comment("comment 2 text", Instant.now(), user2.id!!,
+                        article2.id!!).apply { id = 2 },
+                Comment("comment 3 text", Instant.now(), user2.id!!,
+                        article1.id!!).apply { id = 3 },
+                Comment("comment 4 text", Instant.now(), user3.id!!,
+                        article2.id!!).apply { id = 4 },
+                Comment("comment 5 text", Instant.now(), user2.id!!,
+                        article1.id!!).apply { id = 5 }
         )
 
         // when
@@ -439,51 +473,64 @@ class ArticleDaoTest {
                 "u1@e.com",
                 "u1FName", "u1LName",
                 LocalDate.of(2018, 1, 1)
-        ).apply { id = 1 }
+        )
+            .apply { id = 1 }
 
         val user2 = User(
                 "u2@e.com",
                 "u2FName", "u2LName",
                 LocalDate.of(2018, 1, 1)
-        ).apply { id = 2 }
+        )
+            .apply { id = 2 }
 
         val user3 = User(
                 "u3@e.com",
                 "u3FName", "u3LName",
                 LocalDate.of(2018, 1, 1)
-        ).apply { id = 3 }
+        )
+            .apply { id = 3 }
 
         val article1 = Article(
                 "Article 1", "article 1 text",
                 Instant.now(),
                 78
-        ).apply { id = 1 }
+        )
+            .apply { id = 1 }
 
         val article2 = Article(
                 "Article 2", "article 2 text",
                 Instant.now(),
                 79
-        ).apply { id = 2 }
+        )
+            .apply { id = 2 }
 
         val article3 = Article(
                 "Article 3", "article 3 text",
                 Instant.now(),
                 80
-        ).apply { id = 3 }
+        )
+            .apply { id = 3 }
 
         val article4 = Article(
                 "Article 4", "article 4 text",
                 Instant.now(),
                 81
-        ).apply { id = 4 }
+        )
+            .apply { id = 4 }
 
         val comments = listOf(
-                Comment("comment 1 text", Instant.now(), user1.id!!, article1.id!!).apply { id = 1 },
-                Comment("comment 2 text", Instant.now(), user2.id!!, article2.id!!).apply { id = 2 },
-                Comment("comment 3 text", Instant.now(), user2.id!!, article1.id!!).apply { id = 3 },
-                Comment("comment 4 text", Instant.now(), user3.id!!, article4.id!!).apply { id = 4 },
-                Comment("comment 5 text", Instant.now(), user2.id!!, article3.id!!).apply { id = 5 },
-                Comment("comment 6 text", Instant.now(), user2.id!!, article3.id!!).apply { id = 6 }
+                Comment("comment 1 text", Instant.now(), user1.id!!,
+                        article1.id!!).apply { id = 1 },
+                Comment("comment 2 text", Instant.now(), user2.id!!,
+                        article2.id!!).apply { id = 2 },
+                Comment("comment 3 text", Instant.now(), user2.id!!,
+                        article1.id!!).apply { id = 3 },
+                Comment("comment 4 text", Instant.now(), user3.id!!,
+                        article4.id!!).apply { id = 4 },
+                Comment("comment 5 text", Instant.now(), user2.id!!,
+                        article3.id!!).apply { id = 5 },
+                Comment("comment 6 text", Instant.now(), user2.id!!,
+                        article3.id!!).apply { id = 6 }
         )
 
         // when
@@ -514,51 +561,64 @@ class ArticleDaoTest {
                 "u1@e.com",
                 "u1FName", "u1LName",
                 LocalDate.of(2018, 1, 1)
-        ).apply { id = 1 }
+        )
+            .apply { id = 1 }
 
         val user2 = User(
                 "u2@e.com",
                 "u2FName", "u2LName",
                 LocalDate.of(2018, 1, 1)
-        ).apply { id = 2 }
+        )
+            .apply { id = 2 }
 
         val user3 = User(
                 "u3@e.com",
                 "u3FName", "u3LName",
                 LocalDate.of(2018, 1, 1)
-        ).apply { id = 3 }
+        )
+            .apply { id = 3 }
 
         val article1 = Article(
                 "Article 1", "article 1 text",
                 Instant.now(),
                 78
-        ).apply { id = 1 }
+        )
+            .apply { id = 1 }
 
         val article2 = Article(
                 "Article 2", "article 2 text",
                 Instant.now(),
                 79
-        ).apply { id = 2 }
+        )
+            .apply { id = 2 }
 
         val article3 = Article(
                 "Article 3", "article 3 text",
                 Instant.now(),
                 80
-        ).apply { id = 3 }
+        )
+            .apply { id = 3 }
 
         val article4 = Article(
                 "Article 4", "article 4 text",
                 Instant.now(),
                 81
-        ).apply { id = 4 }
+        )
+            .apply { id = 4 }
 
         val comments = listOf(
-                Comment("comment 1 text", Instant.now(), user1.id!!, article1.id!!).apply { id = 1 },
-                Comment("comment 2 text", Instant.now(), user2.id!!, article2.id!!).apply { id = 2 },
-                Comment("comment 3 text", Instant.now(), user2.id!!, article1.id!!).apply { id = 3 },
-                Comment("comment 4 text", Instant.now(), user3.id!!, article4.id!!).apply { id = 4 },
-                Comment("comment 5 text", Instant.now(), user2.id!!, article3.id!!).apply { id = 5 },
-                Comment("comment 6 text", Instant.now(), user2.id!!, article3.id!!).apply { id = 6 }
+                Comment("comment 1 text", Instant.now(), user1.id!!,
+                        article1.id!!).apply { id = 1 },
+                Comment("comment 2 text", Instant.now(), user2.id!!,
+                        article2.id!!).apply { id = 2 },
+                Comment("comment 3 text", Instant.now(), user2.id!!,
+                        article1.id!!).apply { id = 3 },
+                Comment("comment 4 text", Instant.now(), user3.id!!,
+                        article4.id!!).apply { id = 4 },
+                Comment("comment 5 text", Instant.now(), user2.id!!,
+                        article3.id!!).apply { id = 5 },
+                Comment("comment 6 text", Instant.now(), user2.id!!,
+                        article3.id!!).apply { id = 6 }
         )
 
         // when
