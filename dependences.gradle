@@ -57,6 +57,9 @@ ext {
     softKeyboardHelper_version = "2.1.0"
     picassoTransformations_version = "2.2.1"
 
+    barcodescanner_version = "1.9.8"
+    permissiondispatcher_version = "3.3.1"
+
     timesSquare_version = "1.7.9@aar"
     maskedEditText_version = "1.0.5"
     pageIndicator_version = "0.2.6"
@@ -198,6 +201,11 @@ ext {
             ],
 
             //time
-            threetenabp             : "com.jakewharton.threetenabp:threetenabp:$threetenabp_version"
+            threetenabp             : "com.jakewharton.threetenabp:threetenabp:$threetenabp_version",
+
+            barcodescanner               : "me.dm7.barcodescanner:zxing:$barcodescanner_version",
+
+            permissiondispatcher         : "com.github.hotchemi:permissionsdispatcher:$permissiondispatcher_version",
+            permissiondispatcherProcessor: "com.github.hotchemi:permissionsdispatcher-processor:$permissiondispatcher_version"
     ]
 }
