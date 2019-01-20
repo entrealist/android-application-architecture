@@ -104,6 +104,9 @@ ext {
                     v13              : "com.android.support:support-v13:$supportLib_version",
             ],
 
+            supportMultidexInst     : "com.android.support:multidex-instrumentation:$multidex_version",
+            supportLint             : "com.android.tools.lint:lint-gradle:$supportLint_version",
+
             //play services
             playServices : [
                     servicesLocation    : "com.google.android.gms:play-services-location:$play_services",
@@ -213,7 +216,7 @@ ext {
 
             //Navigation
             cicerone                : "ru.terrakok.cicerone:cicerone:$cicerone_version",
-            bottomNavigationBar     : "com.ashokvarma.android:bottom-navigation-bar:$bottom_bar_version"
+            bottomNavigationBar     : "com.ashokvarma.android:bottom-navigation-bar:$bottom_bar_version",
             barcodescanner          : "me.dm7.barcodescanner:zxing:$barcodescanner_version",
 
             permissiondispatcher         : "com.github.hotchemi:permissionsdispatcher:$permissiondispatcher_version",

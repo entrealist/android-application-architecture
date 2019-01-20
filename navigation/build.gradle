@@ -74,6 +74,7 @@ dependencies {
     implementation deps.support.cardView
     implementation deps.support.constraintLayout
     implementation deps.support.multidex
+    implementation deps.supportMultidexInst
 
     //kotlin
     implementation deps.kotlin
