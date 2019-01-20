@@ -58,14 +58,18 @@ ext {
     softKeyboardHelper_version = "2.1.0"
     picassoTransformations_version = "2.2.1"
 
+    barcodescanner_version = "1.9.8"
+    permissiondispatcher_version = "3.3.1"
+
     timesSquare_version = "1.7.9@aar"
     maskedEditText_version = "1.0.5"
     pageIndicator_version = "0.2.6"
     pagerIndicator_version = "1.0.10"
     stickyHeaders_version = "0.4.3@aar"
-    moxy_version = "1.5.3"
 
-    cicerone_version = '4.0.0'
+    moxy_version = '1.5.3'
+
+    cicerone_version = '4.0.2'
     bottom_bar_version = '2.0.5'
 
     testDependencies = [
@@ -206,12 +210,16 @@ ext {
                     support         : "com.arello-mobile:moxy-app-compat:$moxy_version"
             ],
 
+            //time
+            threetenabp             : "com.jakewharton.threetenabp:threetenabp:$threetenabp_version",
+
+
             //Navigation
             cicerone                : "ru.terrakok.cicerone:cicerone:$cicerone_version",
             bottomNavigationBar     : "com.ashokvarma.android:bottom-navigation-bar:$bottom_bar_version",
+            barcodescanner          : "me.dm7.barcodescanner:zxing:$barcodescanner_version",
 
-            //time
-            threetenabp             : "com.jakewharton.threetenabp:threetenabp:$threetenabp_version"
-
+            permissiondispatcher         : "com.github.hotchemi:permissionsdispatcher:$permissiondispatcher_version",
+            permissiondispatcherProcessor: "com.github.hotchemi:permissionsdispatcher-processor:$permissiondispatcher_version"
     ]
 }
