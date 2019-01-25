@@ -1,0 +1,11 @@
+<!--
+  ~ Copyright (c) 2019 Rosberry. All rights reserved.
+  -->
+
+<resources>
+    <string name="app_name">PreferenceManager</string>
+    <string name="name">name</string>
+    <string name="surname">surname</string>
+    <string name="save">SAVE</string>
+    <string name="load_on_start">Load on start</string>
+</resources>

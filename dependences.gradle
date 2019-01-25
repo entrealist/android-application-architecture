@@ -81,7 +81,7 @@ ext {
             roomTesting    : "android.arch.persistence.room:testing:$room_version"
     ]
 
-    rosberry_core_version = "0.1.1@aar"
+    rosberry_core_version = "0.2.1"
     abstract_recycler_view_version = "0.1.0@aar"
 
     dependencies = [
