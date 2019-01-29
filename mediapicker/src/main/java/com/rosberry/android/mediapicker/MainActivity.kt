@@ -1,12 +1,75 @@
 package com.rosberry.android.mediapicker
 
-import android.support.v7.app.AppCompatActivity
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
+import android.support.v4.app.ActivityCompat
+import android.support.v4.app.Fragment
+import android.support.v4.content.ContextCompat
+import android.support.v7.app.AppCompatActivity
+import android.widget.RadioGroup
 
 class MainActivity : AppCompatActivity() {
+
+    val REQUEST_CODE_GALLERY = 123
+    val REQUEST_CODE_CAMERA = 124
+    lateinit var radioGroup: RadioGroup
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        showPhotoMode()
+
+        radioGroup = findViewById(R.id.radio_group_mode)
+
+        radioGroup.setOnCheckedChangeListener { radioGroup, i ->
+
+            when (i) {
+                R.id.radio_photo -> showPhotoMode()
+                R.id.radio_video -> showVideoMode()
+            }
+
+        }
+    }
+
+    private fun showVideoMode() {
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.content_view, Fragment())
+            .commit()
+    }
+
+    private fun showPhotoMode() {
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.content_view, Fragment())
+            .commit()
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        supportFragmentManager
+            .fragments[0]
+            .onActivityResult(requestCode, resultCode, data)
+    }
+
+    fun checkPermissions(requestCode: Int, vararg permissions: String): Boolean {
+        if (Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+            if (ContextCompat.checkSelfPermission(this,
+                            permissions[0]) != PackageManager.PERMISSION_GRANTED) {
+                if (ActivityCompat.shouldShowRequestPermissionRationale(this, permissions[0])) {
+                    ActivityCompat.requestPermissions(this, permissions, requestCode)
+                } else {
+                    ActivityCompat.requestPermissions(this, permissions, requestCode)
+                }
+                return false
+            } else {
+                return true
+            }
+
+        } else {
+            return true
+        }
     }
 }
