@@ -122,36 +122,11 @@ class PhotoPickerFragment : Fragment(), View.OnClickListener, MediaPicker.OnMedi
         }
     }
 
-    override fun onRequestPermissionsResult(requestCode: Int,
-                                            permissions: Array<String>, grantResults: IntArray) {
-        when (requestCode) {
-            MainActivity.REQUEST_CODE_GALLERY -> if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                mediaPicker.with(photoParamsOptimized)
-                    .pick()
-            } else {
-                Toast.makeText(activity, String.format("Access denied STORAGE "),
-                        Toast.LENGTH_SHORT)
-                    .show()
-            }
-            MainActivity.REQUEST_CODE_CAMERA -> if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                mediaPicker.with(photoParamsOptimized)
-                    .take()
-            } else {
-                Toast.makeText(activity, String.format("Access denied CAMERA"),
-                        Toast.LENGTH_SHORT)
-                    .show()
-            }
-            else -> super.onRequestPermissionsResult(requestCode, permissions,
-                    grantResults)
-        }
-    }
-
     companion object {
 
         fun newInstance(): Fragment {
             return PhotoPickerFragment()
         }
     }
-
 
 }
