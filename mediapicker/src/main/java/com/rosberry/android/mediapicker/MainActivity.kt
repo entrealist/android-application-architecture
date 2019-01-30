@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
     private fun showVideoMode() {
         supportFragmentManager
             .beginTransaction()
-            .replace(R.id.content_view, Fragment())
+            .replace(R.id.content_view, VideoPickerFragment.newInstance())
             .commit()
     }
 
