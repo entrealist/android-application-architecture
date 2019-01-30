@@ -57,23 +57,4 @@ class MainActivity : AppCompatActivity() {
             .fragments[0]
             .onActivityResult(requestCode, resultCode, data)
     }
-
-    fun checkPermissions(requestCode: Int, vararg permissions: String): Boolean {
-        if (Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
-            if (ContextCompat.checkSelfPermission(this,
-                            permissions[0]) != PackageManager.PERMISSION_GRANTED) {
-                if (ActivityCompat.shouldShowRequestPermissionRationale(this, permissions[0])) {
-                    ActivityCompat.requestPermissions(this, permissions, requestCode)
-                } else {
-                    ActivityCompat.requestPermissions(this, permissions, requestCode)
-                }
-                return false
-            } else {
-                return true
-            }
-
-        } else {
-            return true
-        }
-    }
 }

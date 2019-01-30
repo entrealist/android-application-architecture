@@ -7,16 +7,12 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.ProgressBar
-import android.widget.Toast
-
+import android.view.*
+import android.widget.*
 import com.rosberry.mediapicker.MediaPicker
 import com.rosberry.mediapicker.data.MediaResult
 import com.rosberry.mediapicker.data.PhotoParams
+import com.tbruyelle.rxpermissions2.RxPermissions
 
 /**
  * Created by dmitry on 02.10.17.
@@ -30,6 +26,8 @@ class PhotoPickerFragment : Fragment(), View.OnClickListener, MediaPicker.OnMedi
     lateinit var mediaPicker: MediaPicker
     lateinit var photoParamsOptimized: PhotoParams
     lateinit var photoParamsUnmutable: PhotoParams
+
+    lateinit var rxPermissions: RxPermissions
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -70,24 +68,36 @@ class PhotoPickerFragment : Fragment(), View.OnClickListener, MediaPicker.OnMedi
             .mutable(false)
             .build()
 
+        rxPermissions = RxPermissions(this)
+
         return view
     }
 
     override fun onClick(view: View) {
-
-
-        val mainActivity = activity as MainActivity?
         when (view.id) {
-            R.id.button_photo_pick_gallery -> if (mainActivity!!.checkPermissions(
-                            MainActivity.REQUEST_CODE_GALLERY,
-                            Manifest.permission.WRITE_EXTERNAL_STORAGE))
+            R.id.button_photo_pick_gallery -> rxPermissions.request(
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                .subscribe { granted ->
+                    if (granted) {
+                        mediaPicker.with(photoParamsOptimized)
+                            .pick()
+                    } else {
+                        //.!.
+                    }
+                }
 
-                mediaPicker.with(photoParamsOptimized).pick()
-            R.id.button_photo_pick_camera -> if (mainActivity!!.checkPermissions(
-                            MainActivity.REQUEST_CODE_CAMERA,
-                            Manifest.permission.WRITE_EXTERNAL_STORAGE))
-
-                mediaPicker.with(photoParamsOptimized).take()
+            R.id.button_photo_pick_camera -> {
+                rxPermissions.request(Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                        Manifest.permission.CAMERA)
+                    .subscribe { granted ->
+                        if (granted) {
+                            mediaPicker.with(photoParamsOptimized)
+                                .take()
+                        } else {
+                            //.!.
+                        }
+                    }
+            }
         }
     }
 

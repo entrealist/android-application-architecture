@@ -4,16 +4,13 @@ import android.Manifest
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.ProgressBar
-import android.widget.Toast
-import android.widget.VideoView
-
+import android.view.*
+import android.widget.*
 import com.rosberry.mediapicker.MediaPicker
 import com.rosberry.mediapicker.data.MediaResult
 import com.rosberry.mediapicker.data.PhotoParams
+import com.tbruyelle.rxpermissions2.RxPermissions
+
 
 /**
  * Created by dmitry on 02.10.17.
@@ -27,6 +24,8 @@ class VideoPickerFragment : Fragment(), View.OnClickListener, MediaPicker.OnMedi
     lateinit var progressBar: ProgressBar
 
     lateinit var params: PhotoParams
+
+    lateinit var rxPermissions: RxPermissions
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,6 +54,7 @@ class VideoPickerFragment : Fragment(), View.OnClickListener, MediaPicker.OnMedi
             .highQuality(true)
             .build()
 
+        rxPermissions = RxPermissions(this)
 
         return view
     }
@@ -65,18 +65,31 @@ class VideoPickerFragment : Fragment(), View.OnClickListener, MediaPicker.OnMedi
     }
 
     override fun onClick(view: View) {
-        val mainActivity = activity as MainActivity?
         when (view.id) {
-            R.id.button_video_pick_gallery -> if (mainActivity!!.checkPermissions(
-                            MainActivity.REQUEST_CODE_GALLERY,
-                            Manifest.permission.WRITE_EXTERNAL_STORAGE))
+            R.id.button_video_pick_gallery -> {
+                rxPermissions
+                    .request(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    .subscribe { granted ->
+                        if (granted) {
+                            mediaPicker!!.with(params)
+                                .pick()
+                        } else {
+                            //.!.
+                        }
+                    }
+            }
 
-                mediaPicker!!.with(params).pick()
-            R.id.button_video_pick_camera -> if (mainActivity!!.checkPermissions(
-                            MainActivity.REQUEST_CODE_CAMERA,
-                            Manifest.permission.WRITE_EXTERNAL_STORAGE))
-
-                mediaPicker!!.with(params).take()
+            R.id.button_video_pick_camera -> {
+                rxPermissions.request(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    .subscribe { granted ->
+                        if (granted) {
+                            mediaPicker!!.with(params)
+                                .take()
+                        } else {
+                            //.!.
+                        }
+                    }
+            }
         }
     }
 
