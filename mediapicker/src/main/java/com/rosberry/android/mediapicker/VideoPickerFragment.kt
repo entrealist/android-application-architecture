@@ -80,7 +80,8 @@ class VideoPickerFragment : Fragment(), View.OnClickListener, MediaPicker.OnMedi
             }
 
             R.id.button_video_pick_camera -> {
-                rxPermissions.request(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                rxPermissions.request(Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                        Manifest.permission.CAMERA)
                     .subscribe { granted ->
                         if (granted) {
                             mediaPicker!!.with(params)
