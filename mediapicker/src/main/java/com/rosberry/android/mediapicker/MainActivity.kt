@@ -9,11 +9,15 @@ import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.widget.RadioGroup
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    val REQUEST_CODE_GALLERY = 123
-    val REQUEST_CODE_CAMERA = 124
+    companion object {
+        public val REQUEST_CODE_GALLERY = 123
+        public val REQUEST_CODE_CAMERA = 124
+    }
+
     lateinit var radioGroup: RadioGroup
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,7 +47,7 @@ class MainActivity : AppCompatActivity() {
     private fun showPhotoMode() {
         supportFragmentManager
             .beginTransaction()
-            .replace(R.id.content_view, Fragment())
+            .replace(R.id.content_view, PhotoPickerFragment.newInstance())
             .commit()
     }
 
