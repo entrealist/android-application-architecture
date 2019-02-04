@@ -2,7 +2,6 @@ package com.rosberry.android.mediapicker
 
 import android.Manifest
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
@@ -25,7 +24,7 @@ class PhotoPickerFragment : Fragment(), View.OnClickListener, MediaPicker.OnMedi
 
     lateinit var mediaPicker: MediaPicker
     lateinit var photoParamsOptimized: PhotoParams
-    lateinit var photoParamsUnmutable: PhotoParams
+    lateinit var photoParamsImmutable: PhotoParams
 
     lateinit var rxPermissions: RxPermissions
 
@@ -63,7 +62,7 @@ class PhotoPickerFragment : Fragment(), View.OnClickListener, MediaPicker.OnMedi
             .pickGalleryError("Pick gallery error")
             .build()
 
-        photoParamsUnmutable = PhotoParams.Builder()
+        photoParamsImmutable = PhotoParams.Builder()
             .type(MediaPicker.Type.IMAGE)
             .mutable(false)
             .build()
