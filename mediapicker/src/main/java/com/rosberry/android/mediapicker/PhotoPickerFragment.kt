@@ -19,6 +19,13 @@ import com.tbruyelle.rxpermissions2.RxPermissions
 
 class PhotoPickerFragment : Fragment(), View.OnClickListener, MediaPicker.OnMediaListener {
 
+    companion object {
+
+        fun newInstance(): Fragment {
+            return PhotoPickerFragment()
+        }
+    }
+
     lateinit var contentImageView: ImageView
     lateinit var progressBar: ProgressBar
 
@@ -120,12 +127,4 @@ class PhotoPickerFragment : Fragment(), View.OnClickListener, MediaPicker.OnMedi
                 .show()
         }
     }
-
-    companion object {
-
-        fun newInstance(): Fragment {
-            return PhotoPickerFragment()
-        }
-    }
-
 }

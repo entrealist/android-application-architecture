@@ -18,6 +18,13 @@ import com.tbruyelle.rxpermissions2.RxPermissions
 
 class VideoPickerFragment : Fragment(), View.OnClickListener, MediaPicker.OnMediaListener {
 
+    companion object {
+
+        fun newInstance(): Fragment {
+            return VideoPickerFragment()
+        }
+    }
+
     private var mediaPicker: MediaPicker? = null
 
     lateinit var videoView: VideoView
@@ -111,13 +118,6 @@ class VideoPickerFragment : Fragment(), View.OnClickListener, MediaPicker.OnMedi
         } else {
             Toast.makeText(activity, errorMsg, Toast.LENGTH_SHORT)
                 .show()
-        }
-    }
-
-    companion object {
-
-        fun newInstance(): Fragment {
-            return VideoPickerFragment()
         }
     }
 }
