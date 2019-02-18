@@ -83,26 +83,26 @@ class PhotoPickerFragment : Fragment(), View.OnClickListener, MediaPicker.OnMedi
         when (view.id) {
             R.id.button_photo_pick_gallery -> rxPermissions.request(
                     Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                .subscribe { granted ->
+                .subscribe({ granted ->
                     if (granted) {
                         mediaPicker.with(photoParamsOptimized)
                             .pick()
                     } else {
                         //.!.
                     }
-                }
+                }) {}
 
             R.id.button_photo_pick_camera -> {
                 rxPermissions.request(Manifest.permission.WRITE_EXTERNAL_STORAGE,
                         Manifest.permission.CAMERA)
-                    .subscribe { granted ->
+                    .subscribe ({ granted ->
                         if (granted) {
                             mediaPicker.with(photoParamsOptimized)
                                 .take()
                         } else {
                             //.!.
                         }
-                    }
+                    },{})
             }
         }
     }

@@ -76,27 +76,27 @@ class VideoPickerFragment : Fragment(), View.OnClickListener, MediaPicker.OnMedi
             R.id.button_video_pick_gallery -> {
                 rxPermissions
                     .request(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                    .subscribe { granted ->
+                    .subscribe ({ granted ->
                         if (granted) {
                             mediaPicker!!.with(params)
                                 .pick()
                         } else {
                             //.!.
                         }
-                    }
+                    }, {})
             }
 
             R.id.button_video_pick_camera -> {
                 rxPermissions.request(Manifest.permission.WRITE_EXTERNAL_STORAGE,
                         Manifest.permission.CAMERA)
-                    .subscribe { granted ->
+                    .subscribe( { granted ->
                         if (granted) {
                             mediaPicker!!.with(params)
                                 .take()
                         } else {
                             //.!.
                         }
-                    }
+                    }, {})
             }
         }
     }
