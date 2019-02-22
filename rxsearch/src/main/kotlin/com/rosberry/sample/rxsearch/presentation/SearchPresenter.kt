@@ -8,6 +8,7 @@ import com.rosberry.sample.rxsearch.error.EmptySearchResult
 import com.rosberry.sample.rxsearch.error.NetworkUnavailableException
 import com.rosberry.sample.rxsearch.presentation.model.SearchResultItem
 import com.rosberry.sample.rxsearch.presentation.model.SearchResultItemConverter
+import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -62,21 +63,16 @@ class SearchPresenter @Inject constructor(
             .map { it.trim() }
             .filter { it.isNotBlank() }
             .observeOn(AndroidSchedulers.mainThread())
-            .doOnNext { viewState.showProgress(true) }
+            .doOnNext {
+                viewState.showProgress(true)
+                viewState.hideInteractivePlaceholder()
+            }
             .switchMapSingle { query -> searchInteractor.search(query) }
             .map { searchItemConverter.convertList(it) }
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .doOnError { showError(it) }
-            .retryWhen { retryHandler ->
-                retryHandler.flatMap { t ->
-                    if (t is UnknownHostException || t is NetworkUnavailableException) {
-                        connectivityInteractor.listenConnectionAvailability()
-                    } else {
-                        retryActionStream
-                    }
-                }
-            }
+            .retryWhen { it.listenRetryEvent() }
             .subscribe(
                     { showResults(it) },
                     { it.printStackTrace() }
@@ -128,5 +124,15 @@ class SearchPresenter @Inject constructor(
 
 
         viewState.showInteractivePlaceholder(title, description, actionText)
+    }
+
+    private fun Observable<Throwable>.listenRetryEvent(): Observable<in Any> {
+        return this.flatMap { t ->
+            if (t is UnknownHostException || t is NetworkUnavailableException) {
+                connectivityInteractor.listenConnectionAvailability()
+            } else {
+                retryActionStream
+            }
+        }
     }
 }

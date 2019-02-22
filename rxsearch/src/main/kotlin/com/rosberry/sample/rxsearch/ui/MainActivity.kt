@@ -7,7 +7,6 @@ import android.support.constraint.ConstraintSet
 import android.support.v4.view.animation.FastOutSlowInInterpolator
 import android.view.View
 import android.view.ViewPropertyAnimator
-import android.view.ViewTreeObserver
 import android.widget.Toast
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
@@ -135,14 +134,5 @@ class MainActivity : MvpAppCompatActivity(), SearchView {
                 applyTo(it)
             }
         }
-    }
-
-    fun <T : View> T.alsoOnLaid(block: (T) -> Unit) {
-        viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
-            override fun onGlobalLayout() {
-                viewTreeObserver.removeOnGlobalLayoutListener(this)
-                block.invoke(this@alsoOnLaid)
-            }
-        })
     }
 }

@@ -19,7 +19,9 @@ class SearchResultDiffUtilCallback(
                 && oldItem is SearchResultItem
                 && newItem is SearchResultItem) {
             oldItem.id == newItem.id
-        } else false
+        } else {
+            false
+        }
     }
 
     override fun getOldListSize() = oldItems.size
@@ -31,7 +33,9 @@ class SearchResultDiffUtilCallback(
         val newItem = newItems[newItemPosition]
 
         return if (oldItem is SearchResultItem && newItem is SearchResultItem) {
-            oldItem.title == oldItem.title
-        } else false
+            oldItem.title == newItem.title
+        } else {
+            false
+        }
     }
 }

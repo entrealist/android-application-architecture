@@ -5,7 +5,6 @@ import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.rosberry.sample.rxsearch.data.network.ServiceApi
 import com.rosberry.sample.rxsearch.data.network.interceptor.CheckConnectionInterceptor
-import com.rosberry.sample.rxsearch.data.network.interceptor.ResponseInterceptor
 import dagger.Module
 import dagger.Provides
 import io.reactivex.schedulers.Schedulers
@@ -31,7 +30,6 @@ class NetworkModule {
     @Provides
     fun provideAuthOkHttpClient(
             context: Context,
-            responseInterceptor: ResponseInterceptor,
             checkConnectionInterceptor: CheckConnectionInterceptor
     ): OkHttpClient {
 
@@ -40,7 +38,6 @@ class NetworkModule {
                 cache(Cache(context.cacheDir, cacheSizeInMb * 1024))
                 connectTimeout(timeoutTime, TimeUnit.SECONDS)
                 readTimeout(timeoutTime, TimeUnit.SECONDS)
-                addInterceptor(responseInterceptor)
                 addInterceptor(checkConnectionInterceptor)
                 addNetworkInterceptor(HttpLoggingInterceptor().apply {
                     level = HttpLoggingInterceptor.Level.BODY
