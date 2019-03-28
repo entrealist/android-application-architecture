@@ -1,0 +1,67 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+
+    defaultConfig {
+        applicationId "com.rosberry.sample.search"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        buildConfigField 'String', 'API_URL', '"https://itunes.apple.com/"'
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    sourceSets {
+        main.java.srcDirs += ['src/main/kotlin']
+        test.java.srcDirs += ['src/test/kotlin']
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    def deps = rootProject.ext.dependencies
+    def testDeps = rootProject.ext.testDependencies
+
+    testImplementation testDeps.jUnit
+    androidTestImplementation testDeps.jUnit
+    androidTestImplementation testDeps.runner
+
+    implementation deps.kotlin
+    implementation deps.support.appCompat
+    implementation deps.support.recyclerView
+    implementation deps.support.constraintLayout
+    implementation deps.support.design
+    implementation deps.abstractRecyclerView
+    implementation deps.rx.java
+    implementation deps.rx.android
+    implementation deps.googleGson
+    implementation deps.retrofit.library
+    implementation deps.retrofit.rxJavaAdapter
+    implementation deps.retrofit.gsonConverter
+    implementation deps.okhttp.library
+    implementation deps.okhttp.loggingInterceptor
+    implementation deps.softKeyboardHelper
+    implementation deps.moxy.library
+    implementation deps.moxy.support
+    kapt deps.moxy.compiler
+    implementation deps.dagger.library
+    kapt deps.dagger.compiler
+    kapt deps.dagger.annotation
+}
