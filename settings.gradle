@@ -6,4 +6,5 @@ include ':app',
         ':roomdatabase',
         ':viewpager',
         ':navigation',
-        ':preferencemanager'
+        ':preferencemanager',
+        ':surfaceviewrxed'
