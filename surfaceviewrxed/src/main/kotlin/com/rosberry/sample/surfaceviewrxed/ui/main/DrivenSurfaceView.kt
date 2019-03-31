@@ -40,9 +40,7 @@ class DrivenSurfaceView @JvmOverloads constructor(
             isRotationEnabled = false
             isDoubleTapEnabled = true
             fitMethod = Settings.Fit.NONE
-            boundsType = Settings.Bounds.OUTSIDE
-            minZoom = 0.5f
-            maxZoom = 0f
+            boundsType = Settings.Bounds.NONE
         }
     }
 

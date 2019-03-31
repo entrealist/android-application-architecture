@@ -33,8 +33,8 @@ public class GridRenderable implements Renderable<GroundState> {
         final int partsPerLine = 4;
         final int columnsBeforeX = (int) (drawportX / model.getGridCellSize());
         final int columnsBeforeY = (int) (drawportY / model.getGridCellSize());
-        final int columnCount = (int) (canvasW / model.getGridCellSize()) + columnsBeforeX + 1;
-        final int rowCount = (int) (canvasH / model.getGridCellSize()) + columnsBeforeY + 1;
+        final int columnCount = (int) (canvasW / model.getGridCellSize()) + Math.abs(columnsBeforeX) + 1;
+        final int rowCount = (int) (canvasH / model.getGridCellSize()) + Math.abs(columnsBeforeY) + 1;
         final int linePartsCount = (columnCount + rowCount) * partsPerLine;
 
         final float[] gridLines = new float[linePartsCount];
@@ -48,12 +48,11 @@ public class GridRenderable implements Renderable<GroundState> {
         }
 
         // gather rows parts
-        for (int j = columnCount; j < columnCount + rowCount; j++) {
-            int startIndex = j * partsPerLine;
-            int currentRow = j - columnCount;
+        for (int j = 0; j < rowCount; j++) {
+            int startIndex = (j + columnCount) * partsPerLine;
 
             gridLines[startIndex] = 0f; // x of start point
-            gridLines[startIndex + 1] = gridLines[startIndex + 3] = drawportY + (currentRow - columnsBeforeY) * model.getGridCellSize(); // y of start & end points
+            gridLines[startIndex + 1] = gridLines[startIndex + 3] = drawportY + (j - columnsBeforeY) * model.getGridCellSize(); // y of start & end points
             gridLines[startIndex + 2] = canvasW; // x of end point
         }
 
