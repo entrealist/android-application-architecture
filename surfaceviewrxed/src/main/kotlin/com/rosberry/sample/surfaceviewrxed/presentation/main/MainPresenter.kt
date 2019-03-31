@@ -1,6 +1,7 @@
 package com.rosberry.sample.surfaceviewrxed.presentation.main
 
 import android.view.MotionEvent
+import com.alexvasilkov.gestures.State
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
 import com.rosberry.sample.surfaceviewrxed.di.main.MainSceneQualifier
@@ -27,7 +28,8 @@ class MainPresenter @Inject constructor(
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
 
-        viewState.registerSurfaceTouches()
+        //viewState.registerSurfaceTouches()
+        viewState.registerSurfaceStates()
     }
 
     override fun detachView(view: MainView?) {
@@ -40,7 +42,13 @@ class MainPresenter @Inject constructor(
         viewState.closeScope()
     }
 
-    fun setSurfaceTouches(touches: Observable<MotionEvent>) {
+    fun setSurfaceStatesObs(states: Observable<State>) {
+        states.map { GroundState().apply { set(it) } }
+            .subscribe {  mySceneStateHandler.onState(it) }
+            .let { viewDisposables.add(it) }
+    }
+
+    fun setSurfaceTouchesObs(touches: Observable<MotionEvent>) {
         touches.map { getState(it) }
             .subscribe { mySceneStateHandler.onState(it) }
             .let { viewDisposables.add(it) }
@@ -49,13 +57,13 @@ class MainPresenter @Inject constructor(
     private fun getState(ev: MotionEvent): LayerState {
         return when (ev.action) {
             MotionEvent.ACTION_MOVE -> {
-                MiddleState()
+                GroundState()
             }
             MotionEvent.ACTION_UP -> {
                 UiState()
             }
 
-            else -> GroundState()
+            else -> MiddleState()
         }
     }
 }

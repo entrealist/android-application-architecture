@@ -12,6 +12,7 @@ import com.rosberry.sample.surfaceviewrxed.presentation.main.MainPresenter
 import com.rosberry.sample.surfaceviewrxed.presentation.main.MainView
 import com.rosberry.sample.surfaceviewrxed.presentation.system.drawing.SceneParams
 import com.rosberry.sample.surfaceviewrxed.ui.main.system.CanvasHandler
+import com.rosberry.sample.surfaceviewrxed.ui.main.system.states
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
@@ -28,7 +29,7 @@ class MainActivity : MvpAppCompatActivity(), MainView {
     fun providePresenter() = Injector.mainComponent!!.providePresenter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        Injector.openMainScope(SceneParams(0, 0))
+        Injector.openMainScope(SceneParams(5000f, 5000f))
             .inject(this)
         super.onCreate(savedInstanceState)
 
@@ -37,7 +38,11 @@ class MainActivity : MvpAppCompatActivity(), MainView {
     }
 
     override fun registerSurfaceTouches() {
-        presenter.setSurfaceTouches(surfaceView.touches())
+        presenter.setSurfaceTouchesObs(surfaceView.touches())
+    }
+
+    override fun registerSurfaceStates() {
+        presenter.setSurfaceStatesObs(surfaceView.states())
     }
 
     override fun closeScope() {

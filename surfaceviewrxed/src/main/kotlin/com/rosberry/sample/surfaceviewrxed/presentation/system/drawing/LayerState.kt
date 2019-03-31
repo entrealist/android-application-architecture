@@ -5,5 +5,5 @@ package com.rosberry.sample.surfaceviewrxed.presentation.system.drawing
  */
 interface LayerState {
 
-    fun set(other: LayerState)
+    fun update(other: LayerState)
 }

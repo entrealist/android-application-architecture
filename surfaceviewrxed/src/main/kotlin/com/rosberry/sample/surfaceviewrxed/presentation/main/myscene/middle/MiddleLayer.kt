@@ -1,8 +1,11 @@
 package com.rosberry.sample.surfaceviewrxed.presentation.main.myscene.middle
 
-import com.rosberry.sample.surfaceviewrxed.presentation.system.drawing.LayerModel
+import com.rosberry.sample.surfaceviewrxed.presentation.system.drawing.Layer
 
-class MiddleLayerModel : LayerModel<MiddleState>() {
+/**
+ * @author mmikhailov on 30/03/2019.
+ */
+class MiddleLayer : Layer<MiddleState>() {
 
     init {
         setRenderables(CurveRenderable())
@@ -11,7 +14,7 @@ class MiddleLayerModel : LayerModel<MiddleState>() {
     // the state of renderables
     override val state = MiddleState()
 
-    override fun onStateChange() {
+    override fun onStateChange(updated: MiddleState) {
 
     }
 }

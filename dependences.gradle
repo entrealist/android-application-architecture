@@ -26,6 +26,7 @@ ext {
     rxJava_version = "2.2.8"
     rxKotlin_version = "2.3.0"
     rxpermission_version = "0.9.5@aar"
+    rxbinding_version = "3.0.0-alpha2"
 
     room_version = "1.1.0"
 
@@ -41,7 +42,7 @@ ext {
     supportLint_version = "26.3.0-alpha08"
     picasso_version = "2.71828"
     smartRefreshVersion = "1.0.3"
-    gestureViews_version = "2.3.2"
+    gestureViews_version = "2.5.2"
     videoPlayer_version = "1.2.1"
     gestureImageView_version = "2.3.2"
     bottomNavigationEx_version = "1.2.4"
@@ -52,8 +53,6 @@ ext {
     mediaPicker_version = "1.0.1"
 
     imageCropper_version = "2.6.0"
-
-    rxBinding_version = "2.1.1"
 
     softKeyboardHelper_version = "2.1.0"
     picassoTransformations_version = "2.2.1"
@@ -148,7 +147,7 @@ ext {
                     java                  : "io.reactivex.rxjava2:rxjava:$rxJava_version",
                     kotlin                : "io.reactivex.rxjava2:rxkotlin:$rxKotlin_version",
                     permissions           : "com.tbruyelle.rxpermissions2:rxpermissions:$rxpermission_version",
-                    binding               : "com.jakewharton.rxbinding2:rxbinding-kotlin:$rxBinding_version",
+                    binding               : "com.jakewharton.rxbinding3:rxbinding:$rxbinding_version",
             ],
 
             //inject
@@ -188,7 +187,6 @@ ext {
 
             gestureViews            : "com.alexvasilkov:gesture-views:$gestureViews_version",
             videoPlayer             : "com.sprylab.android.texturevideoview:texturevideoview:$videoPlayer_version",
-            gestureImageView        : "com.alexvasilkov:gesture-views:$gestureViews_version",
             bottomNavigationEx      : "com.github.ittianyu:BottomNavigationViewEx:$bottomNavigationEx_version",
             softKeyboardHelper      : "net.yslibrary.keyboardvisibilityevent:keyboardvisibilityevent:$softKeyboardHelper_version",
             pagerIndicator          : "com.ryanjeffreybrooks:indefinitepagerindicator:$pagerIndicator_version",

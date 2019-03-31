@@ -124,7 +124,7 @@ public class UiState implements LayerState {
     }
 
     @Override
-    public void set(@NotNull LayerState other) {
+    public void update(@NotNull LayerState other) {
         if (other instanceof UiState) {
             UiState uiState = (UiState) other;
 
@@ -138,7 +138,7 @@ public class UiState implements LayerState {
 
     public UiState copy() {
         UiState copy = new UiState();
-        copy.set(this);
+        copy.update(this);
         return copy;
     }
 

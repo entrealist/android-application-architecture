@@ -1,13 +1,17 @@
 package com.rosberry.sample.surfaceviewrxed.ui.main
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Canvas
-import android.graphics.Color
 import android.graphics.PixelFormat
 import android.util.AttributeSet
 import android.util.Log
+import android.view.MotionEvent
 import android.view.SurfaceHolder
 import android.view.SurfaceView
+import com.alexvasilkov.gestures.GestureController
+import com.alexvasilkov.gestures.Settings
+import com.alexvasilkov.gestures.views.interfaces.GestureView
 import com.rosberry.sample.surfaceviewrxed.ui.main.system.CanvasHandler
 import io.reactivex.disposables.Disposable
 
@@ -18,33 +22,54 @@ class DrivenSurfaceView @JvmOverloads constructor(
         context: Context,
         attrs: AttributeSet? = null,
         defStyle: Int = 0
-) : SurfaceView(context, attrs, defStyle), SurfaceHolder.Callback {
+) : SurfaceView(context, attrs, defStyle), SurfaceHolder.Callback, GestureView {
 
+    private val controller = GestureController(this)
     private var canvasHandler: CanvasHandler? = null
     private var canvasHandlerDisposable: Disposable? = null
     private var thread: SurfaceThread? = null
     private var surfaceCreated = false
 
     init {
-        holder.addCallback(this)
-        holder.setFormat(PixelFormat.TRANSLUCENT)
+        with(holder) {
+            addCallback(this@DrivenSurfaceView)
+            setFormat(PixelFormat.TRANSLUCENT)
+        }
+
+        controller.settings.apply {
+            isRotationEnabled = false
+            isDoubleTapEnabled = true
+            fitMethod = Settings.Fit.NONE
+            boundsType = Settings.Bounds.OUTSIDE
+            minZoom = 0.5f
+            maxZoom = 0f
+        }
     }
 
     override fun surfaceCreated(holder: SurfaceHolder) {
         Log.d("Dbg.SurfaceView", "surfaceCreated::")
         surfaceCreated = true
-        tryDrawWhite(holder)
         start()
     }
 
     override fun surfaceChanged(holder: SurfaceHolder, format: Int, width: Int, height: Int) {
         Log.d("Dbg.SurfaceView", "surfaceChanged::format: $format, w: $width, h: $height")
+
+        controller.settings.setViewport(width, height)
+        controller.updateState()
     }
 
     override fun surfaceDestroyed(holder: SurfaceHolder) {
         Log.d("Dbg.SurfaceView", "surfaceDestroyed::")
         surfaceCreated = false
         stop()
+    }
+
+    override fun getController() = controller
+
+    @SuppressLint("ClickableViewAccessibility") // Will be handled by gestures controller
+    override fun onTouchEvent(event: MotionEvent): Boolean {
+        return controller.onTouch(this, event)
     }
 
     fun setCanvasHandler(handler: CanvasHandler?) {
@@ -80,18 +105,6 @@ class DrivenSurfaceView @JvmOverloads constructor(
         }
     }
 
-    private fun tryDrawWhite(holder: SurfaceHolder) {
-        try {
-            holder.lockCanvas()
-                ?.also {
-                    it.drawColor(Color.GREEN)
-                    holder.unlockCanvasAndPost(it)
-                }
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-    }
-
     private fun subscribeComposer() {
         canvasHandlerDisposable = canvasHandler?.drawCommands
             ?.subscribe { thread?.setDraw(it) }
@@ -121,19 +134,12 @@ class DrivenSurfaceView @JvmOverloads constructor(
 
                 if (!draw && !pendingPost) continue
 
-                Log.d("Dbg.SurfaceThread", "run::pending: $pendingPost")
                 if (pendingPost) {
                     pendingPost = false
                     unlockCanvasAndPost()
                 } else {
                     pendingPost = lockCanvasAndDraw()
                 }
-
-                /*synchronized(canvasHandler.lock) {
-                    if (running && neededSleep) {
-                        canvasHandler.lock.wait()
-                    }
-                }*/
             }
 
             unlockCanvasAndPost()
@@ -144,10 +150,6 @@ class DrivenSurfaceView @JvmOverloads constructor(
         internal fun release() {
             Log.d("Dbg.SurfaceThread", "release")
             running = false
-            /*synchronized(canvasHandler.lock) {
-                running = false
-                canvasHandler.lock.notify()
-            }*/
         }
 
         private fun unlockCanvasAndPost() {

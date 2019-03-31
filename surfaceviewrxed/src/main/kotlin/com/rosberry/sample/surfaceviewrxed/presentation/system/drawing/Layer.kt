@@ -5,18 +5,18 @@ import android.graphics.Canvas
 /**
  * @author mmikhailov on 29/03/2019.
  */
-abstract class LayerModel<T : LayerState> {
+abstract class Layer<T : LayerState> {
 
     protected abstract val state: T
 
-    abstract fun onStateChange()
+    abstract fun onStateChange(updated: T)
 
     private val renderables: MutableList<Renderable<T>> = mutableListOf()
 
     fun changeState(updated: T) {
-        state.set(updated)
+        state.update(updated)
 
-        onStateChange()
+        onStateChange(updated)
     }
 
     fun drawLayer(canvas: Canvas) {

@@ -124,7 +124,7 @@ public class MiddleState implements LayerState {
     }
 
     @Override
-    public void set(@NotNull LayerState other) {
+    public void update(@NotNull LayerState other) {
         if (other instanceof MiddleState) {
             MiddleState state = (MiddleState) other;
 
@@ -138,7 +138,7 @@ public class MiddleState implements LayerState {
 
     public MiddleState copy() {
         MiddleState copy = new MiddleState();
-        copy.set(this);
+        copy.update(this);
         return copy;
     }
 

@@ -50,5 +50,6 @@ dependencies {
     implementation deps.rx.java
     implementation deps.rx.kotlin
     implementation deps.rx.android
-    implementation 'com.jakewharton.rxbinding3:rxbinding:3.0.0-alpha2'
+    implementation deps.rx.binding
+    implementation deps.gestureViews
 }
