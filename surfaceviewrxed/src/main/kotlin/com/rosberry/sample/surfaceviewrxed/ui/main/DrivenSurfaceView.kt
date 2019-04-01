@@ -37,6 +37,7 @@ class DrivenSurfaceView @JvmOverloads constructor(
         }
 
         controller.settings.apply {
+            isZoomEnabled = true
             isRotationEnabled = false
             isDoubleTapEnabled = true
             fitMethod = Settings.Fit.NONE
@@ -55,6 +56,7 @@ class DrivenSurfaceView @JvmOverloads constructor(
 
         controller.settings.setViewport(width, height)
         controller.updateState()
+        thread?.setDraw(true)
     }
 
     override fun surfaceDestroyed(holder: SurfaceHolder) {

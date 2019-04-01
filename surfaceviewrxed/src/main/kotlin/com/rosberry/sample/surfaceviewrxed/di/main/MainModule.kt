@@ -2,7 +2,7 @@ package com.rosberry.sample.surfaceviewrxed.di.main
 
 import com.rosberry.sample.surfaceviewrxed.presentation.main.myscene.MySceneComposer
 import com.rosberry.sample.surfaceviewrxed.presentation.system.drawing.SceneParams
-import com.rosberry.sample.surfaceviewrxed.presentation.system.drawing.StateHandler
+import com.rosberry.sample.surfaceviewrxed.presentation.system.drawing.StateObserver
 import com.rosberry.sample.surfaceviewrxed.ui.main.system.CanvasHandler
 import dagger.Module
 import dagger.Provides
@@ -23,7 +23,7 @@ class MainModule {
     @MainScope
     @Provides
     @MainSceneQualifier
-    fun provideMySceneModelHolder(@MainSceneQualifier canvasHandler: CanvasHandler): StateHandler {
-        return canvasHandler as StateHandler
+    fun provideMySceneModelHolder(@MainSceneQualifier canvasHandler: CanvasHandler): StateObserver {
+        return canvasHandler as StateObserver
     }
 }

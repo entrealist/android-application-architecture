@@ -4,7 +4,6 @@ import android.os.Bundle
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
-import com.jakewharton.rxbinding3.view.touches
 import com.rosberry.sample.surfaceviewrxed.R
 import com.rosberry.sample.surfaceviewrxed.di.Injector
 import com.rosberry.sample.surfaceviewrxed.di.main.MainSceneQualifier
@@ -35,10 +34,6 @@ class MainActivity : MvpAppCompatActivity(), MainView {
 
         setContentView(R.layout.activity_main)
         surfaceView.setCanvasHandler(canvasHandler)
-    }
-
-    override fun registerSurfaceTouches() {
-        presenter.setSurfaceTouchesObs(surfaceView.touches())
     }
 
     override fun registerSurfaceStates() {

@@ -1,15 +1,13 @@
 package com.rosberry.sample.surfaceviewrxed.presentation.main
 
-import android.view.MotionEvent
+import android.graphics.Color
 import com.alexvasilkov.gestures.State
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
 import com.rosberry.sample.surfaceviewrxed.di.main.MainSceneQualifier
-import com.rosberry.sample.surfaceviewrxed.presentation.main.myscene.ground.GroundState
-import com.rosberry.sample.surfaceviewrxed.presentation.main.myscene.middle.MiddleState
-import com.rosberry.sample.surfaceviewrxed.presentation.main.myscene.ui.UiState
-import com.rosberry.sample.surfaceviewrxed.presentation.system.drawing.LayerState
-import com.rosberry.sample.surfaceviewrxed.presentation.system.drawing.StateHandler
+import com.rosberry.sample.surfaceviewrxed.presentation.main.myscene.background.BackgroundState
+import com.rosberry.sample.surfaceviewrxed.presentation.main.myscene.grid.GridState
+import com.rosberry.sample.surfaceviewrxed.presentation.system.drawing.StateObserver
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Inject
@@ -20,20 +18,20 @@ import javax.inject.Inject
 @InjectViewState
 class MainPresenter @Inject constructor(
         @MainSceneQualifier
-        private val mySceneStateHandler: StateHandler
+        private val mySceneStateObserver: StateObserver
 ) : MvpPresenter<MainView>() {
 
     private var viewDisposables = CompositeDisposable()
 
-    override fun onFirstViewAttach() {
-        super.onFirstViewAttach()
+    override fun attachView(view: MainView?) {
+        super.attachView(view)
 
-        //viewState.registerSurfaceTouches()
         viewState.registerSurfaceStates()
     }
 
     override fun detachView(view: MainView?) {
         super.detachView(view)
+
         viewDisposables.clear()
     }
 
@@ -43,27 +41,20 @@ class MainPresenter @Inject constructor(
     }
 
     fun setSurfaceStatesObs(states: Observable<State>) {
-        states.map { GroundState().apply { set(it) } }
-            .subscribe {  mySceneStateHandler.onState(it) }
+        states
+            .map { GridState().apply { set(it) } }
+            .flatMap { Observable.just(calculateBackgroundState(it.zoom), it) }
+            .subscribe { mySceneStateObserver.pushState(it) }
             .let { viewDisposables.add(it) }
     }
 
-    fun setSurfaceTouchesObs(touches: Observable<MotionEvent>) {
-        touches.map { getState(it) }
-            .subscribe { mySceneStateHandler.onState(it) }
-            .let { viewDisposables.add(it) }
-    }
+    private fun calculateBackgroundState(zoom: Float): BackgroundState {
+        val red = if (zoom < 1.0f)
+            (255 * zoom).toInt()
+        else
+            255
 
-    private fun getState(ev: MotionEvent): LayerState {
-        return when (ev.action) {
-            MotionEvent.ACTION_MOVE -> {
-                GroundState()
-            }
-            MotionEvent.ACTION_UP -> {
-                UiState()
-            }
-
-            else -> MiddleState()
-        }
+        return BackgroundState()
+            .apply { backgroundColor = Color.rgb(red, 255, 255) }
     }
 }

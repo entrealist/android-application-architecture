@@ -19,7 +19,7 @@ abstract class Layer<T : LayerState> {
         onStateChange(updated)
     }
 
-    fun drawLayer(canvas: Canvas) {
+    fun draw(canvas: Canvas) {
         renderables.forEach { r ->
             r.draw(canvas, state)
         }

@@ -11,9 +11,6 @@ import com.arellomobile.mvp.viewstate.strategy.StateStrategyType
 interface MainView : MvpView {
 
     @StateStrategyType(AddToEndSingleStrategy::class)
-    fun registerSurfaceTouches()
-
-    @StateStrategyType(AddToEndSingleStrategy::class)
     fun registerSurfaceStates()
 
     @StateStrategyType(OneExecutionStateStrategy::class)

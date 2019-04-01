@@ -1,18 +1,17 @@
 package com.rosberry.sample.surfaceviewrxed.presentation.main.myscene
 
 import android.graphics.Canvas
-import com.rosberry.sample.surfaceviewrxed.presentation.main.myscene.ground.GroundLayer
-import com.rosberry.sample.surfaceviewrxed.presentation.main.myscene.ground.GroundState
-import com.rosberry.sample.surfaceviewrxed.presentation.main.myscene.middle.MiddleLayer
-import com.rosberry.sample.surfaceviewrxed.presentation.main.myscene.middle.MiddleState
+import com.rosberry.sample.surfaceviewrxed.presentation.main.myscene.background.BackgroundLayer
+import com.rosberry.sample.surfaceviewrxed.presentation.main.myscene.background.BackgroundState
+import com.rosberry.sample.surfaceviewrxed.presentation.main.myscene.grid.GridLayer
+import com.rosberry.sample.surfaceviewrxed.presentation.main.myscene.grid.GridState
 import com.rosberry.sample.surfaceviewrxed.presentation.main.myscene.ui.UiLayer
 import com.rosberry.sample.surfaceviewrxed.presentation.main.myscene.ui.UiState
 import com.rosberry.sample.surfaceviewrxed.presentation.system.drawing.LayerState
 import com.rosberry.sample.surfaceviewrxed.presentation.system.drawing.SceneParams
-import com.rosberry.sample.surfaceviewrxed.presentation.system.drawing.StateHandler
+import com.rosberry.sample.surfaceviewrxed.presentation.system.drawing.StateObserver
 import com.rosberry.sample.surfaceviewrxed.ui.main.system.CanvasHandler
 import io.reactivex.Observable
-import io.reactivex.subjects.PublishSubject
 import java.util.concurrent.TimeUnit
 
 /**
@@ -20,60 +19,37 @@ import java.util.concurrent.TimeUnit
  */
 class MySceneComposer(
         sceneParams: SceneParams
-) : CanvasHandler, StateHandler {
+) : StateObserver(), CanvasHandler {
 
-    private val stateStream = PublishSubject.create<LayerState>()
-    private val groundLayer = GroundLayer(GroundLayer.LayerModel(sceneParams.width, sceneParams.height))
-    private val middleLayer = MiddleLayer()
+    private val backgroundLayer = BackgroundLayer()
+    private val gridLayer = GridLayer()
     private val uiLayer = UiLayer()
 
-    private val pendingDrawLayerArray = Array(3) { false } // todo refactor...
-
-    override val drawCommands: Observable<Boolean> = stateStream
-        .doOnNext {
-            when (it) {
-                is GroundState -> {
-                    pendingDrawLayerArray[0] = true
-                    groundLayer.changeState(it)
-                }
-                is MiddleState -> {
-                    pendingDrawLayerArray[1] = true
-                    middleLayer.changeState(it)
-                }
-                is UiState -> {
-                    pendingDrawLayerArray[2] = true
-                    uiLayer.changeState(it)
-                }
-            }
-        }
-        .map { true }
-        .timeout(
+    override val drawCommands: Observable<Boolean> = states
+        .map { true } // we want to draw because of new state
+        .timeout( // we don't want draw when there aren't new states within timeout
                 100, TimeUnit.MILLISECONDS,
                 Observable.just(false).concatWith(Observable.error(Exception()))
         )
-        .doOnError {
-            pendingDrawLayerArray[0] = false
-            pendingDrawLayerArray[1] = false
-            pendingDrawLayerArray[2] = false
-        }
         .retry()
         .distinctUntilChanged()
 
+    /**
+     * Called when canvas is ready for drawing
+     *
+     * Let draw the background first (0), then grid (1) and then UI (2)
+     */
     override fun onCanvas(canvas: Canvas) {
-        if (pendingDrawLayerArray[0]) {
-            groundLayer.drawLayer(canvas)
-        }
-
-        if (pendingDrawLayerArray[1]) {
-            middleLayer.drawLayer(canvas)
-        }
-
-        if (pendingDrawLayerArray[2]) {
-            uiLayer.drawLayer(canvas)
-        }
+        backgroundLayer.draw(canvas)
+        gridLayer.draw(canvas)
+        uiLayer.draw(canvas)
     }
 
-    override fun onState(state: LayerState) {
-        stateStream.onNext(state)
+    override fun acceptState(state: LayerState) {
+        when (state) {
+            is BackgroundState -> backgroundLayer.changeState(state)
+            is GridState -> gridLayer.changeState(state)
+            is UiState -> uiLayer.changeState(state)
+        }
     }
 }
