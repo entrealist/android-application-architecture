@@ -1,6 +1,5 @@
 package com.rosberry.sample.surfaceviewrxed.presentation.main
 
-import android.graphics.Color
 import com.alexvasilkov.gestures.State
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
@@ -21,6 +20,9 @@ class MainPresenter @Inject constructor(
         @MainSceneQualifier
         private val mySceneStateObserver: StateObserver
 ) : MvpPresenter<MainView>() {
+
+    private val backgroundState = BackgroundState()
+    private val gridState = GridState()
 
     private var viewDisposables = CompositeDisposable()
 
@@ -43,20 +45,11 @@ class MainPresenter @Inject constructor(
 
     fun setSurfaceStatesObs(states: Observable<State>) {
         states
-            .map { GridState().apply { set(it) } }
-            .flatMap { Observable.just(calculateBackgroundState(it.zoom), it) }
+            .doOnNext { gridState.apply { set(it) } }
+            .doOnNext { backgroundState.apply { zoom = it.zoom } }
+            .flatMap { Observable.just(backgroundState, gridState) }
             .subscribe { mySceneStateObserver.pushState(it) }
             .connect()
-    }
-
-    private fun calculateBackgroundState(zoom: Float): BackgroundState {
-        val red = if (zoom < 1.0f)
-            (255 * zoom).toInt()
-        else
-            255
-
-        return BackgroundState()
-            .apply { backgroundColor = Color.rgb(red, 255, 255) }
     }
 
     private fun Disposable.connect() {

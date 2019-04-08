@@ -28,7 +28,7 @@ class MainActivity : MvpAppCompatActivity(), MainView {
     fun providePresenter() = Injector.mainComponent!!.providePresenter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        Injector.openMainScope(SceneParams(5000f, 5000f))
+        Injector.openMainScope(SceneParams(5000f, 5000f)) // just for example
             .inject(this)
         super.onCreate(savedInstanceState)
 

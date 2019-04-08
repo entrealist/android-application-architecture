@@ -8,6 +8,9 @@ import android.view.SurfaceHolder
 import com.alexvasilkov.gestures.GestureController
 import com.alexvasilkov.gestures.Settings
 import com.alexvasilkov.gestures.views.interfaces.GestureView
+import com.rosberry.sample.surfaceviewrxed.presentation.main.myscene.Constant.MAX_ZOOM
+import com.rosberry.sample.surfaceviewrxed.presentation.main.myscene.Constant.MIN_ZOOM
+import com.rosberry.sample.surfaceviewrxed.presentation.main.myscene.Constant.OVERZOOM_FACTOR
 
 /**
  * @author mmikhailov on 28/03/2019.
@@ -18,15 +21,19 @@ class GestureSurfaceView @JvmOverloads constructor(
         defStyle: Int = 0
 ) : DrivenSurfaceView(context, attrs, defStyle), SurfaceHolder.Callback, GestureView {
 
-    private val controller = GestureController(this)
-
-    init {
-        controller.settings.apply {
+    private val controller = GestureController(this).apply {
+        settings.apply {
             isZoomEnabled = true
             isRotationEnabled = false
             isDoubleTapEnabled = true
             fitMethod = Settings.Fit.NONE
             boundsType = Settings.Bounds.NONE
+            isExitEnabled = false
+            overzoomFactor = OVERZOOM_FACTOR
+            maxZoom = MAX_ZOOM
+            minZoom = MIN_ZOOM
+            animationsDuration = 150L
+            setImage(1, 1)
         }
     }
 

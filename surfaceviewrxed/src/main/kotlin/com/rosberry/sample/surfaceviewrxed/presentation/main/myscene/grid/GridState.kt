@@ -10,17 +10,18 @@ import com.rosberry.sample.surfaceviewrxed.presentation.system.drawing.LayerStat
  */
 class GridState : State(), LayerState {
 
-    var gridCellSize = 56f
-    var gridThick = 2f
+    private val gridCellSizeNominal = 56f
+
     @ColorInt
     var gridColor = Color.RED
-
+    var gridThick = 2f
+    var gridCellSize = gridCellSizeNominal
 
     override fun update(other: LayerState) {
         if (other is GridState) {
             super.set(other)
 
-            this.gridCellSize = other.gridCellSize
+            this.gridCellSize = gridCellSizeNominal * zoom
             this.gridThick = other.gridThick
             this.gridColor = other.gridColor
         }
