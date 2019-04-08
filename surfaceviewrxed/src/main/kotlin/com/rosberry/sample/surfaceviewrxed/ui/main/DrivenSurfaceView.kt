@@ -1,30 +1,24 @@
 package com.rosberry.sample.surfaceviewrxed.ui.main
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.PixelFormat
 import android.util.AttributeSet
 import android.util.Log
-import android.view.MotionEvent
 import android.view.SurfaceHolder
 import android.view.SurfaceView
-import com.alexvasilkov.gestures.GestureController
-import com.alexvasilkov.gestures.Settings
-import com.alexvasilkov.gestures.views.interfaces.GestureView
 import com.rosberry.sample.surfaceviewrxed.ui.main.system.CanvasHandler
 import io.reactivex.disposables.Disposable
 
 /**
  * @author mmikhailov on 28/03/2019.
  */
-class DrivenSurfaceView @JvmOverloads constructor(
+open class DrivenSurfaceView @JvmOverloads constructor(
         context: Context,
         attrs: AttributeSet? = null,
         defStyle: Int = 0
-) : SurfaceView(context, attrs, defStyle), SurfaceHolder.Callback, GestureView {
+) : SurfaceView(context, attrs, defStyle), SurfaceHolder.Callback {
 
-    private val controller = GestureController(this)
     private var canvasHandler: CanvasHandler? = null
     private var canvasHandlerDisposable: Disposable? = null
     private var thread: SurfaceThread? = null
@@ -34,14 +28,6 @@ class DrivenSurfaceView @JvmOverloads constructor(
         with(holder) {
             addCallback(this@DrivenSurfaceView)
             setFormat(PixelFormat.TRANSLUCENT)
-        }
-
-        controller.settings.apply {
-            isZoomEnabled = true
-            isRotationEnabled = false
-            isDoubleTapEnabled = true
-            fitMethod = Settings.Fit.NONE
-            boundsType = Settings.Bounds.NONE
         }
     }
 
@@ -54,8 +40,6 @@ class DrivenSurfaceView @JvmOverloads constructor(
     override fun surfaceChanged(holder: SurfaceHolder, format: Int, width: Int, height: Int) {
         Log.d("Dbg.SurfaceView", "surfaceChanged::format: $format, w: $width, h: $height")
 
-        controller.settings.setViewport(width, height)
-        controller.updateState()
         thread?.setDraw(true)
     }
 
@@ -63,13 +47,6 @@ class DrivenSurfaceView @JvmOverloads constructor(
         Log.d("Dbg.SurfaceView", "surfaceDestroyed::")
         surfaceCreated = false
         stop()
-    }
-
-    override fun getController() = controller
-
-    @SuppressLint("ClickableViewAccessibility") // Will be handled by gestures controller
-    override fun onTouchEvent(event: MotionEvent): Boolean {
-        return controller.onTouch(this, event)
     }
 
     fun setCanvasHandler(handler: CanvasHandler?) {

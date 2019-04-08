@@ -10,6 +10,7 @@ import com.rosberry.sample.surfaceviewrxed.presentation.main.myscene.grid.GridSt
 import com.rosberry.sample.surfaceviewrxed.presentation.system.drawing.StateObserver
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.disposables.Disposable
 import javax.inject.Inject
 
 /**
@@ -45,7 +46,7 @@ class MainPresenter @Inject constructor(
             .map { GridState().apply { set(it) } }
             .flatMap { Observable.just(calculateBackgroundState(it.zoom), it) }
             .subscribe { mySceneStateObserver.pushState(it) }
-            .let { viewDisposables.add(it) }
+            .connect()
     }
 
     private fun calculateBackgroundState(zoom: Float): BackgroundState {
@@ -56,5 +57,9 @@ class MainPresenter @Inject constructor(
 
         return BackgroundState()
             .apply { backgroundColor = Color.rgb(red, 255, 255) }
+    }
+
+    private fun Disposable.connect() {
+        viewDisposables.add(this)
     }
 }
