@@ -5,13 +5,16 @@ import com.rosberry.sample.surfaceviewrxed.presentation.system.drawing.Layer
 /**
  * @author mmikhailov on 30/03/2019.
  */
-class BackgroundLayer: Layer<BackgroundState>() {
+class BackgroundLayer(
+        maxZoom: Float,
+        minZoom: Float
+): Layer<BackgroundState>() {
 
     init {
         setRenderables(BackgroundRenderable())
     }
 
-    override val state = BackgroundState()
+    override val state = BackgroundState(maxZoom, minZoom)
 
     override fun onStateChange(updated: BackgroundState) {
 

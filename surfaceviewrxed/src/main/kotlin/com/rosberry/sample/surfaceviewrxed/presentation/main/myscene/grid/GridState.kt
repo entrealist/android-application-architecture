@@ -8,7 +8,10 @@ import com.rosberry.sample.surfaceviewrxed.presentation.system.drawing.LayerStat
 /**
  * @author mmikhailov on 31/03/2019.
  */
-class GridState : State(), LayerState {
+class GridState(
+        var boardWidth: Float,
+        var boardHeight: Float
+) : State(), LayerState {
 
     private val gridCellSizeNominal = 56f
 

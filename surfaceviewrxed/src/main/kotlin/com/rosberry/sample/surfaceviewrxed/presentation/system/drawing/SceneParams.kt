@@ -5,5 +5,9 @@ package com.rosberry.sample.surfaceviewrxed.presentation.system.drawing
  */
 data class SceneParams(
         val width: Float,
-        val height: Float
+        val height: Float,
+        val maxZoom: Float,
+        val minZoom: Float,
+        val overzoomFactor: Float,
+        val gestureAnimationDuration: Long
 )

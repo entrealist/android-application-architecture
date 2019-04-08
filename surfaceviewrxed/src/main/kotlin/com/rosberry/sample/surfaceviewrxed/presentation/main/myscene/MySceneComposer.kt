@@ -21,8 +21,8 @@ class MySceneComposer(
         sceneParams: SceneParams
 ) : StateObserver(), CanvasHandler {
 
-    private val backgroundLayer = BackgroundLayer()
-    private val gridLayer = GridLayer()
+    private val backgroundLayer = BackgroundLayer(sceneParams.maxZoom, sceneParams.minZoom)
+    private val gridLayer = GridLayer(sceneParams.width, sceneParams.height)
     private val uiLayer = UiLayer()
 
     override val drawCommands: Observable<Boolean> = states

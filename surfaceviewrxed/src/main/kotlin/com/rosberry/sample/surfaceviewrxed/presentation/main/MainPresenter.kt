@@ -4,6 +4,8 @@ import com.alexvasilkov.gestures.State
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
 import com.rosberry.sample.surfaceviewrxed.di.main.MainSceneQualifier
+import com.rosberry.sample.surfaceviewrxed.presentation.main.myscene.MySceneData.MAX_ZOOM
+import com.rosberry.sample.surfaceviewrxed.presentation.main.myscene.MySceneData.MIN_ZOOM
 import com.rosberry.sample.surfaceviewrxed.presentation.main.myscene.background.BackgroundState
 import com.rosberry.sample.surfaceviewrxed.presentation.main.myscene.grid.GridState
 import com.rosberry.sample.surfaceviewrxed.presentation.system.drawing.StateObserver
@@ -21,8 +23,8 @@ class MainPresenter @Inject constructor(
         private val mySceneStateObserver: StateObserver
 ) : MvpPresenter<MainView>() {
 
-    private val backgroundState = BackgroundState()
-    private val gridState = GridState()
+    private val backgroundState = BackgroundState(MAX_ZOOM, MIN_ZOOM) // todo решить с этими вопрос
+    private val gridState = GridState(5000f, 5000f)
 
     private var viewDisposables = CompositeDisposable()
 

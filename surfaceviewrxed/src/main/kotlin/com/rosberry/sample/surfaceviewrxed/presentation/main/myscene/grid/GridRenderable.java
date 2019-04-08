@@ -30,31 +30,67 @@ public class GridRenderable implements Renderable<GridState> {
         final float drawportX = state.getX();
         final float drawportY = state.getY();
         final float gridCellSize = state.getGridCellSize();
+        final float boardWidthScaled = Math.abs(state.getBoardWidth() * state.getZoom());
+        final float boardHeightScaled = Math.abs(state.getBoardHeight() * state.getZoom());
 
         final int partsPerLine = 4;
         final int columnsBeforeX = (int) (drawportX / gridCellSize);
         final int columnsBeforeY = (int) (drawportY / gridCellSize);
-        final int columnCount = (int) (canvasW / gridCellSize) + Math.abs(columnsBeforeX) + 1;
-        final int rowCount = (int) (canvasH / gridCellSize) + Math.abs(columnsBeforeY) + 1;
+        final int columnCount = (int) (canvasW / gridCellSize) + 2;
+        final int rowCount = (int) (canvasH / gridCellSize) + 2;
         final int linePartsCount = (columnCount + rowCount) * partsPerLine;
 
+        //Log.d("Dbg.GridRenderable", "z:" + state.getZoom() + ", x: " + drawportX + ", y: " + drawportY + ", c: " + columnCount);
         final float[] gridLines = new float[linePartsCount];
+
+        float mostEndLineX = canvasW;
+        float mostEndLineY = canvasH;
+
         // gather columns parts
         for (int i = 0; i < columnCount; i++) {
-            int startIndex = i * partsPerLine;
+            final int startIndex = i * partsPerLine;
+            final float lineX = drawportX + (i - columnsBeforeX) * gridCellSize;
 
-            gridLines[startIndex] = gridLines[startIndex + 2] = drawportX + (i - columnsBeforeX) * gridCellSize; // x of start & stop points
-            gridLines[startIndex + 1] = 0f; // y of start point
-            gridLines[startIndex + 3] = canvasH; // y of stop point
+            // restrict by start side
+            if (lineX < drawportX) continue;
+
+            // restrict by end side
+            final float boardEndSideX = Math.abs(drawportX) + lineX;
+            if (boardEndSideX > boardWidthScaled) {
+                mostEndLineX = gridLines[startIndex - 2];
+                break;
+            }
+
+            gridLines[startIndex] = gridLines[startIndex + 2] = lineX; // x of start & stop points
+            gridLines[startIndex + 1] = drawportY > 0 ? drawportY : 0f; // y of start point
+            gridLines[startIndex + 3] = mostEndLineY; // y of stop point
         }
 
         // gather rows parts
         for (int j = 0; j < rowCount; j++) {
-            int startIndex = (j + columnCount) * partsPerLine;
+            final int startIndex = (j + columnCount) * partsPerLine;
+            final float lineY = drawportY + (j - columnsBeforeY) * gridCellSize;
 
-            gridLines[startIndex] = 0f; // x of start point
-            gridLines[startIndex + 1] = gridLines[startIndex + 3] = drawportY + (j - columnsBeforeY) * gridCellSize; // y of start & end points
-            gridLines[startIndex + 2] = canvasW; // x of end point
+            // restrict by top side
+            if (lineY < drawportY) continue;
+
+            // restrict by bottom side
+            final float boardBottomSideY = Math.abs(drawportY) + lineY;
+            if (boardBottomSideY > boardHeightScaled) {
+                mostEndLineY = gridLines[startIndex - 1];
+                break;
+            }
+
+            gridLines[startIndex] = drawportX > 0 ? drawportX : 0f; // x of start point
+            gridLines[startIndex + 1] = gridLines[startIndex + 3] = lineY; // y of start & end points
+            gridLines[startIndex + 2] = mostEndLineX; // x of end point
+        }
+
+        // apply Y restrictions to column lines, if applicable
+        if (mostEndLineY != canvasH) {
+            for (int k = 0; k < columnCount; k++) {
+                gridLines[k * partsPerLine + 3] = mostEndLineY;
+            }
         }
 
         canvas.drawLines(gridLines, gridPaint);

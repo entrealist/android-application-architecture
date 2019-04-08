@@ -2,23 +2,21 @@ package com.rosberry.sample.surfaceviewrxed.presentation.main.myscene.background
 
 import android.graphics.Color
 import android.support.annotation.ColorInt
-import com.rosberry.sample.surfaceviewrxed.presentation.main.myscene.Constant.MAX_ZOOM
-import com.rosberry.sample.surfaceviewrxed.presentation.main.myscene.Constant.MIN_ZOOM
 import com.rosberry.sample.surfaceviewrxed.presentation.system.drawing.LayerState
 
 /**
  * @author mmikhailov on 31/03/2019.
  */
-class BackgroundState : LayerState {
+class BackgroundState(
+        var maxZoom: Float,
+        var minZoom: Float
+) : LayerState {
 
     @get:ColorInt
     val backgroundColor: Int
         get() = calculateBackground()
 
     var zoom = 1f
-
-    private val maxZoom = MAX_ZOOM
-    private val minZoom = MIN_ZOOM
 
     override fun update(other: LayerState) {
         if (other is BackgroundState) {
