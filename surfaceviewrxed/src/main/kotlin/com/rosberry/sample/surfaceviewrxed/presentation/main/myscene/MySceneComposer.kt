@@ -8,7 +8,6 @@ import com.rosberry.sample.surfaceviewrxed.presentation.main.myscene.grid.GridSt
 import com.rosberry.sample.surfaceviewrxed.presentation.main.myscene.ui.UiLayer
 import com.rosberry.sample.surfaceviewrxed.presentation.main.myscene.ui.UiState
 import com.rosberry.sample.surfaceviewrxed.presentation.system.drawing.LayerState
-import com.rosberry.sample.surfaceviewrxed.presentation.system.drawing.SceneParams
 import com.rosberry.sample.surfaceviewrxed.presentation.system.drawing.StateObserver
 import com.rosberry.sample.surfaceviewrxed.ui.main.system.CanvasHandler
 import io.reactivex.Observable
@@ -17,12 +16,10 @@ import java.util.concurrent.TimeUnit
 /**
  * @author mmikhailov on 28/03/2019.
  */
-class MySceneComposer(
-        sceneParams: SceneParams
-) : StateObserver(), CanvasHandler {
+class MySceneComposer : StateObserver(), CanvasHandler {
 
-    private val backgroundLayer = BackgroundLayer(sceneParams.maxZoom, sceneParams.minZoom)
-    private val gridLayer = GridLayer(sceneParams.width, sceneParams.height)
+    private val backgroundLayer = BackgroundLayer()
+    private val gridLayer = GridLayer()
     private val uiLayer = UiLayer()
 
     override val drawCommands: Observable<Boolean> = states

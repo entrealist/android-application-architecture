@@ -2,6 +2,7 @@ package com.rosberry.sample.surfaceviewrxed.presentation.main.myscene.grid;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.util.Log;
 
 import com.rosberry.sample.surfaceviewrxed.presentation.system.drawing.Renderable;
 
@@ -40,7 +41,7 @@ public class GridRenderable implements Renderable<GridState> {
         final int rowCount = (int) (canvasH / gridCellSize) + 2;
         final int linePartsCount = (columnCount + rowCount) * partsPerLine;
 
-        //Log.d("Dbg.GridRenderable", "z:" + state.getZoom() + ", x: " + drawportX + ", y: " + drawportY + ", c: " + columnCount);
+        Log.d("Dbg.GridRenderable", "z:" + state.getZoom() + ", x: " + drawportX + ", y: " + drawportY + ", c: " + columnCount);
         final float[] gridLines = new float[linePartsCount];
 
         float mostEndLineX = canvasW;

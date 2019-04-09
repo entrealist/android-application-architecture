@@ -4,7 +4,6 @@ import android.content.Context
 import com.rosberry.sample.surfaceviewrxed.di.app.ApplicationComponent
 import com.rosberry.sample.surfaceviewrxed.di.app.DaggerApplicationComponent
 import com.rosberry.sample.surfaceviewrxed.di.main.MainComponent
-import com.rosberry.sample.surfaceviewrxed.presentation.system.drawing.SceneParams
 
 /**
  * @author mmikhailov on 28/03/2019.
@@ -24,11 +23,9 @@ object Injector {
         return appComponent
     }
 
-    fun openMainScope(sceneParams: SceneParams): MainComponent {
+    fun openMainScope(): MainComponent {
         return mainComponent
             ?: appComponent.plusMainComponent()
-                .sceneParams(sceneParams)
-                .build()
                 .also { mainComponent = it }
     }
 

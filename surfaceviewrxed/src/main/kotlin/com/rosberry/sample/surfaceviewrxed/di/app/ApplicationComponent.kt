@@ -22,6 +22,6 @@ interface ApplicationComponent {
         fun build(): ApplicationComponent
     }
 
-    fun plusMainComponent(): MainComponent.Builder
+    fun plusMainComponent(): MainComponent
 
 }

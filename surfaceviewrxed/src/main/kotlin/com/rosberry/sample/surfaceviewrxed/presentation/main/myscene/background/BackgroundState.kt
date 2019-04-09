@@ -7,20 +7,21 @@ import com.rosberry.sample.surfaceviewrxed.presentation.system.drawing.LayerStat
 /**
  * @author mmikhailov on 31/03/2019.
  */
-class BackgroundState(
-        var maxZoom: Float,
-        var minZoom: Float
-) : LayerState {
+class BackgroundState: LayerState {
 
     @get:ColorInt
     val backgroundColor: Int
         get() = calculateBackground()
 
-    var zoom = 1f
+    var maxZoom = 0f
+    var minZoom = 0f
+    var curZoom = 1f
 
     override fun update(other: LayerState) {
         if (other is BackgroundState) {
-            this.zoom = other.zoom
+            this.curZoom = other.curZoom
+            this.maxZoom = other.maxZoom
+            this.minZoom = other.minZoom
         }
     }
 
@@ -30,13 +31,13 @@ class BackgroundState(
         var blue = 255
 
         when {
-            zoom < minZoom -> {
-                val coefficient = 1 - (minZoom - zoom)
+            curZoom < minZoom -> {
+                val coefficient = 1 - (minZoom - curZoom)
                 red = (red * coefficient).toInt()
                 blue = (blue * coefficient).toInt()
             }
-            zoom > maxZoom -> {
-                val coefficient = maxZoom / zoom
+            curZoom > maxZoom -> {
+                val coefficient = maxZoom / curZoom
                 green = (green * coefficient).toInt()
                 blue = (blue * coefficient).toInt()
             }

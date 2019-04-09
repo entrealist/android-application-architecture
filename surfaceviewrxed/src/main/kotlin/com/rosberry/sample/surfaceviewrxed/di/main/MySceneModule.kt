@@ -1,7 +1,6 @@
 package com.rosberry.sample.surfaceviewrxed.di.main
 
 import com.rosberry.sample.surfaceviewrxed.presentation.main.myscene.MySceneComposer
-import com.rosberry.sample.surfaceviewrxed.presentation.system.drawing.SceneParams
 import com.rosberry.sample.surfaceviewrxed.presentation.system.drawing.StateObserver
 import com.rosberry.sample.surfaceviewrxed.ui.main.system.CanvasHandler
 import dagger.Module
@@ -11,13 +10,13 @@ import dagger.Provides
  * @author mmikhailov on 28/03/2019.
  */
 @Module
-class MainModule {
+class MySceneModule {
 
     @MainScope
     @Provides
     @MainSceneQualifier
-    fun provideMySceneRenderer(sceneParams: SceneParams): CanvasHandler {
-        return MySceneComposer(sceneParams)
+    fun provideMySceneRenderer(): CanvasHandler {
+        return MySceneComposer()
     }
 
     @MainScope

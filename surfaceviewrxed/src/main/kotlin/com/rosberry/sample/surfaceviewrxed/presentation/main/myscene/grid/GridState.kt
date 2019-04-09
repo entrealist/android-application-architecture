@@ -1,6 +1,5 @@
 package com.rosberry.sample.surfaceviewrxed.presentation.main.myscene.grid
 
-import android.graphics.Color
 import android.support.annotation.ColorInt
 import com.alexvasilkov.gestures.State
 import com.rosberry.sample.surfaceviewrxed.presentation.system.drawing.LayerState
@@ -8,25 +7,27 @@ import com.rosberry.sample.surfaceviewrxed.presentation.system.drawing.LayerStat
 /**
  * @author mmikhailov on 31/03/2019.
  */
-class GridState(
-        var boardWidth: Float,
-        var boardHeight: Float
-) : State(), LayerState {
+class GridState : State(), LayerState {
 
-    private val gridCellSizeNominal = 56f
-
+    var boardWidth: Float = 0f
+    var boardHeight: Float = 0f
+    var gridCellSizeNominal: Float = 0f
     @ColorInt
-    var gridColor = Color.RED
-    var gridThick = 2f
-    var gridCellSize = gridCellSizeNominal
+    var gridColor = 0
+    var gridThick = 0f
+
+    val gridCellSize: Float
+        get() = gridCellSizeNominal * zoom
 
     override fun update(other: LayerState) {
         if (other is GridState) {
             super.set(other)
 
-            this.gridCellSize = gridCellSizeNominal * zoom
-            this.gridThick = other.gridThick
+            this.boardWidth = other.boardWidth
+            this.boardHeight = other.boardHeight
+            this.gridCellSizeNominal = other.gridCellSizeNominal
             this.gridColor = other.gridColor
+            this.gridThick = other.gridThick
         }
     }
 }
