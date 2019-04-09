@@ -2,7 +2,6 @@ package com.rosberry.sample.surfaceviewrxed.presentation.main.myscene.grid;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.util.Log;
 
 import com.rosberry.sample.surfaceviewrxed.presentation.system.drawing.Renderable;
 
@@ -31,17 +30,17 @@ public class GridRenderable implements Renderable<GridState> {
         final float drawportX = state.getX();
         final float drawportY = state.getY();
         final float gridCellSize = state.getGridCellSize();
-        final float boardWidthScaled = Math.abs(state.getBoardWidth() * state.getZoom());
-        final float boardHeightScaled = Math.abs(state.getBoardHeight() * state.getZoom());
+        final float boardWidthScaled = state.getBoardWidth() * state.getZoom();
+        final float boardHeightScaled = state.getBoardHeight() * state.getZoom();
 
         final int partsPerLine = 4;
         final int columnsBeforeX = (int) (drawportX / gridCellSize);
         final int columnsBeforeY = (int) (drawportY / gridCellSize);
-        final int columnCount = (int) (canvasW / gridCellSize) + 2;
-        final int rowCount = (int) (canvasH / gridCellSize) + 2;
+        final int columnCount = (int) (canvasW / gridCellSize + 3); // s zapasom
+        final int rowCount = (int) (canvasH / gridCellSize) + 3;
         final int linePartsCount = (columnCount + rowCount) * partsPerLine;
 
-        Log.d("Dbg.GridRenderable", "z:" + state.getZoom() + ", x: " + drawportX + ", y: " + drawportY + ", c: " + columnCount);
+        //Log.d("Dbg.GridRenderable", "z:" + state.getZoom() + ", x: " + drawportX + ", y: " + drawportY + ", c: " + columnCount);
         final float[] gridLines = new float[linePartsCount];
 
         float mostEndLineX = canvasW;
@@ -56,8 +55,8 @@ public class GridRenderable implements Renderable<GridState> {
             if (lineX < drawportX) continue;
 
             // restrict by end side
-            final float boardEndSideX = Math.abs(drawportX) + lineX;
-            if (boardEndSideX > boardWidthScaled) {
+            final float currentEndX = -drawportX + lineX;
+            if (currentEndX >= boardWidthScaled) {
                 mostEndLineX = gridLines[startIndex - 2];
                 break;
             }
@@ -76,8 +75,8 @@ public class GridRenderable implements Renderable<GridState> {
             if (lineY < drawportY) continue;
 
             // restrict by bottom side
-            final float boardBottomSideY = Math.abs(drawportY) + lineY;
-            if (boardBottomSideY > boardHeightScaled) {
+            final float currentBottomY = -drawportY + lineY;
+            if (currentBottomY >= boardHeightScaled) {
                 mostEndLineY = gridLines[startIndex - 1];
                 break;
             }
@@ -90,7 +89,13 @@ public class GridRenderable implements Renderable<GridState> {
         // apply Y restrictions to column lines, if applicable
         if (mostEndLineY != canvasH) {
             for (int k = 0; k < columnCount; k++) {
-                gridLines[k * partsPerLine + 3] = mostEndLineY;
+                if (gridLines[k * partsPerLine]
+                        + gridLines[k * partsPerLine + 1]
+                        + gridLines[k * partsPerLine + 2]
+                        + gridLines[k * partsPerLine + 3] != 0) {
+
+                    gridLines[k * partsPerLine + 3] = mostEndLineY;
+                }
             }
         }
 

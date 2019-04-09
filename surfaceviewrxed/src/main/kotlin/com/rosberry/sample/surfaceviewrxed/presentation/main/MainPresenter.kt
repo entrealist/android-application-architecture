@@ -3,6 +3,8 @@ package com.rosberry.sample.surfaceviewrxed.presentation.main
 import com.alexvasilkov.gestures.State
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
+import com.rosberry.sample.surfaceviewrxed.R
+import com.rosberry.sample.surfaceviewrxed.data.ResourceManager
 import com.rosberry.sample.surfaceviewrxed.data.myscene.MySceneData
 import com.rosberry.sample.surfaceviewrxed.di.main.MainSceneQualifier
 import com.rosberry.sample.surfaceviewrxed.presentation.main.myscene.background.BackgroundState
@@ -19,7 +21,8 @@ import javax.inject.Inject
 @InjectViewState
 class MainPresenter @Inject constructor(
         @MainSceneQualifier
-        private val mySceneStateObserver: StateObserver
+        private val mySceneStateObserver: StateObserver,
+        private val resourceManager: ResourceManager
 ) : MvpPresenter<MainView>() {
 
     private val backgroundState = BackgroundState()
@@ -71,7 +74,7 @@ class MainPresenter @Inject constructor(
             boardWidth = sceneParams.width
             boardHeight = sceneParams.height
             gridCellSizeNominal = sceneParams.gridParams.gridCellSizeNominal
-            gridColor = sceneParams.gridParams.gridColor
+            gridColor = resourceManager.getColor(R.color.colorPrimaryDark)
             gridThick = sceneParams.gridParams.gridThick
         }
 
