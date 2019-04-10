@@ -33,12 +33,12 @@ class BackgroundState: LayerState {
         when {
             curZoom < minZoom -> {
                 val coefficient = 1 - (minZoom - curZoom)
-                red = (red * coefficient).toInt()
+                green = (green * coefficient).toInt()
                 blue = (blue * coefficient).toInt()
             }
             curZoom > maxZoom -> {
                 val coefficient = maxZoom / curZoom
-                green = (green * coefficient).toInt()
+                red = (red * coefficient).toInt()
                 blue = (blue * coefficient).toInt()
             }
         }

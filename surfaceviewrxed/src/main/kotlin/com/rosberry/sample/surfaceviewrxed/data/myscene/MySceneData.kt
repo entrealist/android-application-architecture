@@ -9,18 +9,22 @@ import com.rosberry.sample.surfaceviewrxed.presentation.system.drawing.ScenePara
  */
 object MySceneData {
 
-    private const val BOARD_WIDTH = 300f
-    private const val BOARD_HEIGHT = 500f
-    private const val MIN_ZOOM = 0.5f
-    private const val MAX_ZOOM = 6.0f
-    private const val OVERZOOM_FACTOR = 2.0f
-    private const val GESTURE_ANIMATION_DURATION = 150L
-    private const val GRID_CELL_SIZE_NOMINAL = 56f
+    private const val GRID_ROWS = 50
+    private const val GRID_COLUMNS = 30
+    private const val GRID_CELL_HEIGHT_NOMINAL = 56f
+    private const val GRID_CELL_WIDTH_NOMINAL = GRID_CELL_HEIGHT_NOMINAL * 0.67f
+    private const val BOARD_HEIGHT = GRID_CELL_HEIGHT_NOMINAL * GRID_ROWS
+    private const val BOARD_WIDTH = GRID_CELL_WIDTH_NOMINAL * GRID_COLUMNS
     private const val GRID_COLOR = Color.RED
     private const val GRID_THICK = 2f
+    private const val MIN_ZOOM = 1f
+    private const val MAX_ZOOM = 8f
+    private const val OVERZOOM_FACTOR = 2f
+    private const val GESTURE_ANIMATION_DURATION = 150L
 
     private val gridParams = GridParams(
-            GRID_CELL_SIZE_NOMINAL,
+            GRID_CELL_WIDTH_NOMINAL,
+            GRID_CELL_HEIGHT_NOMINAL,
             GRID_COLOR,
             GRID_THICK
     )

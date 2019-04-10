@@ -1,5 +1,7 @@
 package com.rosberry.sample.surfaceviewrxed.presentation.main
 
+import android.graphics.PointF
+import android.view.MotionEvent
 import com.alexvasilkov.gestures.State
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
@@ -9,6 +11,7 @@ import com.rosberry.sample.surfaceviewrxed.data.myscene.MySceneData
 import com.rosberry.sample.surfaceviewrxed.di.main.MainSceneQualifier
 import com.rosberry.sample.surfaceviewrxed.presentation.main.myscene.background.BackgroundState
 import com.rosberry.sample.surfaceviewrxed.presentation.main.myscene.grid.GridState
+import com.rosberry.sample.surfaceviewrxed.presentation.system.drawing.SceneParams
 import com.rosberry.sample.surfaceviewrxed.presentation.system.drawing.StateObserver
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
@@ -25,10 +28,12 @@ class MainPresenter @Inject constructor(
         private val resourceManager: ResourceManager
 ) : MvpPresenter<MainView>() {
 
+    private val viewDisposables = CompositeDisposable()
     private val backgroundState = BackgroundState()
     private val gridState = GridState()
 
-    private var viewDisposables = CompositeDisposable()
+    private lateinit var sceneParams: SceneParams
+    private lateinit var viewportCenter: PointF
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
@@ -39,7 +44,11 @@ class MainPresenter @Inject constructor(
     override fun attachView(view: MainView?) {
         super.attachView(view)
 
-        viewState.registerSurfaceStates()
+        viewState.registerSurfaceEvents(
+                { onSurfaceStatesObs(it) },
+                { onSurfaceTapsObs(it) },
+                { onViewportCenter(it) }
+        )
     }
 
     override fun detachView(view: MainView?) {
@@ -53,7 +62,11 @@ class MainPresenter @Inject constructor(
         viewState.closeScope()
     }
 
-    fun setSurfaceStatesObs(states: Observable<State>) {
+    private fun onViewportCenter(viewportCenter: PointF) {
+        this.viewportCenter = viewportCenter
+    }
+
+    private fun onSurfaceStatesObs(states: Observable<State>) {
         states
             .doOnNext { gridState.apply { set(it) } }
             .doOnNext { backgroundState.apply { curZoom = it.zoom } }
@@ -62,8 +75,14 @@ class MainPresenter @Inject constructor(
             .connect()
     }
 
+    private fun onSurfaceTapsObs(taps: Observable<MotionEvent>) {
+        taps
+            .subscribe { zoom(it.x, it.y) }
+            .connect()
+    }
+
     private fun setupSceneParams() {
-        val sceneParams = MySceneData.sceneParams
+        sceneParams = MySceneData.sceneParams
 
         backgroundState.apply {
             maxZoom = sceneParams.maxZoom
@@ -71,14 +90,20 @@ class MainPresenter @Inject constructor(
         }
 
         gridState.apply {
-            boardWidth = sceneParams.width
-            boardHeight = sceneParams.height
-            gridCellSizeNominal = sceneParams.gridParams.gridCellSizeNominal
+            boardWidthNominal = sceneParams.width
+            boardHeightNominal = sceneParams.height
+            gridCellWidthNominal = sceneParams.gridParams.width
+            gridCellHeightNominal = sceneParams.gridParams.height
+            gridThickNominal = sceneParams.gridParams.thick
             gridColor = resourceManager.getColor(R.color.colorPrimaryDark)
-            gridThick = sceneParams.gridParams.gridThick
         }
 
         viewState.setSceneParams(sceneParams)
+    }
+
+    private fun zoom(x: Float, y: Float) {
+        gridState.zoomToCell(viewportCenter.x, viewportCenter.y, x, y , sceneParams.maxZoom)
+        viewState.animateStateTo(gridState)
     }
 
     private fun Disposable.connect() {

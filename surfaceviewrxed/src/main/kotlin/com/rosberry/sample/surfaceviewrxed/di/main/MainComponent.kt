@@ -1,6 +1,5 @@
 package com.rosberry.sample.surfaceviewrxed.di.main
 
-import com.rosberry.sample.surfaceviewrxed.presentation.main.MainPresenter
 import com.rosberry.sample.surfaceviewrxed.ui.main.MainActivity
 import dagger.Subcomponent
 
@@ -12,5 +11,4 @@ import dagger.Subcomponent
 interface MainComponent {
 
     fun inject(target: MainActivity)
-    fun providePresenter(): MainPresenter
 }

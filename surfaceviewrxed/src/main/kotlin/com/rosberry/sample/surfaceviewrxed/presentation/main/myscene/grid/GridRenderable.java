@@ -27,20 +27,21 @@ public class GridRenderable implements Renderable<GridState> {
 
         final float canvasW = canvas.getWidth();
         final float canvasH = canvas.getHeight();
-        final float drawportX = state.getX();
-        final float drawportY = state.getY();
-        final float gridCellSize = state.getGridCellSize();
-        final float boardWidthScaled = state.getBoardWidth() * state.getZoom();
-        final float boardHeightScaled = state.getBoardHeight() * state.getZoom();
+        final float boardWidth = state.getBoardWidth();
+        final float boardHeight = state.getBoardHeight();
+        final float gridCellWidth = state.getCellWidth();
+        final float gridCellHeight = state.getCellHeight();
+        final float boardStartX = state.getX();
+        final float boardStartY = state.getY();
 
         final int partsPerLine = 4;
-        final int columnsBeforeX = (int) (drawportX / gridCellSize);
-        final int columnsBeforeY = (int) (drawportY / gridCellSize);
-        final int columnCount = (int) (canvasW / gridCellSize + 3); // s zapasom
-        final int rowCount = (int) (canvasH / gridCellSize) + 3;
+        final int columnsBeforeX = (int) (boardStartX / gridCellWidth);
+        final int columnsBeforeY = (int) (boardStartY / gridCellHeight);
+        final int columnCount = (int) (canvasW / gridCellWidth + 3); // s zapasom
+        final int rowCount = (int) (canvasH / gridCellHeight) + 3;
         final int linePartsCount = (columnCount + rowCount) * partsPerLine;
 
-        //Log.d("Dbg.GridRenderable", "z:" + state.getZoom() + ", x: " + drawportX + ", y: " + drawportY + ", c: " + columnCount);
+        //Log.d("Dbg.GridRenderable", "z:" + state.getZoom() + ", x: " + boardStartX + ", y: " + boardStartY + ", c: " + columnCount);
         final float[] gridLines = new float[linePartsCount];
 
         float mostEndLineX = canvasW;
@@ -49,39 +50,41 @@ public class GridRenderable implements Renderable<GridState> {
         // gather columns parts
         for (int i = 0; i < columnCount; i++) {
             final int startIndex = i * partsPerLine;
-            final float lineX = drawportX + (i - columnsBeforeX) * gridCellSize;
+            final float lineX = boardStartX + (i - columnsBeforeX) * gridCellWidth;
 
             // restrict by start side
-            if (lineX < drawportX) continue;
+            if (lineX < boardStartX) continue;
 
             // restrict by end side
-            final float currentEndX = -drawportX + lineX;
-            if (currentEndX >= boardWidthScaled) {
+            final float currentEndX = -boardStartX + lineX;
+            if (currentEndX > boardWidth + 0.001f) { // suffering from float accuracy...
                 mostEndLineX = gridLines[startIndex - 2];
                 break;
             }
 
+            // save column parts
             gridLines[startIndex] = gridLines[startIndex + 2] = lineX; // x of start & stop points
-            gridLines[startIndex + 1] = drawportY > 0 ? drawportY : 0f; // y of start point
+            gridLines[startIndex + 1] = boardStartY > 0 ? boardStartY : 0f; // y of start point
             gridLines[startIndex + 3] = mostEndLineY; // y of stop point
         }
 
         // gather rows parts
         for (int j = 0; j < rowCount; j++) {
             final int startIndex = (j + columnCount) * partsPerLine;
-            final float lineY = drawportY + (j - columnsBeforeY) * gridCellSize;
+            final float lineY = boardStartY + (j - columnsBeforeY) * gridCellHeight;
 
             // restrict by top side
-            if (lineY < drawportY) continue;
+            if (lineY < boardStartY) continue;
 
             // restrict by bottom side
-            final float currentBottomY = -drawportY + lineY;
-            if (currentBottomY >= boardHeightScaled) {
+            final float currentBottomY = -boardStartY + lineY;
+            if (currentBottomY > boardHeight + 0.001f) {
                 mostEndLineY = gridLines[startIndex - 1];
                 break;
             }
 
-            gridLines[startIndex] = drawportX > 0 ? drawportX : 0f; // x of start point
+            // save row parts
+            gridLines[startIndex] = boardStartX > 0 ? boardStartX : 0f; // x of start point
             gridLines[startIndex + 1] = gridLines[startIndex + 3] = lineY; // y of start & end points
             gridLines[startIndex + 2] = mostEndLineX; // x of end point
         }

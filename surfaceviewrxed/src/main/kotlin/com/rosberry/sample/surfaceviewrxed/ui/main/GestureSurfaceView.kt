@@ -7,6 +7,7 @@ import android.view.MotionEvent
 import android.view.SurfaceHolder
 import com.alexvasilkov.gestures.GestureController
 import com.alexvasilkov.gestures.Settings
+import com.alexvasilkov.gestures.State
 import com.alexvasilkov.gestures.views.interfaces.GestureView
 import com.rosberry.sample.surfaceviewrxed.presentation.system.drawing.SceneParams
 
@@ -55,5 +56,9 @@ class GestureSurfaceView @JvmOverloads constructor(
         }
 
         controller.updateState()
+    }
+
+    fun animateStateTo(state: State) {
+        controller.animateStateTo(state)
     }
 }

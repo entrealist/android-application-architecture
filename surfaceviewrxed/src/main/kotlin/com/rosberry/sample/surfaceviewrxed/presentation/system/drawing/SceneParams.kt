@@ -6,18 +6,19 @@ import android.support.annotation.ColorInt
  * @author mmikhailov on 30/03/2019.
  */
 data class SceneParams(
-        val width: Float,
-        val height: Float,
-        val maxZoom: Float,
-        val minZoom: Float,
-        val overzoomFactor: Float,
-        val gestureAnimationDuration: Long,
-        val gridParams: GridParams
+        var width: Float,
+        var height: Float,
+        var maxZoom: Float,
+        var minZoom: Float,
+        var overzoomFactor: Float,
+        var gestureAnimationDuration: Long,
+        var gridParams: GridParams
 )
 
 data class GridParams(
-        val gridCellSizeNominal: Float,
+        var width: Float,
+        var height: Float,
         @ColorInt
-        val gridColor: Int,
-        val gridThick: Float
+        var color: Int,
+        var thick: Float
 )
