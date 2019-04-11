@@ -22,6 +22,8 @@ class MySceneComposer : StateObserver(), CanvasHandler {
     private val gridLayer = GridLayer()
     private val uiLayer = UiLayer()
 
+    private val lock = Any()
+
     override val drawCommands: Observable<Boolean> = states
         .map { true } // we want to draw because of new state
         .timeout( // we don't want draw when there aren't new states within timeout
@@ -37,16 +39,20 @@ class MySceneComposer : StateObserver(), CanvasHandler {
      * Let draw the background first (0), then grid (1) and then UI (2)
      */
     override fun onCanvas(canvas: Canvas) {
-        backgroundLayer.draw(canvas)
-        gridLayer.draw(canvas)
-        uiLayer.draw(canvas)
+        synchronized(lock) {
+            backgroundLayer.draw(canvas)
+            gridLayer.draw(canvas)
+            uiLayer.draw(canvas)
+        }
     }
 
     override fun acceptState(state: LayerState) {
-        when (state) {
-            is BackgroundState -> backgroundLayer.changeState(state)
-            is GridState -> gridLayer.changeState(state)
-            is UiState -> uiLayer.changeState(state)
+        synchronized(lock) {
+            when (state) {
+                is BackgroundState -> backgroundLayer.changeState(state)
+                is GridState -> gridLayer.changeState(state)
+                is UiState -> uiLayer.changeState(state)
+            }
         }
     }
 }

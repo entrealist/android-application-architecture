@@ -11,17 +11,17 @@ object MySceneData {
 
     private const val GRID_ROWS = 50
     private const val GRID_COLUMNS = 30
-    private const val GRID_CELL_HEIGHT_NOMINAL = 56f
+    private const val GRID_CELL_HEIGHT_NOMINAL = 80f
     private const val GRID_CELL_WIDTH_NOMINAL = GRID_CELL_HEIGHT_NOMINAL * 0.67f
     private const val BOARD_HEIGHT = GRID_CELL_HEIGHT_NOMINAL * GRID_ROWS
     private const val BOARD_WIDTH = GRID_CELL_WIDTH_NOMINAL * GRID_COLUMNS
     private const val GRID_COLOR = Color.RED
     private const val GRID_THICK = 2f
     private const val MIN_ZOOM = 1f
-    private const val MAX_ZOOM = 8f
+    private const val MAX_ZOOM = 4f
     private const val OVERZOOM_FACTOR = 2f
     private const val GESTURE_ANIMATION_DURATION = 150L
-    private const val GRID_TEXT_SIZE_NOMINAL = 32f
+    private const val GRID_TEXT_SIZE_NOMINAL = GRID_CELL_WIDTH_NOMINAL
     private const val GRID_TEXT_COLOR = Color.BLACK
 
     private val gridParams = GridParams(
