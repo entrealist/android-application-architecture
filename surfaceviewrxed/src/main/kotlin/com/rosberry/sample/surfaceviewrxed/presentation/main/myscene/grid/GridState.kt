@@ -15,9 +15,16 @@ class GridState : State(), LayerState {
     var gridCellWidthNominal: Float = 0f
     var gridCellHeightNominal: Float = 0f
     var gridThickNominal: Float = 0f
+    var textSizeNominal: Float = 0f
 
     @ColorInt
     var gridColor = 0
+
+    @ColorInt
+    var textColor = 0
+
+    val textSize: Float
+        get() = textSizeNominal * zoom
 
     val gridThick: Int
         get() = (gridThickNominal * zoom / 2).toInt()
@@ -34,6 +41,14 @@ class GridState : State(), LayerState {
     val cellHeight: Float
         get() = gridCellHeightNominal * zoom
 
+    val columns: Int
+        get() = (boardWidthNominal / gridCellWidthNominal).toInt()
+
+    val rows: Int
+        get() = (boardHeightNominal / gridCellHeightNominal).toInt()
+
+    val numbers = mutableSetOf<Triple<String, Int, Int>>()
+
     override fun update(other: LayerState) {
         if (other is GridState) {
             super.set(other)
@@ -44,6 +59,43 @@ class GridState : State(), LayerState {
             this.gridCellHeightNominal = other.gridCellHeightNominal
             this.gridColor = other.gridColor
             this.gridThickNominal = other.gridThickNominal
+            this.numbers.addAll(other.numbers)
+            this.textColor = other.textColor
+            this.textSizeNominal = other.textSizeNominal
+        }
+    }
+
+    fun addNumber(screenX: Float, screenY: Float) {
+        val startBorder = x
+        val topBorder = y
+        val endBorder = x + boardWidth
+        val bottomBorder = y + boardHeight
+
+        if (screenX in startBorder..endBorder
+                && screenY in topBorder..bottomBorder) {
+
+            var column = 0
+            var row = 0
+
+            for (i in 0..columns) {
+                val curBorder = startBorder + cellWidth * (i + 1)
+                if (screenX <= curBorder) {
+                    column = i
+                    break
+                }
+            }
+
+            for (i in 0..rows) {
+                val curBorder = topBorder + cellHeight * (i + 1)
+                if (screenY <= curBorder) {
+                    row = i
+                    break
+                }
+            }
+
+            //Log.d("Dbg.AddNumber", "column: $column, row: $row")
+
+            numbers.add(Triple("$column:$row",column , row))
         }
     }
 
@@ -60,7 +112,7 @@ class GridState : State(), LayerState {
             var cellY = 0f
 
             var cellBorderX = startBorder + cellWidth
-            while (cellBorderX <= endBorder + 0.001) {
+            while (cellBorderX <= endBorder + 0.1) {
                 if (screenX <= cellBorderX) {
                     cellX = cellBorderX - cellWidth / 2
                     break
@@ -70,7 +122,7 @@ class GridState : State(), LayerState {
             }
 
             var cellBorderY = topBorder + cellHeight
-            while (cellBorderY <= bottomBorder + 0.001) {
+            while (cellBorderY <= bottomBorder + 0.1) {
                 if (screenY <= cellBorderY) {
                     cellY = cellBorderY - cellHeight / 2
                     break

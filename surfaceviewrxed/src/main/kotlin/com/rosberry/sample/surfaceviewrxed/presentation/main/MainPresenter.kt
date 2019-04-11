@@ -77,7 +77,9 @@ class MainPresenter @Inject constructor(
 
     private fun onSurfaceTapsObs(taps: Observable<MotionEvent>) {
         taps
-            .subscribe { zoom(it.x, it.y) }
+            .doOnNext { gridState.addNumber(it.x, it.y) }
+            .doOnNext { zoomGrid(it.x, it.y) }
+            .subscribe()
             .connect()
     }
 
@@ -95,13 +97,15 @@ class MainPresenter @Inject constructor(
             gridCellWidthNominal = sceneParams.gridParams.width
             gridCellHeightNominal = sceneParams.gridParams.height
             gridThickNominal = sceneParams.gridParams.thick
+            textSizeNominal = sceneParams.gridParams.textSize
+            textColor = resourceManager.getColor(R.color.colorPrimaryDark)
             gridColor = resourceManager.getColor(R.color.colorPrimaryDark)
         }
 
         viewState.setSceneParams(sceneParams)
     }
 
-    private fun zoom(x: Float, y: Float) {
+    private fun zoomGrid(x: Float, y: Float) {
         gridState.zoomToCell(viewportCenter.x, viewportCenter.y, x, y , sceneParams.maxZoom)
         viewState.animateStateTo(gridState)
     }

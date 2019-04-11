@@ -21,12 +21,16 @@ object MySceneData {
     private const val MAX_ZOOM = 8f
     private const val OVERZOOM_FACTOR = 2f
     private const val GESTURE_ANIMATION_DURATION = 150L
+    private const val GRID_TEXT_SIZE_NOMINAL = 32f
+    private const val GRID_TEXT_COLOR = Color.BLACK
 
     private val gridParams = GridParams(
             GRID_CELL_WIDTH_NOMINAL,
             GRID_CELL_HEIGHT_NOMINAL,
             GRID_COLOR,
-            GRID_THICK
+            GRID_THICK,
+            GRID_TEXT_SIZE_NOMINAL,
+            GRID_TEXT_COLOR
     )
 
     val sceneParams = SceneParams(

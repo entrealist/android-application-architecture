@@ -20,5 +20,7 @@ data class GridParams(
         var height: Float,
         @ColorInt
         var color: Int,
-        var thick: Float
+        var thick: Float,
+        var textSize: Float,
+        var textColor: Int
 )
