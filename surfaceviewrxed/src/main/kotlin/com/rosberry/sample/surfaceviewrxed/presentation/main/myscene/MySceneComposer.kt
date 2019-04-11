@@ -5,8 +5,6 @@ import com.rosberry.sample.surfaceviewrxed.presentation.main.myscene.background.
 import com.rosberry.sample.surfaceviewrxed.presentation.main.myscene.background.BackgroundState
 import com.rosberry.sample.surfaceviewrxed.presentation.main.myscene.grid.GridLayer
 import com.rosberry.sample.surfaceviewrxed.presentation.main.myscene.grid.GridState
-import com.rosberry.sample.surfaceviewrxed.presentation.main.myscene.ui.UiLayer
-import com.rosberry.sample.surfaceviewrxed.presentation.main.myscene.ui.UiState
 import com.rosberry.sample.surfaceviewrxed.presentation.system.drawing.LayerState
 import com.rosberry.sample.surfaceviewrxed.presentation.system.drawing.StateObserver
 import com.rosberry.sample.surfaceviewrxed.ui.main.system.CanvasHandler
@@ -20,7 +18,6 @@ class MySceneComposer : StateObserver(), CanvasHandler {
 
     private val backgroundLayer = BackgroundLayer()
     private val gridLayer = GridLayer()
-    private val uiLayer = UiLayer()
 
     private val lock = Any()
 
@@ -36,13 +33,13 @@ class MySceneComposer : StateObserver(), CanvasHandler {
     /**
      * Called when canvas is ready for drawing
      *
-     * Let draw the background first (0), then grid (1) and then UI (2)
+     * Order is vital.
+     * Let draw the background first (0), then grid (1)
      */
     override fun onCanvas(canvas: Canvas) {
         synchronized(lock) {
             backgroundLayer.draw(canvas)
             gridLayer.draw(canvas)
-            uiLayer.draw(canvas)
         }
     }
 
@@ -51,7 +48,6 @@ class MySceneComposer : StateObserver(), CanvasHandler {
             when (state) {
                 is BackgroundState -> backgroundLayer.changeState(state)
                 is GridState -> gridLayer.changeState(state)
-                is UiState -> uiLayer.changeState(state)
             }
         }
     }

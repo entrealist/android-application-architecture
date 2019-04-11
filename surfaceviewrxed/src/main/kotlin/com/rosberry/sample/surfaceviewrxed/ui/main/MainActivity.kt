@@ -2,6 +2,8 @@ package com.rosberry.sample.surfaceviewrxed.ui.main
 
 import android.graphics.PointF
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.view.MotionEvent
 import com.alexvasilkov.gestures.State
 import com.arellomobile.mvp.MvpAppCompatActivity
@@ -41,6 +43,21 @@ class MainActivity : MvpAppCompatActivity(), MainView {
 
         setContentView(R.layout.activity_main)
         surfaceView.setCanvasHandler(canvasHandler)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.m_main, menu)
+
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return if (item.itemId == R.id.themeToggle) {
+            presenter.clickToggleTheme()
+            true
+        } else {
+            super.onOptionsItemSelected(item)
+        }
     }
 
     override fun registerSurfaceEvents(statesDeck: (Observable<State>) -> Unit,

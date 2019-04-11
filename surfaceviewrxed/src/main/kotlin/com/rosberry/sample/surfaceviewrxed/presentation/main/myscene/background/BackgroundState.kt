@@ -9,26 +9,30 @@ import com.rosberry.sample.surfaceviewrxed.presentation.system.drawing.LayerStat
  */
 class BackgroundState: LayerState {
 
+    @ColorInt
+    var backgroundColorBase = 0
+
     @get:ColorInt
     val backgroundColor: Int
         get() = calculateBackground()
 
     var maxZoom = 0f
     var minZoom = 0f
-    var curZoom = 1f
+    var curZoom = 0f
 
     override fun update(other: LayerState) {
         if (other is BackgroundState) {
             this.curZoom = other.curZoom
             this.maxZoom = other.maxZoom
             this.minZoom = other.minZoom
+            this.backgroundColorBase = other.backgroundColorBase
         }
     }
 
     private fun calculateBackground(): Int {
-        var red = 255
-        var green = 255
-        var blue = 255
+        var red = Color.red(backgroundColorBase)
+        var green = Color.green(backgroundColorBase)
+        var blue = Color.blue(backgroundColorBase)
 
         when {
             curZoom < minZoom -> {

@@ -1,7 +1,10 @@
 package com.rosberry.sample.surfaceviewrxed.presentation.main
 
+import android.animation.ValueAnimator
+import android.graphics.Color
 import android.graphics.PointF
 import android.view.MotionEvent
+import android.view.animation.AccelerateInterpolator
 import com.alexvasilkov.gestures.State
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
@@ -35,6 +38,8 @@ class MainPresenter @Inject constructor(
     private lateinit var sceneParams: SceneParams
     private lateinit var viewportCenter: PointF
 
+    private var light = true
+
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
 
@@ -60,6 +65,29 @@ class MainPresenter @Inject constructor(
     override fun onDestroy() {
         super.onDestroy()
         viewState.closeScope()
+    }
+
+    fun clickToggleTheme() {
+        light = !light
+
+        val lightColor = Color.parseColor(sceneParams.backgroundColorLight)
+        val darkColor = Color.parseColor(sceneParams.backgroundColorDark)
+        val fromColor = if (light) darkColor else lightColor
+        val toColor = if (light) lightColor else darkColor
+
+        animateColor(fromColor, toColor)
+    }
+
+    private fun animateColor(fromColor: Int, toColor: Int) {
+        with(ValueAnimator.ofArgb(fromColor, toColor)) {
+            duration = 275
+            interpolator = AccelerateInterpolator()
+            addUpdateListener {
+                backgroundState.backgroundColorBase = it.animatedValue as Int
+                mySceneStateObserver.pushState(backgroundState)
+            }
+            start()
+        }
     }
 
     private fun onViewportCenter(viewportCenter: PointF) {
@@ -89,6 +117,8 @@ class MainPresenter @Inject constructor(
         backgroundState.apply {
             maxZoom = sceneParams.maxZoom
             minZoom = sceneParams.minZoom
+            curZoom = minZoom
+            backgroundColorBase = Color.parseColor(sceneParams.backgroundColorLight)
         }
 
         gridState.apply {
@@ -106,7 +136,7 @@ class MainPresenter @Inject constructor(
     }
 
     private fun zoomGrid(x: Float, y: Float) {
-        gridState.zoomToCell(viewportCenter.x, viewportCenter.y, x, y , sceneParams.maxZoom)
+        gridState.zoomToCell(viewportCenter.x, viewportCenter.y, x, y, sceneParams.maxZoom)
         viewState.animateStateTo(gridState)
     }
 
