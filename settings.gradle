@@ -1,4 +1,4 @@
-include ':app',
+include ':app', ':motionlayoutcollapsingtoolbar',
         ':rxsearch',
         ':pagination',
         ':errorhandler',
