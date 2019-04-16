@@ -6,7 +6,6 @@ apply plugin: 'kotlin-kapt'
 android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
-    buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
         applicationId "com.rosberry.sample.workmanager"
@@ -51,7 +50,7 @@ dependencies {
     // db
     implementation deps.x.room.runtime
     implementation deps.x.room.ktx
-    implementation deps.x.room.rx2
     kapt deps.x.room.compiler
-    debugImplementation deps.debugDb
+
+    implementation deps.googleGson
 }
