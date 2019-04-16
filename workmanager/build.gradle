@@ -1,6 +1,8 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
 android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -33,7 +35,23 @@ dependencies {
     def deps = rootProject.ext.dependencies
 
     implementation deps.kotlin
+
+    // androidx
     implementation deps.x.appCompat
     implementation deps.x.constraint
     implementation deps.x.workManager
+
+    // inject
+    implementation deps.dagger.library
+    kapt deps.dagger.compiler
+
+    // time
+    implementation deps.threetenabp
+
+    // db
+    implementation deps.x.room.runtime
+    implementation deps.x.room.ktx
+    implementation deps.x.room.rx2
+    kapt deps.x.room.compiler
+    debugImplementation deps.debugDb
 }
