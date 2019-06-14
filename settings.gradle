@@ -1,8 +1,11 @@
-include ':app', ':mediapicker',
+
+include ':app', ':motionlayoutcollapsingtoolbar',
+        ':rxsearch',
         ':pagination',
         ':errorhandler',
         ':barcodescanner',
         ':roomdatabase',
         ':viewpager',
         ':navigation',
-        ':preferencemanager'
+        ':preferencemanager',
+        ':mediapicker'

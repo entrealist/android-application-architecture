@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">RxSearch</string>
+
+    <string name="hint">Enter the query, e.g. Lady Gaga</string>
+</resources>
