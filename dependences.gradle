@@ -28,7 +28,7 @@ ext {
     rxAndroid_version = "2.1.0"
     rxJava_version = "2.2.6"
     rxKotlin_version = "2.3.0"
-    rxpermission_version = "0.9.5@aar"
+    rxpermission_version = "0.10.2"
 
     room_version = "1.1.1"
     x_room_version = "2.1.0-alpha06"
@@ -53,7 +53,7 @@ ext {
     glide_version = "4.3.1"
     firebaseUi_version = "3.1.0"
 
-    mediaPicker_version = "1.0.1"
+    mediaPicker_version = "1.2.2"
 
     imageCropper_version = "2.6.0"
 
@@ -167,7 +167,7 @@ ext {
                     android               : "io.reactivex.rxjava2:rxandroid:$rxAndroid_version",
                     java                  : "io.reactivex.rxjava2:rxjava:$rxJava_version",
                     kotlin                : "io.reactivex.rxjava2:rxkotlin:$rxKotlin_version",
-                    permissions           : "com.tbruyelle.rxpermissions2:rxpermissions:$rxpermission_version",
+                    permissions           : "com.github.tbruyelle:rxpermissions:$rxpermission_version",
                     binding               : "com.jakewharton.rxbinding2:rxbinding-kotlin:$rxBinding_version",
             ],
 
