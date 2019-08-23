@@ -49,20 +49,18 @@ class GridState : State(), LayerState {
 
     val numbers = mutableSetOf<Triple<String, Int, Int>>()
 
-    override fun update(other: LayerState) {
-        if (other is GridState) {
-            super.set(other)
+    fun update(other: GridState) {
+        super.set(other)
 
-            this.boardWidthNominal = other.boardWidthNominal
-            this.boardHeightNominal = other.boardHeightNominal
-            this.gridCellWidthNominal = other.gridCellWidthNominal
-            this.gridCellHeightNominal = other.gridCellHeightNominal
-            this.gridColor = other.gridColor
-            this.gridThickNominal = other.gridThickNominal
-            this.numbers.addAll(other.numbers)
-            this.textColor = other.textColor
-            this.textSizeNominal = other.textSizeNominal
-        }
+        this.boardWidthNominal = other.boardWidthNominal
+        this.boardHeightNominal = other.boardHeightNominal
+        this.gridCellWidthNominal = other.gridCellWidthNominal
+        this.gridCellHeightNominal = other.gridCellHeightNominal
+        this.gridColor = other.gridColor
+        this.gridThickNominal = other.gridThickNominal
+        this.numbers.addAll(other.numbers)
+        this.textColor = other.textColor
+        this.textSizeNominal = other.textSizeNominal
     }
 
     fun addNumber(screenX: Float, screenY: Float) {
@@ -95,7 +93,7 @@ class GridState : State(), LayerState {
 
             //Log.d("Dbg.AddNumber", "column: $column, row: $row")
 
-            numbers.add(Triple("$column:$row",column , row))
+            numbers.add(Triple("$column:$row", column, row))
         }
     }
 

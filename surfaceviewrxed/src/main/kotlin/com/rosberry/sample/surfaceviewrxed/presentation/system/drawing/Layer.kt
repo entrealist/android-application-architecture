@@ -5,27 +5,11 @@ import android.graphics.Canvas
 /**
  * @author mmikhailov on 29/03/2019.
  */
-abstract class Layer<T : LayerState> {
+interface Layer<T : LayerState> {
 
-    protected abstract val state: T
+    val state: T
+    val renderables: List<Renderable<T>>
 
-    abstract fun onStateChange(updated: T)
-
-    private val renderables: MutableList<Renderable<T>> = mutableListOf()
-
-    fun changeState(updated: T) {
-        state.update(updated)
-
-        onStateChange(updated)
-    }
-
-    fun draw(canvas: Canvas) {
-        renderables.forEach { r ->
-            r.draw(canvas, state)
-        }
-    }
-
-    protected fun setRenderables(vararg renderable: Renderable<T>) {
-        renderables.addAll(renderable)
-    }
+    fun changeState(updated: T)
+    fun draw(canvas: Canvas)
 }
