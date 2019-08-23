@@ -9,4 +9,5 @@ include ':app',
         ':viewpager',
         ':navigation',
         ':preferencemanager',
-        ':mediapicker'
+        ':mediapicker',
+        ':surfaceviewrxed'

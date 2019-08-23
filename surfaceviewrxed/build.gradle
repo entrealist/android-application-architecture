@@ -1,0 +1,55 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+
+    defaultConfig {
+        applicationId "com.rosberry.sample.surfaceviewrxed"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    sourceSets {
+        main.java.srcDirs += ['src/main/kotlin']
+        test.java.srcDirs += ['src/test/kotlin']
+    }
+}
+
+dependencies {
+    def deps = rootProject.ext.dependencies
+    def testDeps = rootProject.ext.testDependencies
+
+    testImplementation testDeps.jUnit
+    androidTestImplementation testDeps.jUnit
+    androidTestImplementation testDeps.runner
+
+    implementation deps.kotlin
+    implementation deps.support.appCompat
+    implementation deps.moxy.library
+    implementation deps.moxy.support
+    kapt deps.moxy.compiler
+    implementation deps.dagger.library
+    kapt deps.dagger.compiler
+    kapt deps.dagger.annotation
+    implementation deps.rx.java
+    implementation deps.rx.kotlin
+    implementation deps.rx.android
+    implementation deps.rx.binding
+    implementation deps.gestureViews
+}
