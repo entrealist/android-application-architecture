@@ -1,5 +1,6 @@
-
-include ':app', ':motionlayoutcollapsingtoolbar',
+include ':app',
+        ':workmanager',
+        ':motionlayoutcollapsingtoolbar',
         ':rxsearch',
         ':pagination',
         ':errorhandler',
