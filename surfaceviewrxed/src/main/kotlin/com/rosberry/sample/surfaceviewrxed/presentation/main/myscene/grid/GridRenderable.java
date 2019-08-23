@@ -41,7 +41,6 @@ public class GridRenderable implements Renderable<GridState> {
         final int rowCount = (int) (canvasH / gridCellHeight) + 3;
         final int linePartsCount = (columnCount + rowCount) * partsPerLine;
 
-        //Log.d("Dbg.GridRenderable", "z:" + state.getZoom() + ", x: " + boardStartX + ", y: " + boardStartY + ", c: " + columnCount);
         final float[] gridLines = new float[linePartsCount];
 
         float mostEndLineX = canvasW;

@@ -91,8 +91,6 @@ class GridState : State(), LayerState {
                 }
             }
 
-            //Log.d("Dbg.AddNumber", "column: $column, row: $row")
-
             numbers.add(Triple("$column:$row", column, row))
         }
     }
