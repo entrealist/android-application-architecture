@@ -3,12 +3,17 @@ package com.rosberry.sample.surfaceviewrxed.ui.main
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.PixelFormat
+import android.os.Handler
+import android.os.HandlerThread
+import android.os.Message
+import android.os.Process
 import android.util.AttributeSet
 import android.util.Log
 import android.view.SurfaceHolder
 import android.view.SurfaceView
 import com.rosberry.sample.surfaceviewrxed.ui.main.system.CanvasHandler
 import io.reactivex.disposables.Disposable
+import java.util.concurrent.Semaphore
 
 /**
  * @author mmikhailov on 28/03/2019.
@@ -32,25 +37,25 @@ open class DrivenSurfaceView @JvmOverloads constructor(
     }
 
     override fun surfaceCreated(holder: SurfaceHolder) {
-        Log.d("Dbg.SurfaceView", "surfaceCreated::")
+        Log.d("SurfaceView", "surfaceCreated::")
         surfaceCreated = true
         start()
     }
 
     override fun surfaceChanged(holder: SurfaceHolder, format: Int, width: Int, height: Int) {
-        Log.d("Dbg.SurfaceView", "surfaceChanged::format: $format, w: $width, h: $height")
+        Log.d("SurfaceView", "surfaceChanged::format: $format, w: $width, h: $height")
 
-        thread?.setDraw(true)
+        thread?.requestDraw(true)
     }
 
     override fun surfaceDestroyed(holder: SurfaceHolder) {
-        Log.d("Dbg.SurfaceView", "surfaceDestroyed::")
+        Log.d("SurfaceView", "surfaceDestroyed::")
         surfaceCreated = false
         stop()
     }
 
     fun setCanvasHandler(handler: CanvasHandler?) {
-        Log.d("Dbg.SurfaceView", "setCanvasHandler::")
+        Log.d("SurfaceView", "setCanvasHandler::")
         this.canvasHandler = handler
 
         stop()
@@ -61,7 +66,7 @@ open class DrivenSurfaceView @JvmOverloads constructor(
         if (!surfaceCreated) return
 
         synchronized(this) {
-            Log.d("Dbg.SurfaceView", "start::prev thread: $thread, canvasHandler: $canvasHandler")
+            Log.d("SurfaceView", "start::prev thread: $thread, canvasHandler: $canvasHandler")
             if (thread == null && canvasHandler != null) {
                 thread = SurfaceThread(canvasHandler!!)
                     .apply { start() }
@@ -73,10 +78,10 @@ open class DrivenSurfaceView @JvmOverloads constructor(
 
     private fun stop() {
         synchronized(this) {
-            Log.d("Dbg.SurfaceView", "stop::current thread: $thread")
+            Log.d("SurfaceView", "stop::current thread: $thread")
             if (thread != null) {
                 canvasHandlerDisposable?.dispose()
-                thread?.release()
+                thread?.requestRelease()
                 thread = null
             }
         }
@@ -84,32 +89,78 @@ open class DrivenSurfaceView @JvmOverloads constructor(
 
     private fun subscribeComposer() {
         canvasHandlerDisposable = canvasHandler?.drawCommands
-            ?.subscribe { thread?.setDraw(it) }
+            ?.subscribe { thread?.requestDraw(it) }
     }
 
-    inner class SurfaceThread(private val handler: CanvasHandler) : Thread() {
-        private var running = true
+    inner class SurfaceThread(
+            private val canvasHandler: CanvasHandler
+    ) : HandlerThread(
+            SurfaceThread::class.java.simpleName,
+            Process.THREAD_PRIORITY_AUDIO
+    ), Handler.Callback {
+
+        private val ACTION_START = 1
+        private val ACTION_STOP = 0
+
+        private var started = false
         private var canvasLocked = false
         private var canvas: Canvas? = null
-        private var draw = false
 
-        /**
-         * Sets whether is there draw something
-         */
-        fun setDraw(draw: Boolean) {
-            Log.d("Dbg.SurfaceThread", "setDraw::$draw")
-            this.draw = draw
+        @Volatile
+        private var currentPermits = 0
+        private val permitsToDraw = 1
+        private val semaphore = Semaphore(currentPermits)
+
+        private lateinit var handler: Handler
+
+        override fun start() {
+            super.start()
+            handler = Handler(looper, this).apply {
+                sendMessage(obtainMessage(ACTION_START))
+            }
         }
 
-        override fun run() {
-            Log.d("Dbg.SurfaceThread", "run::starting thread: $this")
+        override fun handleMessage(msg: Message): Boolean {
+            if (!isAlive) {
+                Log.d(SurfaceThread::class.java.simpleName, "dead thread... Cannot proceed")
+                return false
+            }
+
+            when (msg.what) {
+                ACTION_START -> startInternal()
+                ACTION_STOP -> releaseInternal()
+            }
+
+            return true
+        }
+
+        fun requestRelease() {
+            with(handler) { sendMessage(obtainMessage(ACTION_STOP)) }
+        }
+
+        fun requestDraw(draw: Boolean) {
+            Log.d("SurfaceThread", "requestDraw::$draw, thread: ${Thread.currentThread()}")
+
+            if (draw) {
+                currentPermits = permitsToDraw
+                semaphore.release()
+            } else {
+                currentPermits = 0
+            }
+        }
+
+        private fun startInternal() {
+            Log.d("SurfaceThread",
+                    "startInternal::was started: $started, thread: ${Thread.currentThread()}")
+            if (started) return
+            started = true
+
             var pendingPost = false
 
-            while (running) {
+            while (true) {
+                semaphore.acquire(permitsToDraw)
 
                 if (holder.surface.isValid.not()) continue
-
-                if (!draw && !pendingPost) continue
 
                 if (pendingPost) {
                     pendingPost = false
@@ -117,16 +168,15 @@ open class DrivenSurfaceView @JvmOverloads constructor(
                 } else {
                     pendingPost = lockCanvasAndDraw()
                 }
+
+                semaphore.release(currentPermits)
             }
-
-            unlockCanvasAndPost()
-
-            running = false
         }
 
-        internal fun release() {
-            Log.d("Dbg.SurfaceThread", "release")
-            running = false
+        private fun releaseInternal() {
+            unlockCanvasAndPost()
+            interrupt()
+            quit()
         }
 
         private fun unlockCanvasAndPost() {
@@ -142,7 +192,7 @@ open class DrivenSurfaceView @JvmOverloads constructor(
 
             return if (canvas != null) {
                 canvasLocked = true
-                handler.onCanvas(canvas!!)
+                canvasHandler.onCanvas(canvas!!)
 
                 true
 
