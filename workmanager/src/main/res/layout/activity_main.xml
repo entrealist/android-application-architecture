@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.MainActivity">
+
+    <TextView android:id="@+id/hint"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:gravity="center"
+        android:text="Set your preferences when notification should be triggered"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="From day:"
+        app:layout_constraintBottom_toBottomOf="@id/startDate"
+        app:layout_constraintEnd_toStartOf="@id/startDate"
+        app:layout_constraintTop_toTopOf="@id/startDate" />
+
+    <androidx.appcompat.widget.AppCompatEditText android:id="@+id/startDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:hint="Start date"
+        android:inputType="date"
+        app:layout_constraintEnd_toStartOf="@id/endDate"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/hint" />
+
+    <TextView android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="Until day:"
+        app:layout_constraintBottom_toBottomOf="@id/endDate"
+        app:layout_constraintEnd_toStartOf="@id/endDate"
+        app:layout_constraintTop_toTopOf="@id/endDate" />
+
+
+    <androidx.appcompat.widget.AppCompatEditText android:id="@+id/endDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:hint="End date"
+        android:inputType="date"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/startDate"
+        app:layout_constraintTop_toTopOf="@id/startDate" />
+
+    <RadioGroup android:id="@+id/frequencyGroup"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/endDate">
+
+        <androidx.appcompat.widget.AppCompatRadioButton android:id="@+id/everyday"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="Everyday" />
+
+        <androidx.appcompat.widget.AppCompatRadioButton android:id="@+id/every2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Every 2 days" />
+
+        <androidx.appcompat.widget.AppCompatRadioButton android:id="@+id/every3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Every 3 days" />
+
+        <androidx.appcompat.widget.AppCompatRadioButton android:id="@+id/every4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Every 4 days" />
+
+        <androidx.appcompat.widget.AppCompatRadioButton android:id="@+id/every5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Every 5 days" />
+
+        <androidx.appcompat.widget.AppCompatRadioButton android:id="@+id/every6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Every 6 days" />
+
+        <androidx.appcompat.widget.AppCompatRadioButton android:id="@+id/every7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Every 7 days" />
+    </RadioGroup>
+
+    <Button android:id="@+id/addTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Add time entry"
+        app:layout_constraintEnd_toStartOf="@id/clearTime"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/frequencyGroup" />
+
+    <Button android:id="@+id/clearTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Clear timetable"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/addTime"
+        app:layout_constraintTop_toTopOf="@id/addTime" />
+
+    <ScrollView android:id="@+id/timetableScroll"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintBottom_toTopOf="@id/addTime"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/frequencyGroup"
+        app:layout_constraintTop_toBottomOf="@id/endDate">
+
+        <TextView android:id="@+id/timetable"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:textSize="20sp" />
+
+    </ScrollView>
+
+    <Button android:id="@+id/saveBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Apply changes"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/clearTime" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
