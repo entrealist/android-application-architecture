@@ -6,9 +6,6 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.MotionEvent
 import com.alexvasilkov.gestures.State
-import com.arellomobile.mvp.MvpAppCompatActivity
-import com.arellomobile.mvp.presenter.InjectPresenter
-import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.rosberry.sample.surfaceviewrxed.R
 import com.rosberry.sample.surfaceviewrxed.di.Injector
 import com.rosberry.sample.surfaceviewrxed.di.main.MainSceneQualifier
@@ -21,6 +18,9 @@ import com.rosberry.sample.surfaceviewrxed.ui.main.system.states
 import com.rosberry.sample.surfaceviewrxed.ui.main.system.taps
 import io.reactivex.Observable
 import kotlinx.android.synthetic.main.activity_main.*
+import moxy.MvpAppCompatActivity
+import moxy.presenter.InjectPresenter
+import moxy.presenter.ProvidePresenter
 import javax.inject.Inject
 
 class MainActivity : MvpAppCompatActivity(), MainView {

@@ -1,11 +1,11 @@
 package com.rosberry.navigation.presentation.main
 
-import com.arellomobile.mvp.InjectViewState
 import com.rosberry.navigation.Screens
 import com.rosberry.navigation.di.app.GlobalNavigationQualifier
 import com.rosberry.navigation.di.main.TabsNavigationQualifier
 import com.rosberry.navigation.presentation.base.BasePresenter
 import com.rosberry.navigation.presentation.main.navigation.TabsRouter
+import moxy.InjectViewState
 import ru.terrakok.cicerone.Router
 import javax.inject.Inject
 

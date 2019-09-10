@@ -1,8 +1,8 @@
 package com.rosberry.navigation.presentation.onboarding.page
 
-import com.arellomobile.mvp.InjectViewState
 import com.rosberry.navigation.di.onboarding.OnBoardingNavigationQualifier
 import com.rosberry.navigation.presentation.base.BasePresenter
+import moxy.InjectViewState
 import ru.terrakok.cicerone.Router
 import javax.inject.Inject
 

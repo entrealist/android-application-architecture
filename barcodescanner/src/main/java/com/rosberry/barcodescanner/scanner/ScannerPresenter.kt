@@ -1,8 +1,8 @@
 package com.rosberry.barcodescanner.scanner
 
-import com.arellomobile.mvp.InjectViewState
-import com.arellomobile.mvp.MvpPresenter
 import com.google.zxing.Result
+import moxy.InjectViewState
+import moxy.MvpPresenter
 
 @InjectViewState
 class ScannerPresenter : MvpPresenter<ScannerView>() {

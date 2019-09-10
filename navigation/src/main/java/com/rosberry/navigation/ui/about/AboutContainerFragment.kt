@@ -1,14 +1,14 @@
 package com.rosberry.navigation.ui.about
 
 import android.content.Context
-import com.arellomobile.mvp.presenter.InjectPresenter
-import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.rosberry.navigation.R
 import com.rosberry.navigation.di.AndroidInjector
 import com.rosberry.navigation.di.about.AboutNavigationQualifier
 import com.rosberry.navigation.presentation.about.AboutContainerPresenter
 import com.rosberry.navigation.presentation.about.AboutContainerView
 import com.rosberry.navigation.ui.base.BaseFragment
+import moxy.presenter.InjectPresenter
+import moxy.presenter.ProvidePresenter
 import ru.terrakok.cicerone.NavigatorHolder
 import ru.terrakok.cicerone.android.support.SupportAppNavigator
 import javax.inject.Inject

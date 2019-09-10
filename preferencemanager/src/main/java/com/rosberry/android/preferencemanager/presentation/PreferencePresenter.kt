@@ -4,10 +4,10 @@
 
 package com.rosberry.android.preferencemanager.presentation
 
-import com.arellomobile.mvp.InjectViewState
-import com.arellomobile.mvp.MvpPresenter
 import com.rosberry.android.preferencemanager.data.SettingsManager
 import com.rosberry.android.preferencemanager.data.UserManager
+import moxy.InjectViewState
+import moxy.MvpPresenter
 
 /**
  * @author Alexei Korshun on 21/01/2019.

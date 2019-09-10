@@ -5,9 +5,6 @@ import android.os.Handler
 import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.arellomobile.mvp.MvpAppCompatActivity
-import com.arellomobile.mvp.presenter.InjectPresenter
-import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.rosberry.pagination.R
 import com.rosberry.pagination.data.MoviesApi
 import com.rosberry.pagination.data.MoviesRepository
@@ -16,6 +13,10 @@ import com.rosberry.pagination.presentation.MoviesView
 import com.rosberry.pagination.system.MovieItems
 import com.rosberry.pagination.system.gone
 import com.rosberry.pagination.system.show
+import kotlinx.android.synthetic.main.activity_movies.*
+import moxy.MvpAppCompatActivity
+import moxy.presenter.InjectPresenter
+import moxy.presenter.ProvidePresenter
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory

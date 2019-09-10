@@ -7,14 +7,16 @@ import android.view.View
 import android.view.ViewPropertyAnimator
 import android.widget.Toast
 import androidx.interpolator.view.animation.FastOutSlowInInterpolator
-import com.arellomobile.mvp.MvpAppCompatActivity
-import com.arellomobile.mvp.presenter.InjectPresenter
-import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.rosberry.sample.rxsearch.R
 import com.rosberry.sample.rxsearch.di.AndroidInjector
 import com.rosberry.sample.rxsearch.presentation.SearchPresenter
 import com.rosberry.sample.rxsearch.presentation.SearchView
 import com.rosberry.sample.rxsearch.presentation.model.SearchResultItem
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.l_interactive_placeholder.*
+import moxy.MvpAppCompatActivity
+import moxy.presenter.InjectPresenter
+import moxy.presenter.ProvidePresenter
 
 class MainActivity : MvpAppCompatActivity(), SearchView {
 

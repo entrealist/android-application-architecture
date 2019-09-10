@@ -1,6 +1,7 @@
 package com.rosberry.navigation.presentation.profile.details
 
-import com.arellomobile.mvp.MvpView
+import moxy.MvpView
+
 
 /**
  * @author mmikhailov on 28.09.2018.

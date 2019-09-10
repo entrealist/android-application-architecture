@@ -1,8 +1,8 @@
 package com.rosberry.navigation.presentation.about.content
 
-import com.arellomobile.mvp.InjectViewState
 import com.rosberry.navigation.di.about.AboutNavigationQualifier
 import com.rosberry.navigation.presentation.base.BasePresenter
+import moxy.InjectViewState
 import ru.terrakok.cicerone.Router
 import javax.inject.Inject
 

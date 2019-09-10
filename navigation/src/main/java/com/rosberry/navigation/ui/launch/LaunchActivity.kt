@@ -1,13 +1,13 @@
 package com.rosberry.navigation.ui.launch
 
 import android.os.Bundle
-import com.arellomobile.mvp.MvpAppCompatActivity
-import com.arellomobile.mvp.presenter.InjectPresenter
-import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.rosberry.navigation.di.AndroidInjector
 import com.rosberry.navigation.di.app.GlobalNavigationQualifier
 import com.rosberry.navigation.presentation.launch.LaunchPresenter
 import com.rosberry.navigation.presentation.launch.LaunchView
+import moxy.MvpAppCompatActivity
+import moxy.presenter.InjectPresenter
+import moxy.presenter.ProvidePresenter
 import ru.terrakok.cicerone.NavigatorHolder
 import ru.terrakok.cicerone.android.support.SupportAppNavigator
 import javax.inject.Inject

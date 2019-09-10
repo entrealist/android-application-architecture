@@ -2,14 +2,14 @@ package com.rosberry.navigation.ui.profile.details
 
 import android.os.Bundle
 import android.view.View
-import com.arellomobile.mvp.presenter.InjectPresenter
-import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.rosberry.navigation.R
 import com.rosberry.navigation.di.AndroidInjector
 import com.rosberry.navigation.presentation.profile.details.ProfileDetailsPresenter
 import com.rosberry.navigation.presentation.profile.details.ProfileDetailsView
 import com.rosberry.navigation.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.f_profile_details.*
+import moxy.presenter.InjectPresenter
+import moxy.presenter.ProvidePresenter
 
 /**
  * @author mmikhailov on 28.09.2018.

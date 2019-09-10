@@ -5,15 +5,15 @@
 package com.rosberry.android.preferencemanager.ui
 
 import android.os.Bundle
-import com.arellomobile.mvp.MvpAppCompatActivity
-import com.arellomobile.mvp.presenter.InjectPresenter
-import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.rosberry.android.preferencemanager.R
 import com.rosberry.android.preferencemanager.data.SettingsManager
 import com.rosberry.android.preferencemanager.data.UserManager
 import com.rosberry.android.preferencemanager.presentation.PreferencePresenter
 import com.rosberry.android.preferencemanager.presentation.PreferenceView
 import kotlinx.android.synthetic.main.activity_preference.*
+import moxy.MvpAppCompatActivity
+import moxy.presenter.InjectPresenter
+import moxy.presenter.ProvidePresenter
 
 class PreferenceActivity : MvpAppCompatActivity(), PreferenceView {
 

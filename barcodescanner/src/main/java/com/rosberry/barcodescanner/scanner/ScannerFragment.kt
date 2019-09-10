@@ -18,12 +18,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import com.arellomobile.mvp.MvpAppCompatFragment
-import com.arellomobile.mvp.presenter.InjectPresenter
 import com.google.zxing.Result
 import com.rosberry.barcodescanner.MainActivity
 import com.rosberry.barcodescanner.R
+import kotlinx.android.synthetic.main.fragment_scanner.*
 import me.dm7.barcodescanner.zxing.ZXingScannerView
+import moxy.MvpAppCompatFragment
+import moxy.presenter.InjectPresenter
 import permissions.dispatcher.NeedsPermission
 import permissions.dispatcher.OnNeverAskAgain
 import permissions.dispatcher.OnPermissionDenied

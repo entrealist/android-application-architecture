@@ -1,7 +1,5 @@
 package com.rosberry.sample.rxsearch.presentation
 
-import com.arellomobile.mvp.InjectViewState
-import com.arellomobile.mvp.MvpPresenter
 import com.rosberry.sample.rxsearch.domain.ConnectivityInteractor
 import com.rosberry.sample.rxsearch.domain.SearchInteractor
 import com.rosberry.sample.rxsearch.error.EmptySearchResult
@@ -14,6 +12,8 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.BehaviorSubject
 import io.reactivex.subjects.PublishSubject
+import moxy.InjectViewState
+import moxy.MvpPresenter
 import java.net.UnknownHostException
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
