@@ -1,9 +1,9 @@
 package com.rosberry.sample.surfaceviewrxed.data
 
 import android.content.Context
-import android.support.annotation.ColorInt
-import android.support.annotation.ColorRes
-import android.support.v4.content.ContextCompat
+import androidx.annotation.ColorInt
+import androidx.annotation.ColorRes
+import androidx.core.content.ContextCompat
 import javax.inject.Inject
 import javax.inject.Singleton
 

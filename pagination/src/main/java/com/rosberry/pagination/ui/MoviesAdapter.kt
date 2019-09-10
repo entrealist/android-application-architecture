@@ -1,7 +1,7 @@
 package com.rosberry.pagination.ui
 
-import android.support.v7.util.DiffUtil
 import android.view.View
+import androidx.recyclerview.widget.DiffUtil
 import com.rosberry.abstractrecycler.AbstractItem
 import com.rosberry.abstractrecycler.AbstractRecyclerAdapter
 import com.rosberry.abstractrecycler.AbstractViewHolder

@@ -1,7 +1,6 @@
 package com.rosberry.navigation.ui.base
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import com.arellomobile.mvp.MvpAppCompatActivity
 
 abstract class BaseActivity : MvpAppCompatActivity() {
@@ -16,7 +15,7 @@ abstract class BaseActivity : MvpAppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        var fragment: Fragment? = null
+        var fragment: androidx.fragment.app.Fragment? = null
         for (f in supportFragmentManager.fragments) {
             if (f.isVisible) {
                 fragment = f

@@ -1,6 +1,6 @@
 package com.rosberry.sample.rxsearch.ui
 
-import android.support.v7.util.DiffUtil
+import androidx.recyclerview.widget.DiffUtil
 import com.rosberry.abstractrecycler.AbstractItem
 import com.rosberry.sample.rxsearch.presentation.model.SearchResultItem
 

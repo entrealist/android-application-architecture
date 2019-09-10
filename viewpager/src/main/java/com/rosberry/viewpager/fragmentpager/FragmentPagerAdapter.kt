@@ -1,14 +1,11 @@
 package com.rosberry.viewpager.fragmentpager
 
 import android.content.Context
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentStatePagerAdapter
-import android.support.v4.content.ContextCompat
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.ImageSpan
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import com.rosberry.viewpager.R
 import com.rosberry.viewpager.fragmentpager.tabs.Tab1Fragment
 import com.rosberry.viewpager.fragmentpager.tabs.Tab2Fragment
@@ -18,9 +15,9 @@ import com.rosberry.viewpager.fragmentpager.tabs.Tab3Fragment
  * @author mmikhailov on 12.10.2018.
  */
 class FragmentPagerAdapter(
-        fm: FragmentManager,
+        fm: androidx.fragment.app.FragmentManager,
         private val context: Context
-) : FragmentStatePagerAdapter(fm) {
+) : androidx.fragment.app.FragmentStatePagerAdapter(fm) {
 
     companion object {
         const val POSITION_TAB_1 = 0
@@ -36,7 +33,7 @@ class FragmentPagerAdapter(
     private var tab2Fragment: Tab2Fragment? = null
     private var tab3Fragment: Tab3Fragment? = null
 
-    override fun getItem(position: Int): Fragment? {
+    override fun getItem(position: Int): androidx.fragment.app.Fragment? {
         return when (position) {
             POSITION_TAB_1 -> Tab1Fragment()
             POSITION_TAB_2 -> Tab2Fragment()
@@ -50,7 +47,7 @@ class FragmentPagerAdapter(
     }
 
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
-        val createdFragment = super.instantiateItem(container, position) as Fragment
+        val createdFragment = super.instantiateItem(container, position) as androidx.fragment.app.Fragment
         when (position) {
             POSITION_TAB_1 -> tab1Fragment = createdFragment as Tab1Fragment
             POSITION_TAB_2 -> tab2Fragment = createdFragment as Tab2Fragment

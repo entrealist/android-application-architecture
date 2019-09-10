@@ -1,6 +1,6 @@
 package com.rosberry.navigation
 
-import android.support.multidex.MultiDexApplication
+import androidx.multidex.MultiDexApplication
 import com.rosberry.navigation.di.AndroidInjector
 import com.rosberry.navigation.di.AndroidInjector.openDataScope
 

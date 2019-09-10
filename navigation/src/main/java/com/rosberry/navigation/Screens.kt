@@ -2,7 +2,6 @@ package com.rosberry.navigation
 
 import android.content.Context
 import android.content.Intent
-import android.support.v4.app.Fragment
 import com.rosberry.navigation.ui.about.AboutContainerFragment
 import com.rosberry.navigation.ui.about.AboutContentFragment
 import com.rosberry.navigation.ui.items.ItemsContainerFragment
@@ -44,7 +43,7 @@ class Screens {
     }
 
     class OnBoardingPage : SupportAppScreen() {
-        override fun getFragment(): Fragment {
+        override fun getFragment(): androidx.fragment.app.Fragment {
             return OnBoardingPageFragment.newInstance()
         }
     }
@@ -56,55 +55,55 @@ class Screens {
     }
 
     class AboutContainerScreen : SupportAppScreen() {
-        override fun getFragment(): Fragment {
+        override fun getFragment(): androidx.fragment.app.Fragment {
             return AboutContainerFragment.newInstance()
         }
     }
 
     class AboutContentScreen : SupportAppScreen() {
-        override fun getFragment(): Fragment {
+        override fun getFragment(): androidx.fragment.app.Fragment {
             return AboutContentFragment.newInstance()
         }
     }
 
     class ItemsContainerScreen : SupportAppScreen() {
-        override fun getFragment(): Fragment {
+        override fun getFragment(): androidx.fragment.app.Fragment {
             return ItemsContainerFragment.newInstance()
         }
     }
 
     class ItemListScreen : SupportAppScreen() {
-        override fun getFragment(): Fragment {
+        override fun getFragment(): androidx.fragment.app.Fragment {
             return ItemListFragment.newInstance()
         }
     }
 
     class ItemDetailsScreen(private val itemId: String) : SupportAppScreen() {
-        override fun getFragment(): Fragment {
+        override fun getFragment(): androidx.fragment.app.Fragment {
             return ItemDetailsFragment.newInstance(itemId)
         }
     }
 
     class ProfileContainerScreen : SupportAppScreen() {
-        override fun getFragment(): Fragment {
+        override fun getFragment(): androidx.fragment.app.Fragment {
             return ProfileContainerFragment.newInstance()
         }
     }
 
     class ProfileDetailsScreen : SupportAppScreen() {
-        override fun getFragment(): Fragment {
+        override fun getFragment(): androidx.fragment.app.Fragment {
             return ProfileDetailsFragment.newInstance()
         }
     }
 
     class ProfilePrivacyScreen : SupportAppScreen() {
-        override fun getFragment(): Fragment {
+        override fun getFragment(): androidx.fragment.app.Fragment {
             return ProfilePrivacyFragment.newInstance()
         }
     }
 
     class ProfileNotificationsScreen : SupportAppScreen() {
-        override fun getFragment(): Fragment {
+        override fun getFragment(): androidx.fragment.app.Fragment {
             return ProfileNotificationsFragment.newInstance()
         }
     }

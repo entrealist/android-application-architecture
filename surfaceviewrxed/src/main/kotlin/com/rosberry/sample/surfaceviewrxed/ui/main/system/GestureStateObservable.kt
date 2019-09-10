@@ -1,6 +1,6 @@
 package com.rosberry.sample.surfaceviewrxed.ui.main.system
 
-import android.support.annotation.CheckResult
+import androidx.annotation.CheckResult
 import com.alexvasilkov.gestures.GestureController
 import com.alexvasilkov.gestures.State
 import com.alexvasilkov.gestures.views.interfaces.GestureView

@@ -1,7 +1,7 @@
 package com.rosberry.sample.surfaceviewrxed.presentation.main.myscene.grid
 
 import android.graphics.Matrix
-import android.support.annotation.ColorInt
+import androidx.annotation.ColorInt
 import com.alexvasilkov.gestures.State
 import com.rosberry.sample.surfaceviewrxed.presentation.system.drawing.LayerState
 

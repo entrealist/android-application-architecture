@@ -1,12 +1,12 @@
 package com.rosberry.sample.roomdatabase.db.entity
 
-import android.arch.persistence.room.Dao
-import android.arch.persistence.room.Delete
-import android.arch.persistence.room.Insert
-import android.arch.persistence.room.OnConflictStrategy.IGNORE
-import android.arch.persistence.room.OnConflictStrategy.REPLACE
-import android.arch.persistence.room.Query
-import android.arch.persistence.room.Update
+import androidx.room.Dao
+import androidx.room.Delete
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy.IGNORE
+import androidx.room.OnConflictStrategy.REPLACE
+import androidx.room.Query
+import androidx.room.Update
 import com.rosberry.sample.roomdatabase.ui.model.CommentSearchModel
 import io.reactivex.Flowable
 import io.reactivex.Single

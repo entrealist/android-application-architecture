@@ -9,8 +9,6 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.VibrationEffect
 import android.os.Vibrator
-import android.support.v7.app.AlertDialog
-import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
@@ -18,12 +16,13 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import com.arellomobile.mvp.MvpAppCompatFragment
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.google.zxing.Result
 import com.rosberry.barcodescanner.MainActivity
 import com.rosberry.barcodescanner.R
-import kotlinx.android.synthetic.main.fragment_scanner.*
 import me.dm7.barcodescanner.zxing.ZXingScannerView
 import permissions.dispatcher.NeedsPermission
 import permissions.dispatcher.OnNeverAskAgain

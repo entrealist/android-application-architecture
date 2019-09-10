@@ -5,9 +5,12 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.view.*
-import android.widget.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.ProgressBar
+import android.widget.Toast
 import com.rosberry.mediapicker.MediaPicker
 import com.rosberry.mediapicker.data.MediaResult
 import com.rosberry.mediapicker.data.PhotoParams
@@ -17,11 +20,11 @@ import com.tbruyelle.rxpermissions2.RxPermissions
  * Created by dmitry on 02.10.17.
  */
 
-class PhotoPickerFragment : Fragment(), View.OnClickListener, MediaPicker.OnMediaListener {
+class PhotoPickerFragment : androidx.fragment.app.Fragment(), View.OnClickListener, MediaPicker.OnMediaListener {
 
     companion object {
 
-        fun newInstance(): Fragment {
+        fun newInstance(): androidx.fragment.app.Fragment {
             return PhotoPickerFragment()
         }
     }

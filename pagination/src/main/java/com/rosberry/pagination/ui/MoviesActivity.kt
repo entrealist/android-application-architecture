@@ -2,10 +2,9 @@ package com.rosberry.pagination.ui
 
 import android.os.Bundle
 import android.os.Handler
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
@@ -17,7 +16,6 @@ import com.rosberry.pagination.presentation.MoviesView
 import com.rosberry.pagination.system.MovieItems
 import com.rosberry.pagination.system.gone
 import com.rosberry.pagination.system.show
-import kotlinx.android.synthetic.main.activity_movies.*
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
@@ -29,7 +27,10 @@ class MoviesActivity : MvpAppCompatActivity(), MoviesView {
 
     private val viewHandler = Handler()
 
-    private val moviesLayoutManager by lazy { LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false) }
+    private val moviesLayoutManager by lazy {
+        androidx.recyclerview.widget.LinearLayoutManager(this,
+                androidx.recyclerview.widget.LinearLayoutManager.VERTICAL, false)
+    }
     private val moviesAdapter by lazy { MoviesAdapter(emptyList()) }
     private val moviesEndlessScrollListener by lazy { MoviesEndlessScrollListener() }
 
@@ -103,7 +104,7 @@ class MoviesActivity : MvpAppCompatActivity(), MoviesView {
     private inner class MoviesEndlessScrollListener :
             EndlessRecyclerViewScrollListener(moviesLayoutManager) {
 
-        override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView) {
+        override fun onLoadMore(page: Int, totalItemsCount: Int, view: androidx.recyclerview.widget.RecyclerView) {
             presenter.loadNextPage()
         }
 

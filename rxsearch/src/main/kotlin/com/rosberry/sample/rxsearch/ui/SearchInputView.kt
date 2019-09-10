@@ -9,7 +9,7 @@ class SearchInputView @JvmOverloads constructor(
         context: Context,
         attrs: AttributeSet? = null,
         defStyle: Int = 0
-) : android.support.v7.widget.AppCompatEditText(context, attrs, defStyle) {
+) : androidx.appcompat.widget.AppCompatEditText(context, attrs, defStyle) {
 
     private var mSearchKeyListener: OnKeyboardSearchKeyClickListener? = null
     private var mOnKeyboardDismissedListener: OnKeyboardDismissedListener? = null

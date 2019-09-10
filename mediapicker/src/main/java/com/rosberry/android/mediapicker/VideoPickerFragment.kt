@@ -3,9 +3,12 @@ package com.rosberry.android.mediapicker
 import android.Manifest
 import android.content.Intent
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.view.*
-import android.widget.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.ProgressBar
+import android.widget.Toast
+import android.widget.VideoView
 import com.rosberry.mediapicker.MediaPicker
 import com.rosberry.mediapicker.data.MediaResult
 import com.rosberry.mediapicker.data.PhotoParams
@@ -16,11 +19,11 @@ import com.tbruyelle.rxpermissions2.RxPermissions
  * Created by dmitry on 02.10.17.
  */
 
-class VideoPickerFragment : Fragment(), View.OnClickListener, MediaPicker.OnMediaListener {
+class VideoPickerFragment : androidx.fragment.app.Fragment(), View.OnClickListener, MediaPicker.OnMediaListener {
 
     companion object {
 
-        fun newInstance(): Fragment {
+        fun newInstance(): androidx.fragment.app.Fragment {
             return VideoPickerFragment()
         }
     }
