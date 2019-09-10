@@ -31,8 +31,8 @@ dependencies {
 
     implementation deps.kotlin
 
-    implementation deps.support.appCompat
-    implementation deps.support.recyclerView
+    implementation deps.x.appCompat
+    implementation deps.x.recyclerView
 
     implementation deps.rx.java
     implementation deps.rx.android

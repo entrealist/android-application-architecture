@@ -42,7 +42,7 @@ class ProfileContainerFragment : BaseFragment(), ProfileContainerView {
             .providePresenter()
     }
 
-    override fun onAttach(context: Context?) {
+    override fun onAttach(context: Context) {
         AndroidInjector
             .openProfileScope()
             .inject(this)

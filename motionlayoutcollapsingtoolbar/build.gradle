@@ -34,6 +34,6 @@ dependencies {
     def deps = rootProject.ext.dependencies
 
     implementation deps.kotlin
-    implementation deps.support.appCompat
-    implementation deps.support.motionLayout
+    implementation deps.x.appCompat
+    implementation deps.x.constraint
 }

@@ -33,10 +33,10 @@ dependencies {
 
     testImplementation testDeps.jUnit
 
-    implementation deps.support.appCompat
-    implementation deps.support.design
-    implementation deps.support.cardView
-    implementation deps.support.constraintLayout
+    implementation deps.x.appCompat
+    implementation deps.x.material
+    implementation deps.x.cardView
+    implementation deps.x.constraint
 
     implementation deps.kotlin
     implementation deps.ankoCommons

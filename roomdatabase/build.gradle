@@ -48,10 +48,10 @@ dependencies {
     androidTestImplementation testDeps.roomTesting
 
     implementation deps.kotlin
-    implementation deps.support.appCompat
-    implementation deps.support.recyclerView
-    implementation deps.support.constraintLayout
-    implementation deps.support.design
+    implementation deps.x.appCompat
+    implementation deps.x.recyclerView
+    implementation deps.x.constraint
+    implementation deps.x.material
     implementation deps.rx.java
     implementation deps.rx.android
     implementation deps.googleGson

@@ -42,7 +42,7 @@ class ItemsContainerFragment : BaseFragment(), ItemsContainerView {
             .providePresenter()
     }
 
-    override fun onAttach(context: Context?) {
+    override fun onAttach(context: Context) {
         AndroidInjector
             .openItemsScope()
             .inject(this)

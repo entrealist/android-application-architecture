@@ -6,6 +6,9 @@ import android.text.SpannableString
 import android.text.style.ImageSpan
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentStatePagerAdapter
 import com.rosberry.viewpager.R
 import com.rosberry.viewpager.fragmentpager.tabs.Tab1Fragment
 import com.rosberry.viewpager.fragmentpager.tabs.Tab2Fragment
@@ -15,9 +18,9 @@ import com.rosberry.viewpager.fragmentpager.tabs.Tab3Fragment
  * @author mmikhailov on 12.10.2018.
  */
 class FragmentPagerAdapter(
-        fm: androidx.fragment.app.FragmentManager,
+        fm: FragmentManager,
         private val context: Context
-) : androidx.fragment.app.FragmentStatePagerAdapter(fm) {
+) : FragmentStatePagerAdapter(fm) {
 
     companion object {
         const val POSITION_TAB_1 = 0
@@ -33,12 +36,12 @@ class FragmentPagerAdapter(
     private var tab2Fragment: Tab2Fragment? = null
     private var tab3Fragment: Tab3Fragment? = null
 
-    override fun getItem(position: Int): androidx.fragment.app.Fragment? {
+    override fun getItem(position: Int): Fragment {
         return when (position) {
             POSITION_TAB_1 -> Tab1Fragment()
             POSITION_TAB_2 -> Tab2Fragment()
             POSITION_TAB_3 -> Tab3Fragment()
-            else -> null
+            else -> Tab1Fragment()
         }
     }
 

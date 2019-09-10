@@ -80,21 +80,21 @@ class ScannerFragment : MvpAppCompatFragment(), ScannerView, ZXingScannerView.Re
         super.onStop()
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
-        inflater?.inflate(R.menu.scanner, menu)
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.scanner, menu)
     }
 
-    override fun onPrepareOptionsMenu(menu: Menu?) {
+    override fun onPrepareOptionsMenu(menu: Menu) {
         super.onPrepareOptionsMenu(menu)
 
-        menu?.findItem(R.id.action_torch_on)
+        menu.findItem(R.id.action_torch_on)
             ?.isVisible = !scanner.flash
-        menu?.findItem(R.id.action_torch_off)
+        menu.findItem(R.id.action_torch_off)
             ?.isVisible = scanner.flash
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        when (item?.itemId ?: 0) {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
             R.id.action_torch_on -> {
                 scanner.flash = true
                 requireActivity().invalidateOptionsMenu()

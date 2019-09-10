@@ -44,10 +44,10 @@ dependencies {
     androidTestImplementation testDeps.runner
 
     implementation deps.kotlin
-    implementation deps.support.appCompat
-    implementation deps.support.recyclerView
-    implementation deps.support.constraintLayout
-    implementation deps.support.design
+    implementation deps.x.appCompat
+    implementation deps.x.recyclerView
+    implementation deps.x.constraint
+    implementation deps.x.material
     implementation deps.abstractRecyclerView
     implementation deps.rx.java
     implementation deps.rx.android

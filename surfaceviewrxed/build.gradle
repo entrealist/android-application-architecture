@@ -40,7 +40,7 @@ dependencies {
     androidTestImplementation testDeps.runner
 
     implementation deps.kotlin
-    implementation deps.support.appCompat
+    implementation deps.x.appCompat
     implementation deps.moxy.library
     implementation deps.moxy.support
     kapt deps.moxy.compiler

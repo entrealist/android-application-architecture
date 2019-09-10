@@ -67,14 +67,12 @@ dependencies {
     testImplementation testDeps.jUnit
 
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation deps.support.appCompat
-    implementation deps.support.design
-    implementation deps.support.v13
-    implementation deps.support.recyclerView
-    implementation deps.support.cardView
-    implementation deps.support.constraintLayout
-    implementation deps.support.multidex
-    implementation deps.supportMultidexInst
+    implementation deps.x.appCompat
+    implementation deps.x.material
+    implementation deps.x.recyclerView
+    implementation deps.x.cardView
+    implementation deps.x.constraint
+    implementation deps.x.multidex
 
     //kotlin
     implementation deps.kotlin

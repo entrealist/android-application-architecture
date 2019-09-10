@@ -1,5 +1,4 @@
-include ':app',
-        ':workmanager',
+include ':workmanager',
         ':motionlayoutcollapsingtoolbar',
         ':rxsearch',
         ':pagination',
