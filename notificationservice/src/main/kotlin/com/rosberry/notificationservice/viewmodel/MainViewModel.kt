@@ -2,10 +2,13 @@ package com.rosberry.notificationservice.viewmodel
 
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
-import com.rosberry.notificationservice.extension.formatToLocalTimeString
+import com.rosberry.notificationservice.App
 import com.rosberry.notificationservice.extension.mutableLiveData
+import com.rosberry.notificationservice.extension.toFormattedString
+import com.rosberry.notificationservice.manager.preference.UserPrefs
 import com.rosberry.notificationservice.model.TimeRollItem
 import com.rosberry.notificationservice.repository.MainRepository
+import com.rosberry.notificationservice.util.Scheduler
 import org.threeten.bp.LocalDateTime
 import org.threeten.bp.LocalTime
 
@@ -14,12 +17,12 @@ import org.threeten.bp.LocalTime
  */
 class MainViewModel : ViewModel() {
 
-    private val mainRepository = MainRepository
-    private val timetable = mutableLiveData(mainRepository.getInitialTimetable())
+    private val mainRepository = MainRepository(UserPrefs(App.context))
+    private val timetable = mutableLiveData(mainRepository.getTimetable())
 
     val timeRollItems = Transformations.map(timetable) { srcList ->
         srcList.map { item ->
-            TimeRollItem(item.key, item.value.formatToLocalTimeString(), item.value.hour,
+            TimeRollItem(item.key, item.value.toFormattedString("HH:mm"), item.value.hour,
                     item.value.minute)
         }
     }
@@ -44,20 +47,16 @@ class MainViewModel : ViewModel() {
     fun changeItemTime(itemId: Int, h: Int, m: Int) {
         timetable.value = timetable.value!!.toMutableMap()
             .apply {
-                put(itemId, LocalDateTime.of(get(itemId)!!.toLocalDate(), LocalTime.of(h, m)) )
+                put(itemId, LocalDateTime.of(get(itemId)!!.toLocalDate(), LocalTime.of(h, m)))
             }
-
-
-        /*{ item ->
-            if (itemId == item.key) {
-                item.key to LocalDateTime.of(item.value.toLocalDate(), LocalTime.of(h, m))
-            } else {
-                item.key to item.value
-            }
-        }*/
     }
 
-    /*private fun extractItemId(timetableItemTag: String) =
-            timetableItemTag.substringAfterLast(
-                    TAG_PREFIX_TIME_FIELD, "1").toInt()*/
+    fun clickSchedule() {
+        mainRepository.saveTimetable(timetable.value!!)
+        Scheduler.scheduleTimetable(
+                nowDateTime = LocalDateTime.now(),
+                timetable = timetable.value!!.asIterable()
+                    .map { it.value.toLocalTime() }
+        )
+    }
 }

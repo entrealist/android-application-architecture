@@ -14,6 +14,7 @@ import androidx.core.view.children
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListUpdateCallback
 import com.rosberry.notificationservice.R
+import com.rosberry.notificationservice.extension.alsoOnLaid
 import com.rosberry.notificationservice.model.TimeRollItem
 import kotlinx.android.synthetic.main.i_time_roll.view.*
 
@@ -55,20 +56,21 @@ class TimeRollView @JvmOverloads constructor(
                     getChildAt(oldItemPosition).timeText.text == newItems[newItemPosition].textValue
 
             override fun getOldListSize() = childCount
+
             override fun getNewListSize() = newItems.size
         })
             .dispatchUpdatesTo(object : ListUpdateCallback {
                 override fun onInserted(position: Int, count: Int) {
-                    addItem(newItems[position])
+                    addItems(newItems, position, count)
                     onAddedListener?.invoke()
                 }
 
                 override fun onRemoved(position: Int, count: Int) {
-                    removeItem(getChildAt(position).tag as Int)
+                    removeItems(position, count)
                 }
 
                 override fun onChanged(position: Int, count: Int, payload: Any?) {
-                    setItemText(newItems[position])
+                    setItemsText(newItems, position, count)
                 }
 
                 override fun onMoved(fromPosition: Int, toPosition: Int) {
@@ -76,23 +78,32 @@ class TimeRollView @JvmOverloads constructor(
             })
     }
 
-    private fun addItem(model: TimeRollItem) {
-        createItemView(model, true)
-            .also { addView(it) }
+    private fun addItems(items: List<TimeRollItem>, position: Int, count: Int) {
+        for (i in position until position + count) {
+            val item = items[i]
+            createItemView(item, item.id == items.last().id)
+                .also { addView(it) }
+        }
 
         invalidateCompoundButtons()
     }
 
-    private fun removeItem(itemTag: Int) {
-        val removedView = findViewWithTag<View>(itemTag)
-        removeView(removedView)
+    private fun removeItems(position: Int, count: Int) {
+        for (i in position until position + count) {
+            findViewWithTag<View>(getChildAt(i).tag as Int).also {
+                removeView(it)
+            }
+        }
+
         invalidateCompoundButtons()
     }
 
-    private fun setItemText(item: TimeRollItem) {
-        findViewWithTag<View>(item.id)
-            ?.timeText
-            ?.let { it.text = item.textValue }
+    private fun setItemsText(items: List<TimeRollItem>, position: Int, count: Int) {
+        for (i in position until position + count) {
+            findViewWithTag<View>(items[i].id)
+                ?.timeText
+                ?.apply { text = items[i].textValue }
+        }
     }
 
     @Suppress("SameParameterValue")
@@ -134,23 +145,25 @@ class TimeRollView @JvmOverloads constructor(
             .toList()
 
         buttonViews.forEachIndexed { index, textView ->
-            invalidateCompoundText(textView, index == buttonViews.lastIndex)
-
-            if (textView.width > btnMaxWidth) { // find widest button
-                btnMaxWidth = textView.width
+            invalidateCompoundText(textView, index == buttonViews.lastIndex) {
+                if (textView.width > btnMaxWidth) { // find widest button
+                    btnMaxWidth = textView.width
+                }
             }
         }
 
-        if (btnMaxWidth > 0) {
-            buttonViews.forEach {
-                it.apply {
-                    layoutParams = layoutParams.apply { width = btnMaxWidth }
+        buttonViews.last().alsoOnLaid {
+            if (btnMaxWidth > 0) {
+                buttonViews.forEach {
+                    it.apply {
+                        layoutParams = layoutParams.apply { width = btnMaxWidth }
+                    }
                 }
             }
         }
     }
 
-    private fun invalidateCompoundText(textView: TextView, lastItem: Boolean) {
+    private fun invalidateCompoundText(textView: TextView, lastItem: Boolean, onTextWidth: (Int) -> Unit) {
         val oldText = textView.text
         val newText = if (lastItem) textOfLast else textOfNotLast
 
@@ -166,6 +179,7 @@ class TimeRollView @JvmOverloads constructor(
                         textView.text = newText
                         textView.setTextColor(ContextCompat.getColorStateList(context, newColor))
                         textView.isEnabled = true
+                        onTextWidth(textView.width)
                     }
 
                     override fun onAnimationEnd(animation: Animation?) {
@@ -177,6 +191,10 @@ class TimeRollView @JvmOverloads constructor(
 
                 textView.startAnimation(this)
                 textView.isEnabled = false
+            }
+        } else {
+            textView.alsoOnLaid {
+                onTextWidth(it.width)
             }
         }
     }

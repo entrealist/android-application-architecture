@@ -23,6 +23,10 @@ android {
         }
     }
 
+    sourceSets {
+        main.java.srcDirs += ['src/main/kotlin']
+        test.java.srcDirs += ['src/test/kotlin']
+    }
 }
 
 dependencies {
@@ -43,4 +47,5 @@ dependencies {
     implementation dependencies.x.ktx
     implementation dependencies.x.constraint
     implementation dependencies.threetenabp
+    implementation dependencies.timber
 }

@@ -76,6 +76,8 @@ ext {
 
     debugDb_version = '1.0.6'
 
+    timber_version = '4.7.1'
+
     testDependencies = [
             jUnit          : "junit:junit:$junit_version",
             espresso       : "com.android.support.test.espresso:espresso-core:$espresso_version",
@@ -233,6 +235,7 @@ ext {
             permissiondispatcherProcessor: "com.github.hotchemi:permissionsdispatcher-processor:$permissiondispatcher_version",
 
             // debug
-            debugDb                      : "com.amitshekhar.android:debug-db:$debugDb_version"
+            debugDb                      : "com.amitshekhar.android:debug-db:$debugDb_version",
+            timber                       : "com.jakewharton.timber:timber:$timber_version"
     ]
 }
