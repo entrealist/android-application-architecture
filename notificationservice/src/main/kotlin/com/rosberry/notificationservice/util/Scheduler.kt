@@ -22,8 +22,10 @@ import timber.log.Timber
  */
 object Scheduler {
 
-    private const val KEY_NOTIFICATION_ID = "KEY_NOTIFICATION_ID"
-    private const val KEY_REMINDER_SET_TIME = "KEY_REMINDER_SET_TIME"
+    const val ACTION_TRIGGER_NOTIFICATION = "ACTION_TRIGGER_NOTIFICATION"
+
+    const val KEY_NOTIFICATION_ID = "KEY_NOTIFICATION_ID"
+    const val KEY_REMINDER_SET_TIME = "KEY_REMINDER_SET_TIME"
 
     fun scheduleTimetable(nowDateTime: LocalDateTime, timetable: List<LocalTime>) {
 
@@ -34,7 +36,6 @@ object Scheduler {
                     PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
                     PackageManager.DONT_KILL_APP)
 
-        // set day alarm clocks
         for (timetableItemTime in timetable) {
             val delay = calculateDelayBeforeTime(nowDateTime.toLocalTime(),
                     timetableItemTime)

@@ -32,7 +32,7 @@ class TimeRollView @JvmOverloads constructor(
     @ColorRes
     private var textOfLastColorRes: Int = R.color.colorAccent
     @ColorRes
-    private var textOfNotLastColorRes: Int = R.color.colorPrimary
+    private var textOfNotLastColorRes: Int = R.color.colorPrimaryDark
 
     private var changeTimeListener: ((Int, Int, Int) -> Unit)? = null
     private var buttonClickListener: ((Int) -> Unit)? = null

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginTop="4dp"
     android:paddingStart="8dp"
     android:paddingEnd="8dp">
 
@@ -12,8 +13,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:animateLayoutChanges="true"
-        app:cardCornerRadius="6dp"
-        app:cardElevation="4dp"
+        app:cardCornerRadius="1.5dp"
+        app:cardElevation="1dp"
         app:cardUseCompatPadding="true"
         app:layout_constraintEnd_toStartOf="@id/compoundBtn"
         app:layout_constraintStart_toStartOf="parent"
