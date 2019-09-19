@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">AndroidApplicationSample</string>
+    <string name="show_date_picker">Show date picker</string>
 </resources>
