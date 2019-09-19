@@ -21,11 +21,6 @@ class MainActivity : AppCompatActivity() {
         val month = calendar[Calendar.MONTH]
         val day = calendar[Calendar.DAY_OF_MONTH]
 
-        DatePickerDialog(this, object : DatePickerDialog.OnDateSetListener {
-            override fun onDateSet(p0: DatePicker?, p1: Int, p2: Int, p3: Int) {
-
-            }
-
-        }, year, month, day).show()
+        DatePickerDialog(this, DatePickerDialog.OnDateSetListener { p0, p1, p2, p3 -> }, year, month, day).show()
     }
 }
