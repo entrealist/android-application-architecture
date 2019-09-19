@@ -140,7 +140,7 @@ dependencies {
 
 
     implementation deps.supportAppCompat
-    implementation deps.kotlin
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.50"
 
 
 }
