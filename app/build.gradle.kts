@@ -32,10 +32,30 @@ android {
         wearAppUnbundled = true
     }
 
-    buildTypes {
-        getByName("debug") {
-
+    signingConfigs {
+        create("release") {
+            keyAlias = keystoreProperties.getProperty("keyAlias")
+            keyPassword = keystoreProperties.getProperty("keyPassword")
+            storeFile = file(keystoreProperties.getProperty("storeFile"))
+            storePassword = keystoreProperties.getProperty("storePassword")
         }
+    }
+
+    buildTypes {
+        getByName("release") {
+            postprocessing {
+                isRemoveUnusedCode = true
+                isRemoveUnusedResources = true
+                isObfuscate = true
+                isOptimizeCode = true
+                proguardFile("proguard-rules.pro")
+            }
+
+            isDebuggable = false
+
+            signingConfig = signingConfigs.getByName("release")
+        }
+
     }
 
     testOptions {
