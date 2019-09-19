@@ -15,6 +15,14 @@ object Versions {
     const val junit = "4.12"
 }
 
+object ProductionConstants{
+    const val url = "\"https://yandex.com\""
+}
+
+object DevelopmentConstants{
+    const val url = "\"https://ya.com\""
+}
+
 object Libs {
     const val kotlin = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Versions.kotlin}"
     const val appcompat = "androidx.appcompat:appcompat:${Versions.appcompat}"

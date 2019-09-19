@@ -1,6 +1,5 @@
-import org.gradle.kotlin.dsl.*
-import java.util.Properties
 import java.io.FileInputStream
+import java.util.Properties
 
 plugins {
     id("com.android.application")
@@ -66,18 +65,19 @@ android {
 
     productFlavors {
         create("demo") {
-
-            versionCode = 1
+            buildConfigField("String", "BASE_URL", DevelopmentConstants.url)
+            versionCode = BuildConfig.versionCode + 10
         }
 
         create("prod") {
-
-            versionCode = 1
+            buildConfigField("String", "BASE_URL", ProductionConstants.url)
+            versionCode = BuildConfig.versionCode
         }
-        create("instant"){
-            versionCode =  1
+        create("instant") {
+            versionCode = BuildConfig.versionCode + 1000
         }
     }
+
 
     sourceSets {
         getByName("main").java.srcDirs("src/main/kotlin")
