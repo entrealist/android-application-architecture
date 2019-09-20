@@ -1,0 +1,13 @@
+include(":workmanager",
+        ":kotlin-dsl",
+        ":motionlayoutcollapsingtoolbar",
+        ":rxsearch",
+        ":pagination",
+        ":errorhandler",
+        ":barcodescanner",
+        ":roomdatabase",
+        ":viewpager",
+        ":navigation",
+        ":preferencemanager",
+        ":mediapicker",
+        ":surfaceviewrxed")
