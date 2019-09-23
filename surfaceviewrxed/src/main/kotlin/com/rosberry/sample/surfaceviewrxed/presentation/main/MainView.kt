@@ -3,12 +3,12 @@ package com.rosberry.sample.surfaceviewrxed.presentation.main
 import android.graphics.PointF
 import android.view.MotionEvent
 import com.alexvasilkov.gestures.State
-import com.arellomobile.mvp.MvpView
-import com.arellomobile.mvp.viewstate.strategy.AddToEndSingleStrategy
-import com.arellomobile.mvp.viewstate.strategy.OneExecutionStateStrategy
-import com.arellomobile.mvp.viewstate.strategy.StateStrategyType
 import com.rosberry.sample.surfaceviewrxed.presentation.system.drawing.SceneParams
 import io.reactivex.Observable
+import moxy.MvpView
+import moxy.viewstate.strategy.AddToEndSingleStrategy
+import moxy.viewstate.strategy.OneExecutionStateStrategy
+import moxy.viewstate.strategy.StateStrategyType
 
 /**
  * @author mmikhailov on 28/03/2019.

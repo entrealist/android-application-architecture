@@ -1,10 +1,10 @@
 package com.rosberry.sample.roomdatabase.db.entity
 
-import android.arch.persistence.room.Entity
-import android.arch.persistence.room.Ignore
-import android.arch.persistence.room.Index
-import android.arch.persistence.room.PrimaryKey
 import android.graphics.Bitmap
+import androidx.room.Entity
+import androidx.room.Ignore
+import androidx.room.Index
+import androidx.room.PrimaryKey
 import com.rosberry.sample.roomdatabase.data.Gender
 import org.threeten.bp.LocalDate
 

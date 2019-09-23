@@ -1,10 +1,10 @@
 package com.rosberry.navigation.presentation.items.list
 
-import com.arellomobile.mvp.InjectViewState
-import com.arellomobile.mvp.MvpView
 import com.rosberry.navigation.Screens
 import com.rosberry.navigation.di.items.ItemsNavigationQualifier
 import com.rosberry.navigation.presentation.base.BasePresenter
+import moxy.InjectViewState
+import moxy.MvpView
 import ru.terrakok.cicerone.Router
 import java.util.Random
 import javax.inject.Inject

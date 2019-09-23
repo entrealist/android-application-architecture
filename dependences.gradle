@@ -1,20 +1,22 @@
 ext {
-    buildToolsVersion = '28.0.3'
+    buildToolsVersion = '29.0.2'
     minSdkVersion = 21
-    compileSdkVersion = 28
-    targetSdkVersion = 28
+    compileSdkVersion = 29
+    targetSdkVersion = 29
 
     junit_version = "4.12"
     espresso_version = "3.1.0"
     runner_version = "1.0.2"
     play_services = "15.0.1"
-    x_work_manager_version = "2.0.1"
+    work_manager_version = "2.0.1"
 
-    supportLib_version = "28.0.0"
-    androidx_version = "1.0.2"
+    androidx_version = "1.1.0"
+    recycler_version = "1.0.0"
+    cardview_version = "1.0.0"
+    material_version = "1.0.0"
+    multidex_version = "2.0.0"
 
-    constraint_version = "1.1.3"
-    x_constraint_version = "2.0.0-alpha4"
+    constraint_version = "2.0.0-beta2"
 
     anko_version = "0.10.8"
 
@@ -31,18 +33,15 @@ ext {
     rxpermission_version = "0.10.2"
     rxbinding_version = "3.0.0-alpha2"
 
-    room_version = "1.1.1"
-    x_room_version = "2.1.0-alpha06"
+    room_version = "2.1.0"
 
     threetenabp_version = "1.2.0"
 
     dagger2_version = "2.22.1"
-    javaxAnnotation_version = "1.0"
 
     fabric_version = "2.9.1@aar"
     androidProcesses_version = "1.0.9"
     materialDialog_version = "0.9.6.0"
-    multidex_version = "1.0.3"
     supportLint_version = "26.3.0-alpha08"
     picasso_version = "2.71828"
     smartRefreshVersion = "1.0.3"
@@ -70,9 +69,9 @@ ext {
     pagerIndicator_version = "1.0.10"
     stickyHeaders_version = "0.4.3@aar"
 
-    moxy_version = '1.5.3'
+    moxy_version = '1.0.14'
 
-    cicerone_version = '4.0.2'
+    cicerone_version = '5.0.0'
     bottom_bar_version = '2.0.5'
 
     debugDb_version = '1.0.6'
@@ -80,10 +79,9 @@ ext {
     testDependencies = [
             jUnit          : "junit:junit:$junit_version",
             espresso       : "com.android.support.test.espresso:espresso-core:$espresso_version",
-            annotations    : "com.android.support:support-annotations:$supportLib_version",
-            runner         : "com.android.support.test:runner:$runner_version",
-            archCoreTesting: "android.arch.core:core-testing:$room_version",
-            roomTesting    : "android.arch.persistence.room:testing:$room_version"
+            runner         : 'androidx.test:runner:1.1.0',
+            archCoreTesting: 'androidx.arch.core:core-testing:2.0.0',
+            roomTesting    : 'androidx.room:room-testing:2.0.0'
     ]
 
     rosberry_core_version = "0.2.1"
@@ -98,32 +96,24 @@ ext {
             abstractRecyclerView   : "com.github.alexeykorshun:abstractrecyclerview:$abstract_recycler_view_version",
 
             //Android Support
-            support : [
-                    appCompat        : "com.android.support:appcompat-v7:$supportLib_version",
-                    recyclerView     : "com.android.support:recyclerview-v7:$supportLib_version",
-                    design           : "com.android.support:design:$supportLib_version",
-                    cardView         : "com.android.support:cardview-v7:$supportLib_version",
-                    multidex         : "com.android.support:multidex:$multidex_version",
-                    dynamicAnimations: "com.android.support:support-dynamic-animation:$supportLib_version",
-                    constraintLayout : "com.android.support.constraint:constraint-layout:$constraint_version",
-                    v13              : "com.android.support:support-v13:$supportLib_version",
-                    motionLayout     : "com.android.support.constraint:constraint-layout:$x_constraint_version",
-            ],
-
             x : [
                     appCompat        : "androidx.appcompat:appcompat:$androidx_version",
-                    recyclerView     : "androidx.recyclerview:recyclerview:$androidx_version",
-                    constraint       : "androidx.constraintlayout:constraintlayout:$x_constraint_version",
-                    workManager      : "androidx.work:work-runtime-ktx:$x_work_manager_version",
+                    recyclerView     : "androidx.recyclerview:recyclerview:$recycler_version",
+                    multidex         : "androidx.multidex:multidex:$multidex_version",
+                    multidexInst     : "androidx.multidex:multidex-instrumentation:$multidex_version",
+                    constraint       : "androidx.constraintlayout:constraintlayout:$constraint_version",
+                    cardView         : "androidx.cardview:cardview:$cardview_version",
+                    workManager      : "androidx.work:work-runtime-ktx:$work_manager_version",
+                    material         : "com.google.android.material:material:$material_version",
+                    ktx              : "androidx.core:core-ktx:$androidx_version",
                     room : [
-                            runtime  : "androidx.room:room-runtime:$x_room_version",
-                            compiler : "androidx.room:room-compiler:$x_room_version",
-                            rx2      : "androidx.room:room-rxjava2:$x_room_version",
-                            ktx      : "androidx.room:room-ktx:$x_room_version",
+                            runtime  : "androidx.room:room-runtime:$room_version",
+                            compiler : "androidx.room:room-compiler:$room_version",
+                            rx2      : "androidx.room:room-rxjava2:$room_version",
+                            ktx      : "androidx.room:room-ktx:$room_version",
                     ],
             ],
 
-            supportMultidexInst     : "com.android.support:multidex-instrumentation:$multidex_version",
             supportLint             : "com.android.tools.lint:lint-gradle:$supportLint_version",
 
             //play services
@@ -149,7 +139,7 @@ ext {
 
             //rest
             retrofit : [
-                    library                : "com.squareup.retrofit2:retrofit:$retrofit_version",
+                    library         : "com.squareup.retrofit2:retrofit:$retrofit_version",
                     rxJavaAdapter   : "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version",
                     gsonConverter   : "com.squareup.retrofit2:converter-gson:$retrofit_version",
             ],
@@ -189,9 +179,9 @@ ext {
 
             //data
             room : [
-                    runtime             : "android.arch.persistence.room:runtime:$room_version",
-                    compiler            : "android.arch.persistence.room:compiler:$room_version",
-                    rx2                 : "android.arch.persistence.room:rxjava2:$room_version",
+                    runtime             : 'androidx.room:room-runtime:2.0.0',
+                    compiler            : 'androidx.room:room-compiler:2.0.0',
+                    rx2                 : 'androidx.room:room-rxjava2:2.0.0',
             ],
 
             //ui
@@ -223,9 +213,10 @@ ext {
 
             //moxy
             moxy : [
-                    library         : "com.arello-mobile:moxy:$moxy_version",
-                    compiler        : "com.arello-mobile:moxy-compiler:$moxy_version",
-                    support         : "com.arello-mobile:moxy-app-compat:$moxy_version"
+                    library         : "com.github.moxy-community:moxy:$moxy_version",
+                    compiler        : "com.github.moxy-community:moxy-compiler:$moxy_version",
+                    support         : "com.github.moxy-community:moxy-androidx:$moxy_version",
+                    material         : "com.github.moxy-community:moxy-material:$moxy_version"
             ],
 
             //time

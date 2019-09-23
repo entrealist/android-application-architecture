@@ -3,14 +3,10 @@ package com.rosberry.sample.rxsearch.ui
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.os.Bundle
-import android.support.constraint.ConstraintSet
-import android.support.v4.view.animation.FastOutSlowInInterpolator
 import android.view.View
 import android.view.ViewPropertyAnimator
 import android.widget.Toast
-import com.arellomobile.mvp.MvpAppCompatActivity
-import com.arellomobile.mvp.presenter.InjectPresenter
-import com.arellomobile.mvp.presenter.ProvidePresenter
+import androidx.interpolator.view.animation.FastOutSlowInInterpolator
 import com.rosberry.sample.rxsearch.R
 import com.rosberry.sample.rxsearch.di.AndroidInjector
 import com.rosberry.sample.rxsearch.presentation.SearchPresenter
@@ -18,6 +14,9 @@ import com.rosberry.sample.rxsearch.presentation.SearchView
 import com.rosberry.sample.rxsearch.presentation.model.SearchResultItem
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.l_interactive_placeholder.*
+import moxy.MvpAppCompatActivity
+import moxy.presenter.InjectPresenter
+import moxy.presenter.ProvidePresenter
 
 class MainActivity : MvpAppCompatActivity(), SearchView {
 
@@ -120,15 +119,16 @@ class MainActivity : MvpAppCompatActivity(), SearchView {
 
     private fun applyConstraints(connectToSearchBar: Boolean) {
         searchParentConstraint?.let {
-            ConstraintSet().apply {
+            androidx.constraintlayout.widget.ConstraintSet()
+                .apply {
                 clone(it)
 
                 if (connectToSearchBar) {
-                    connect(R.id.interactivePlaceholder, ConstraintSet.TOP, R.id.searchBar, ConstraintSet.BOTTOM)
-                    connect(R.id.searchProgress, ConstraintSet.TOP, R.id.searchBar, ConstraintSet.BOTTOM)
+                    connect(R.id.interactivePlaceholder, androidx.constraintlayout.widget.ConstraintSet.TOP, R.id.searchBar, androidx.constraintlayout.widget.ConstraintSet.BOTTOM)
+                    connect(R.id.searchProgress, androidx.constraintlayout.widget.ConstraintSet.TOP, R.id.searchBar, androidx.constraintlayout.widget.ConstraintSet.BOTTOM)
                 } else {
-                    connect(R.id.interactivePlaceholder, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP)
-                    connect(R.id.searchProgress, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP)
+                    connect(R.id.interactivePlaceholder, androidx.constraintlayout.widget.ConstraintSet.TOP, androidx.constraintlayout.widget.ConstraintSet.PARENT_ID, androidx.constraintlayout.widget.ConstraintSet.TOP)
+                    connect(R.id.searchProgress, androidx.constraintlayout.widget.ConstraintSet.TOP, androidx.constraintlayout.widget.ConstraintSet.PARENT_ID, androidx.constraintlayout.widget.ConstraintSet.TOP)
                 }
 
                 applyTo(it)

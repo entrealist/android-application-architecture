@@ -1,8 +1,6 @@
 package com.rosberry.navigation.ui.main
 
 import android.os.Bundle
-import com.arellomobile.mvp.presenter.InjectPresenter
-import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.ashokvarma.bottomnavigation.BottomNavigationBar
 import com.ashokvarma.bottomnavigation.BottomNavigationItem
 import com.rosberry.navigation.R
@@ -14,6 +12,8 @@ import com.rosberry.navigation.presentation.main.BottomNavigationView
 import com.rosberry.navigation.presentation.main.navigation.SupportTabsNavigator
 import com.rosberry.navigation.ui.base.BaseActivity
 import kotlinx.android.synthetic.main.a_bottom_navigation.*
+import moxy.presenter.InjectPresenter
+import moxy.presenter.ProvidePresenter
 import ru.terrakok.cicerone.NavigatorHolder
 import ru.terrakok.cicerone.android.support.SupportAppNavigator
 import javax.inject.Inject

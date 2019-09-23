@@ -1,8 +1,6 @@
 package com.rosberry.navigation.ui.login
 
 import android.os.Bundle
-import com.arellomobile.mvp.presenter.InjectPresenter
-import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.rosberry.navigation.R
 import com.rosberry.navigation.di.AndroidInjector
 import com.rosberry.navigation.di.app.GlobalNavigationQualifier
@@ -10,6 +8,8 @@ import com.rosberry.navigation.presentation.login.LoginPresenter
 import com.rosberry.navigation.presentation.login.LoginView
 import com.rosberry.navigation.ui.base.BaseActivity
 import kotlinx.android.synthetic.main.a_login.*
+import moxy.presenter.InjectPresenter
+import moxy.presenter.ProvidePresenter
 import ru.terrakok.cicerone.NavigatorHolder
 import ru.terrakok.cicerone.android.support.SupportAppNavigator
 import javax.inject.Inject

@@ -1,8 +1,6 @@
 package com.rosberry.navigation.ui.onboarding
 
 import android.os.Bundle
-import com.arellomobile.mvp.presenter.InjectPresenter
-import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.rosberry.navigation.R
 import com.rosberry.navigation.di.AndroidInjector
 import com.rosberry.navigation.di.app.GlobalNavigationQualifier
@@ -10,6 +8,8 @@ import com.rosberry.navigation.di.onboarding.OnBoardingNavigationQualifier
 import com.rosberry.navigation.presentation.onboarding.OnBoardingPresenter
 import com.rosberry.navigation.presentation.onboarding.OnBoardingView
 import com.rosberry.navigation.ui.base.BaseActivity
+import moxy.presenter.InjectPresenter
+import moxy.presenter.ProvidePresenter
 import ru.terrakok.cicerone.NavigatorHolder
 import ru.terrakok.cicerone.android.support.SupportAppNavigator
 import javax.inject.Inject

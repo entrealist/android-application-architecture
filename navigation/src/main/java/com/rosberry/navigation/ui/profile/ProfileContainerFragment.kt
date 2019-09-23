@@ -1,13 +1,13 @@
 package com.rosberry.navigation.ui.profile
 
 import android.content.Context
-import com.arellomobile.mvp.presenter.InjectPresenter
-import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.rosberry.navigation.R
 import com.rosberry.navigation.di.AndroidInjector
 import com.rosberry.navigation.di.profile.ProfileNavigationQualifier
 import com.rosberry.navigation.presentation.profile.ProfileContainerPresenter
 import com.rosberry.navigation.ui.base.BaseFragment
+import moxy.presenter.InjectPresenter
+import moxy.presenter.ProvidePresenter
 import ru.terrakok.cicerone.NavigatorHolder
 import ru.terrakok.cicerone.android.support.SupportAppNavigator
 import javax.inject.Inject
@@ -42,7 +42,7 @@ class ProfileContainerFragment : BaseFragment(), ProfileContainerView {
             .providePresenter()
     }
 
-    override fun onAttach(context: Context?) {
+    override fun onAttach(context: Context) {
         AndroidInjector
             .openProfileScope()
             .inject(this)

@@ -3,7 +3,6 @@ package com.rosberry.sample.rxsearch.ui;
 import android.app.Activity;
 import android.content.Context;
 import android.content.ContextWrapper;
-import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.WindowManager;
@@ -14,6 +13,8 @@ import android.widget.TextView;
 import com.rosberry.sample.rxsearch.R;
 
 import net.yslibrary.android.keyboardvisibilityevent.util.UIUtil;
+
+import androidx.core.view.ViewCompat;
 
 /**
  * A search UI widget that implements a floating search box also called persistent

@@ -17,7 +17,7 @@ android {
         versionCode 1
         versionName "1.0"
 
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
     }
 
@@ -34,7 +34,7 @@ dependencies {
     def deps = rootProject.ext.dependencies
 
     implementation deps.kotlin
-    implementation deps.support.appCompat
+    implementation deps.x.appCompat
 
     implementation deps.moxy.library
     implementation deps.moxy.support

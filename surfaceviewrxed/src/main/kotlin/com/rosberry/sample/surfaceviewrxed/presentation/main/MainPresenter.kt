@@ -6,8 +6,6 @@ import android.graphics.PointF
 import android.view.MotionEvent
 import android.view.animation.AccelerateInterpolator
 import com.alexvasilkov.gestures.State
-import com.arellomobile.mvp.InjectViewState
-import com.arellomobile.mvp.MvpPresenter
 import com.rosberry.sample.surfaceviewrxed.R
 import com.rosberry.sample.surfaceviewrxed.data.ResourceManager
 import com.rosberry.sample.surfaceviewrxed.data.myscene.MySceneData
@@ -19,6 +17,8 @@ import com.rosberry.sample.surfaceviewrxed.presentation.system.drawing.StateObse
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
+import moxy.InjectViewState
+import moxy.MvpPresenter
 import javax.inject.Inject
 
 /**

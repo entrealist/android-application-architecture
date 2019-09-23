@@ -1,14 +1,14 @@
 package com.rosberry.navigation.ui.items
 
 import android.content.Context
-import com.arellomobile.mvp.presenter.InjectPresenter
-import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.rosberry.navigation.R
 import com.rosberry.navigation.di.AndroidInjector
 import com.rosberry.navigation.di.items.ItemsNavigationQualifier
 import com.rosberry.navigation.presentation.items.ItemsContainerPresenter
 import com.rosberry.navigation.presentation.items.ItemsContainerView
 import com.rosberry.navigation.ui.base.BaseFragment
+import moxy.presenter.InjectPresenter
+import moxy.presenter.ProvidePresenter
 import ru.terrakok.cicerone.NavigatorHolder
 import ru.terrakok.cicerone.android.support.SupportAppNavigator
 import javax.inject.Inject
@@ -42,7 +42,7 @@ class ItemsContainerFragment : BaseFragment(), ItemsContainerView {
             .providePresenter()
     }
 
-    override fun onAttach(context: Context?) {
+    override fun onAttach(context: Context) {
         AndroidInjector
             .openItemsScope()
             .inject(this)

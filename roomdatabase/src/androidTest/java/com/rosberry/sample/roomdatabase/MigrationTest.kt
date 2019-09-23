@@ -1,11 +1,11 @@
 package com.rosberry.sample.roomdatabase
 
-import android.arch.persistence.db.framework.FrameworkSQLiteOpenHelperFactory
-import android.arch.persistence.room.testing.MigrationTestHelper
 import android.content.ContentValues
 import android.database.sqlite.SQLiteDatabase
-import android.support.test.InstrumentationRegistry
-import android.support.test.runner.AndroidJUnit4
+import androidx.room.testing.MigrationTestHelper
+import androidx.sqlite.db.framework.FrameworkSQLiteOpenHelperFactory
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.platform.app.InstrumentationRegistry
 import com.rosberry.sample.roomdatabase.data.Gender
 import com.rosberry.sample.roomdatabase.db.AppDatabase
 import com.rosberry.sample.roomdatabase.db.Migrations.MIGRATION_1_2
@@ -14,7 +14,6 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import java.io.IOException
-
 
 
 /**

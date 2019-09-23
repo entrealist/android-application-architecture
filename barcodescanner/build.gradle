@@ -29,8 +29,8 @@ dependencies {
 
     implementation deps.kotlin
 
-    implementation deps.support.appCompat
-    implementation deps.support.constraintLayout
+    implementation deps.x.appCompat
+    implementation deps.x.constraint
 
     implementation deps.moxy.library
     implementation deps.moxy.support

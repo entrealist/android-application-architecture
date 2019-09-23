@@ -1,10 +1,9 @@
 package com.rosberry.viewpager
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 import com.rosberry.viewpager.fragmentpager.FragmentPagerFragment
 import com.rosberry.viewpager.itempager.ItemPagerFragment
 
@@ -37,7 +36,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun openFragment(f: Fragment) {
+    private fun openFragment(f: androidx.fragment.app.Fragment) {
             supportFragmentManager.beginTransaction()
                 .apply {
                     replace(R.id.fragmentContainer, f)

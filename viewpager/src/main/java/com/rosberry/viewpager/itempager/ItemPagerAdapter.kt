@@ -1,7 +1,6 @@
 package com.rosberry.viewpager.itempager
 
 import android.content.Context
-import android.support.v4.view.PagerAdapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,7 +13,7 @@ import kotlinx.android.synthetic.main.i_card.view.*
 class ItemPagerAdapter(
         private val context: Context,
         private var items: MutableList<Item> = ArrayList()
-) : PagerAdapter() {
+) : androidx.viewpager.widget.PagerAdapter() {
 
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
         val view = LayoutInflater.from(context)

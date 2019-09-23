@@ -1,7 +1,6 @@
 package com.rosberry.viewpager.itempager
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +10,7 @@ import kotlinx.android.synthetic.main.f_item_pager.*
 /**
  * @author mmikhailov on 12.10.2018.
  */
-class ItemPagerFragment : Fragment() {
+class ItemPagerFragment : androidx.fragment.app.Fragment() {
 
     private val pagerAdapter: ItemPagerAdapter by lazy { ItemPagerAdapter(requireContext()) }
 

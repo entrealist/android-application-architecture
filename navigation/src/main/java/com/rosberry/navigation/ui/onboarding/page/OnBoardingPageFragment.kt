@@ -2,8 +2,6 @@ package com.rosberry.navigation.ui.onboarding.page
 
 import android.os.Bundle
 import android.view.View
-import com.arellomobile.mvp.presenter.InjectPresenter
-import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.rosberry.navigation.R
 import com.rosberry.navigation.di.AndroidInjector
 import com.rosberry.navigation.presentation.onboarding.page.OnBoardingPagePresenter
@@ -11,6 +9,8 @@ import com.rosberry.navigation.presentation.onboarding.page.OnBoardingPageView
 import com.rosberry.navigation.ui.base.BaseFragment
 import com.rosberry.navigation.ui.onboarding.OnBoardingCompleteListener
 import kotlinx.android.synthetic.main.f_on_boarding_page.*
+import moxy.presenter.InjectPresenter
+import moxy.presenter.ProvidePresenter
 
 /**
  * @author mmikhailov on 01.10.2018.

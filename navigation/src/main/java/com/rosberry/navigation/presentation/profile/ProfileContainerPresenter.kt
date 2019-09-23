@@ -1,10 +1,10 @@
 package com.rosberry.navigation.presentation.profile
 
-import com.arellomobile.mvp.InjectViewState
 import com.rosberry.navigation.Screens
 import com.rosberry.navigation.di.profile.ProfileNavigationQualifier
 import com.rosberry.navigation.presentation.base.BasePresenter
 import com.rosberry.navigation.ui.profile.ProfileContainerView
+import moxy.InjectViewState
 import ru.terrakok.cicerone.Router
 import javax.inject.Inject
 

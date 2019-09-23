@@ -1,7 +1,7 @@
 package com.rosberry.sample.roomdatabase.db
 
-import android.arch.persistence.db.SupportSQLiteDatabase
-import android.arch.persistence.room.migration.Migration
+import androidx.room.migration.Migration
+import androidx.sqlite.db.SupportSQLiteDatabase
 
 /**
  * @author mmikhailov on 14.11.2018.

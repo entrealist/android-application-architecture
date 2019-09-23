@@ -1,7 +1,5 @@
 package com.rosberry.navigation.presentation.main.navigation
 
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
 import ru.terrakok.cicerone.Navigator
 import ru.terrakok.cicerone.android.support.SupportAppScreen
 import ru.terrakok.cicerone.commands.Command
@@ -10,7 +8,7 @@ import ru.terrakok.cicerone.commands.Command
  * @author mmikhailov on 07/12/2018.
  */
 class SupportTabsNavigator(
-        private val fragmentManager: FragmentManager,
+        private val fragmentManager: androidx.fragment.app.FragmentManager,
         private val containerId: Int
 ) : Navigator {
 
@@ -35,7 +33,7 @@ class SupportTabsNavigator(
 
     private fun openTab(command: OpenTab) {
         val screen = command.screen as SupportAppScreen
-        var currentFragment: Fragment? = null
+        var currentFragment: androidx.fragment.app.Fragment? = null
         for (f in fragmentManager.fragments) {
             if (f.isVisible) {
                 currentFragment = f

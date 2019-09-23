@@ -1,8 +1,8 @@
 package com.rosberry.navigation.presentation.items.details
 
-import com.arellomobile.mvp.InjectViewState
 import com.rosberry.navigation.di.items.details.ItemsItemIdQualifier
 import com.rosberry.navigation.presentation.base.BasePresenter
+import moxy.InjectViewState
 import javax.inject.Inject
 
 /**

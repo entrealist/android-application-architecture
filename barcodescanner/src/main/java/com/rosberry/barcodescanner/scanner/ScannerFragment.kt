@@ -9,8 +9,6 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.VibrationEffect
 import android.os.Vibrator
-import android.support.v7.app.AlertDialog
-import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
@@ -18,13 +16,15 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import com.arellomobile.mvp.MvpAppCompatFragment
-import com.arellomobile.mvp.presenter.InjectPresenter
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import com.google.zxing.Result
 import com.rosberry.barcodescanner.MainActivity
 import com.rosberry.barcodescanner.R
 import kotlinx.android.synthetic.main.fragment_scanner.*
 import me.dm7.barcodescanner.zxing.ZXingScannerView
+import moxy.MvpAppCompatFragment
+import moxy.presenter.InjectPresenter
 import permissions.dispatcher.NeedsPermission
 import permissions.dispatcher.OnNeverAskAgain
 import permissions.dispatcher.OnPermissionDenied
@@ -80,21 +80,21 @@ class ScannerFragment : MvpAppCompatFragment(), ScannerView, ZXingScannerView.Re
         super.onStop()
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
-        inflater?.inflate(R.menu.scanner, menu)
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.scanner, menu)
     }
 
-    override fun onPrepareOptionsMenu(menu: Menu?) {
+    override fun onPrepareOptionsMenu(menu: Menu) {
         super.onPrepareOptionsMenu(menu)
 
-        menu?.findItem(R.id.action_torch_on)
+        menu.findItem(R.id.action_torch_on)
             ?.isVisible = !scanner.flash
-        menu?.findItem(R.id.action_torch_off)
+        menu.findItem(R.id.action_torch_off)
             ?.isVisible = scanner.flash
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        when (item?.itemId ?: 0) {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
             R.id.action_torch_on -> {
                 scanner.flash = true
                 requireActivity().invalidateOptionsMenu()

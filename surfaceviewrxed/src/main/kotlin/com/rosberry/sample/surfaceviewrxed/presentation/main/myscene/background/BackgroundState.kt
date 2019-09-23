@@ -1,7 +1,7 @@
 package com.rosberry.sample.surfaceviewrxed.presentation.main.myscene.background
 
 import android.graphics.Color
-import android.support.annotation.ColorInt
+import androidx.annotation.ColorInt
 import com.rosberry.sample.surfaceviewrxed.presentation.system.drawing.LayerState
 
 /**

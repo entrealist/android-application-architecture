@@ -1,10 +1,8 @@
 package com.rosberry.navigation.ui.profile
 
-import com.arellomobile.mvp.MvpView
+import moxy.MvpView
 
 /**
  * @author mmikhailov on 27.09.2018.
  */
-interface ProfileContainerView : MvpView {
-
-}
+interface ProfileContainerView : MvpView

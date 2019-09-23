@@ -1,9 +1,8 @@
 package com.rosberry.navigation.presentation.about.content
 
-import com.arellomobile.mvp.MvpView
+import moxy.MvpView
 
 /**
  * @author mmikhailov on 01.10.2018.
  */
-interface AboutContentView : MvpView {
-}
+interface AboutContentView : MvpView
