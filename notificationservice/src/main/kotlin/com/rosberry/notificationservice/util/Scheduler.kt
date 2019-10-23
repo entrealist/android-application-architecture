@@ -22,11 +22,6 @@ import timber.log.Timber
  */
 object Scheduler {
 
-    const val ACTION_TRIGGER_NOTIFICATION = "ACTION_TRIGGER_NOTIFICATION"
-
-    const val KEY_NOTIFICATION_ID = "KEY_NOTIFICATION_ID"
-    const val KEY_REMINDER_SET_TIME = "KEY_REMINDER_SET_TIME"
-
     fun scheduleTimetable(nowDateTime: LocalDateTime, timetable: List<LocalTime>) {
 
         val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
@@ -37,37 +32,41 @@ object Scheduler {
                     PackageManager.DONT_KILL_APP)
 
         for (timetableItemTime in timetable) {
-            val delay = calculateDelayBeforeTime(nowDateTime.toLocalTime(),
+            val delay = calculateDurationMsBetween(nowDateTime.toLocalTime(),
                     timetableItemTime)
-            if (delay < 0) continue
+            if (delay < 0) continue // past
 
             val notificationId = getNotificationId(timetableItemTime)
             val intent = Intent(context, AlarmReceiver::class.java)
+                .putExtra(Constant.KEY_NOTIFICATION_ID, notificationId)
+                .putExtra(Constant.KEY_REMINDER_SET_TIME, timetableItemTime.toFormattedString())
 
-            intent
-                .putExtra(KEY_NOTIFICATION_ID, notificationId)
-                .putExtra(KEY_REMINDER_SET_TIME, timetableItemTime.toFormattedString())
-
-            val pendingIntent = PendingIntent.getBroadcast(context,
-                    notificationId, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+            val pendingIntent = PendingIntent.getBroadcast(
+                    context,
+                    notificationId,
+                    intent,
+                    PendingIntent.FLAG_UPDATE_CURRENT
+            )
 
             alarmManager.setAlarmClock(
                     AlarmManager.AlarmClockInfo(System.currentTimeMillis() + delay, pendingIntent),
-                    pendingIntent)
+                    pendingIntent
+            )
 
-            Timber.d("scheduleTimetable::add reminder request for time: $timetableItemTime, delay before: ${delay / 1000f / 60f} min")
+            Timber.d("scheduleTimetable::alarm set on: $timetableItemTime, delay before: ${delay / 1000f / 60f} min")
         }
     }
 
-    private fun calculateDelayBeforeTime(nowTime: LocalTime, target: LocalTime): Long {
+    private fun calculateDurationMsBetween(nowTime: LocalTime, target: LocalTime): Long {
         return when {
-            target.dropSeconds() == nowTime.dropSeconds() && nowTime.isStartOfDay() -> 0
+            target.dropSeconds() == nowTime.dropSeconds() && nowTime.isStartOfDay() -> 0 // target == now time == 00:00 (Midnight)
             target.isAfter(nowTime) -> Duration.between(nowTime, target).toMillis()
             else -> -1
         }
     }
 
     private fun getNotificationId(time: LocalTime): Int {
-        return time.toFormattedString().getUniqueInteger()
+        return time.toFormattedString()
+            .getUniqueInteger()
     }
 }

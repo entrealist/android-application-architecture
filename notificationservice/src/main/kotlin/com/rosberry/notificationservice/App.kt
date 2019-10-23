@@ -4,6 +4,8 @@ import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
 import com.jakewharton.threetenabp.AndroidThreeTen
+import com.rosberry.notificationservice.extension.createNotificationChannel
+import com.rosberry.notificationservice.util.Constant
 import timber.log.Timber
 
 /**
@@ -21,6 +23,7 @@ class App : Application() {
 
         context = this
         AndroidThreeTen.init(this)
+        createNotificationChannel(Constant.CHANNEL_ID, Constant.CHANNEL_NAME, Constant.CHANNEL_DESCRIPTION)
 
         if (BuildConfig.DEBUG) {
             Timber.plant(Timber.DebugTree())

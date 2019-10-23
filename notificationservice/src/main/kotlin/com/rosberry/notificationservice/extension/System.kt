@@ -1,5 +1,9 @@
 package com.rosberry.notificationservice.extension
 
+import android.annotation.TargetApi
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.content.Context
 import android.os.Build
 import java.math.BigInteger
 import java.security.MessageDigest
@@ -51,3 +55,14 @@ fun is23orAbove() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.M
 fun is24orAbove() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.N
 fun is26orAbove() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.O
 fun is28orAbove() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.P
+
+@TargetApi(Build.VERSION_CODES.O)
+fun Context.createNotificationChannel(id: String, name: String, description: String,
+                                      importance: Int = NotificationManager.IMPORTANCE_DEFAULT) {
+    if (is26orAbove()) {
+        (getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).createNotificationChannel(
+                NotificationChannel(id, name, importance)
+                    .apply { setDescription(description) }
+        )
+    }
+}

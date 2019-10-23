@@ -5,7 +5,7 @@ import android.content.Context
 import android.content.Intent
 import com.rosberry.notificationservice.extension.is26orAbove
 import com.rosberry.notificationservice.extension.toFormattedString
-import com.rosberry.notificationservice.util.Scheduler
+import com.rosberry.notificationservice.util.Constant
 import org.threeten.bp.LocalTime
 import timber.log.Timber
 
@@ -23,13 +23,13 @@ class AlarmReceiver : BroadcastReceiver() {
             return
         }
 
-        val notificationId = extras.getInt(Scheduler.KEY_NOTIFICATION_ID, -1)
-        var setTime = extras.getString(Scheduler.KEY_REMINDER_SET_TIME)
+        val notificationId = extras.getInt(Constant.KEY_NOTIFICATION_ID, -1)
+        var setTime = extras.getString(Constant.KEY_REMINDER_SET_TIME)
 
         Timber.d("""
             onReceive::executing timetable item:
-                        notification id:        $notificationId,
-                        notification time set:  $setTime,
+                        notification id:        $notificationId
+                        notification time set:  $setTime
                         the time is now:        ${LocalTime.now()}
                         """.trimIndent())
 
@@ -44,9 +44,9 @@ class AlarmReceiver : BroadcastReceiver() {
         }
 
         val service = Intent(context, NotificationService::class.java).apply {
-            action = Scheduler.ACTION_TRIGGER_NOTIFICATION
-            putExtra(Scheduler.KEY_NOTIFICATION_ID, notificationId)
-            putExtra(Scheduler.KEY_REMINDER_SET_TIME, setTime)
+            action = Constant.ACTION_TRIGGER_NOTIFICATION
+            putExtra(Constant.KEY_NOTIFICATION_ID, notificationId)
+            putExtra(Constant.KEY_REMINDER_SET_TIME, setTime)
         }
 
         if (is26orAbove()) {
