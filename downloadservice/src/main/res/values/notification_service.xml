@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="data">Data</string>
+    <string name="downloading_data">Downloading data</string>
+    <string name="download_channel_name">Download channel</string>
+    <string name="download_channel_description">Download channel description</string>
+    <string name="download_channel_id">DownloadingChannel</string>
+    <string name="uploading_data">Uploading data</string>
+</resources>

@@ -1,5 +1,6 @@
 include ':workmanager', ':gpp',
         ':notificationservice',
+        ':downloadservice',
         ':motionlayoutcollapsingtoolbar',
         ':rxsearch',
         ':pagination',
