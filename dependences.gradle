@@ -35,7 +35,7 @@ ext {
 
     room_version = "2.1.0"
 
-    threetenabp_version = "1.2.0"
+    threetenabp_version = "1.2.1"
 
     dagger2_version = "2.22.1"
 
@@ -76,6 +76,8 @@ ext {
 
     debugDb_version = '1.0.6'
 
+    timber_version = '4.7.1'
+
     testDependencies = [
             jUnit          : "junit:junit:$junit_version",
             espresso       : "com.android.support.test.espresso:espresso-core:$espresso_version",
@@ -89,149 +91,151 @@ ext {
 
     dependencies = [
 
-            rosberry : [
-                    core : "com.rosberry.android:core:$rosberry_core_version"
+            rosberry                     : [
+                    core: "com.rosberry.android:core:$rosberry_core_version"
             ],
 
-            abstractRecyclerView   : "com.github.alexeykorshun:abstractrecyclerview:$abstract_recycler_view_version",
+            abstractRecyclerView         : "com.github.alexeykorshun:abstractrecyclerview:$abstract_recycler_view_version",
 
             //Android Support
-            x : [
-                    appCompat        : "androidx.appcompat:appcompat:$androidx_version",
-                    recyclerView     : "androidx.recyclerview:recyclerview:$recycler_version",
-                    multidex         : "androidx.multidex:multidex:$multidex_version",
-                    multidexInst     : "androidx.multidex:multidex-instrumentation:$multidex_version",
-                    constraint       : "androidx.constraintlayout:constraintlayout:$constraint_version",
-                    cardView         : "androidx.cardview:cardview:$cardview_version",
-                    workManager      : "androidx.work:work-runtime-ktx:$work_manager_version",
-                    material         : "com.google.android.material:material:$material_version",
-                    ktx              : "androidx.core:core-ktx:$androidx_version",
-                    room : [
-                            runtime  : "androidx.room:room-runtime:$room_version",
-                            compiler : "androidx.room:room-compiler:$room_version",
-                            rx2      : "androidx.room:room-rxjava2:$room_version",
-                            ktx      : "androidx.room:room-ktx:$room_version",
+            x                            : [
+                    appCompat          : "androidx.appcompat:appcompat:$androidx_version",
+                    lifecycleExtensions: "androidx.lifecycle:lifecycle-extensions:2.1.0",
+                    recyclerView       : "androidx.recyclerview:recyclerview:$recycler_version",
+                    multidex           : "androidx.multidex:multidex:$multidex_version",
+                    multidexInst       : "androidx.multidex:multidex-instrumentation:$multidex_version",
+                    constraint         : "androidx.constraintlayout:constraintlayout:$constraint_version",
+                    cardView           : "androidx.cardview:cardview:$cardview_version",
+                    workManager        : "androidx.work:work-runtime-ktx:$work_manager_version",
+                    material           : "com.google.android.material:material:$material_version",
+                    ktx                : "androidx.core:core-ktx:$androidx_version",
+                    room               : [
+                            runtime : "androidx.room:room-runtime:$room_version",
+                            compiler: "androidx.room:room-compiler:$room_version",
+                            rx2     : "androidx.room:room-rxjava2:$room_version",
+                            ktx     : "androidx.room:room-ktx:$room_version",
                     ],
             ],
 
-            supportLint             : "com.android.tools.lint:lint-gradle:$supportLint_version",
+            supportLint                  : "com.android.tools.lint:lint-gradle:$supportLint_version",
 
             //play services
-            playServices : [
-                    servicesLocation    : "com.google.android.gms:play-services-location:$play_services",
-                    servicesMap         : "com.google.android.gms:play-services-maps:$play_services",
+            playServices                 : [
+                    servicesLocation: "com.google.android.gms:play-services-location:$play_services",
+                    servicesMap     : "com.google.android.gms:play-services-maps:$play_services",
             ],
 
-            firebase : [
-                    core            : "com.google.firebase:firebase-core:$play_services",
-                    messaging       : "com.google.firebase:firebase-messaging:$play_services",
-                    database        : "com.google.firebase:firebase-database:$play_services",
-                    auth            : "com.google.firebase:firebase-auth:$play_services",
-                    storage         : "com.google.firebase:firebase-storage:$play_services",
-                    config          : "com.google.firebase:firebase-config:$play_services",
-                    ui              : "com.firebaseui:firebase-ui-storage:$firebaseUi_version",
+            firebase                     : [
+                    core     : "com.google.firebase:firebase-core:$play_services",
+                    messaging: "com.google.firebase:firebase-messaging:$play_services",
+                    database : "com.google.firebase:firebase-database:$play_services",
+                    auth     : "com.google.firebase:firebase-auth:$play_services",
+                    storage  : "com.google.firebase:firebase-storage:$play_services",
+                    config   : "com.google.firebase:firebase-config:$play_services",
+                    ui       : "com.firebaseui:firebase-ui-storage:$firebaseUi_version",
             ],
 
             //kotlin libs
-            kotlin                  : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version",
-            ankoCommons             : "org.jetbrains.anko:anko-commons:$anko_version",
-            ankoCoroutines          : "org.jetbrains.anko:anko-coroutines:$anko_version",
+            kotlin                       : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version",
+            ankoCommons                  : "org.jetbrains.anko:anko-commons:$anko_version",
+            ankoCoroutines               : "org.jetbrains.anko:anko-coroutines:$anko_version",
 
             //rest
-            retrofit : [
-                    library         : "com.squareup.retrofit2:retrofit:$retrofit_version",
-                    rxJavaAdapter   : "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version",
-                    gsonConverter   : "com.squareup.retrofit2:converter-gson:$retrofit_version",
+            retrofit                     : [
+                    library      : "com.squareup.retrofit2:retrofit:$retrofit_version",
+                    rxJavaAdapter: "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version",
+                    gsonConverter: "com.squareup.retrofit2:converter-gson:$retrofit_version",
             ],
 
-            okhttp : [
+            okhttp                       : [
                     loggingInterceptor: "com.squareup.okhttp3:logging-interceptor:$okHttp_version",
                     library           : "com.squareup.okhttp3:okhttp:$okHttp_version",
             ],
 
-            googleGson              : "com.google.code.gson:gson:$gson_version",
+            googleGson                   : "com.google.code.gson:gson:$gson_version",
 
             //rx
-            rx : [
-                    android               : "io.reactivex.rxjava2:rxandroid:$rxAndroid_version",
-                    java                  : "io.reactivex.rxjava2:rxjava:$rxJava_version",
-                    kotlin                : "io.reactivex.rxjava2:rxkotlin:$rxKotlin_version",
-                    permissions           : "com.github.tbruyelle:rxpermissions:$rxpermission_version",
-                    binding               : "com.jakewharton.rxbinding3:rxbinding:$rxbinding_version",
+            rx                           : [
+                    android    : "io.reactivex.rxjava2:rxandroid:$rxAndroid_version",
+                    java       : "io.reactivex.rxjava2:rxjava:$rxJava_version",
+                    kotlin     : "io.reactivex.rxjava2:rxkotlin:$rxKotlin_version",
+                    permissions: "com.github.tbruyelle:rxpermissions:$rxpermission_version",
+                    binding    : "com.jakewharton.rxbinding3:rxbinding:$rxbinding_version",
             ],
 
             //inject
-            dagger : [
-                    library           : "com.google.dagger:dagger:$dagger2_version",
-                    android           : "com.google.dagger:dagger-android:$dagger2_version",
-                    supportLib        : "com.google.dagger:dagger-android-support:$dagger2_version",
-                    compiler          : "com.google.dagger:dagger-compiler:$dagger2_version",
-                    annotation        : "com.google.dagger:dagger-android-processor:$dagger2_version",
+            dagger                       : [
+                    library   : "com.google.dagger:dagger:$dagger2_version",
+                    android   : "com.google.dagger:dagger-android:$dagger2_version",
+                    supportLib: "com.google.dagger:dagger-android-support:$dagger2_version",
+                    compiler  : "com.google.dagger:dagger-compiler:$dagger2_version",
+                    annotation: "com.google.dagger:dagger-android-processor:$dagger2_version",
             ],
 
             //analytics
-            crashlytics             : "com.crashlytics.sdk.android:crashlytics:$fabric_version",
-            androidProcesses        : "com.jaredrummler:android-processes:$androidProcesses_version",
+            crashlytics                  : "com.crashlytics.sdk.android:crashlytics:$fabric_version",
+            androidProcesses             : "com.jaredrummler:android-processes:$androidProcesses_version",
 
             //state
-            androidState            : "com.evernote:android-state:$evernoteState_version",
-            androidStateCompiler    : "com.evernote:android-state-processor:$evernoteState_version",
+            androidState                 : "com.evernote:android-state:$evernoteState_version",
+            androidStateCompiler         : "com.evernote:android-state-processor:$evernoteState_version",
 
             //data
-            room : [
-                    runtime             : 'androidx.room:room-runtime:2.0.0',
-                    compiler            : 'androidx.room:room-compiler:2.0.0',
-                    rx2                 : 'androidx.room:room-rxjava2:2.0.0',
+            room                         : [
+                    runtime : 'androidx.room:room-runtime:2.0.0',
+                    compiler: 'androidx.room:room-compiler:2.0.0',
+                    rx2     : 'androidx.room:room-rxjava2:2.0.0',
             ],
 
             //ui
-            materialDialogs         : "com.afollestad.material-dialogs:core:$materialDialog_version",
-            glide                   : "com.github.bumptech.glide:glide:$glide_version",
-            glideCompiler           : "com.github.bumptech.glide:compiler:$glide_version",
+            materialDialogs              : "com.afollestad.material-dialogs:core:$materialDialog_version",
+            glide                        : "com.github.bumptech.glide:glide:$glide_version",
+            glideCompiler                : "com.github.bumptech.glide:compiler:$glide_version",
 
-            picasso : [
-                    library          : "com.squareup.picasso:picasso:$picasso_version",
-                    downloader       : "com.jakewharton.picasso:picasso2-okhttp3-downloader:$okhttp3downloader_version",
-                    transformations  : "jp.wasabeef:picasso-transformations:$picassoTransformations_version",
+            picasso                      : [
+                    library        : "com.squareup.picasso:picasso:$picasso_version",
+                    downloader     : "com.jakewharton.picasso:picasso2-okhttp3-downloader:$okhttp3downloader_version",
+                    transformations: "jp.wasabeef:picasso-transformations:$picassoTransformations_version",
             ],
 
-            gestureViews            : "com.alexvasilkov:gesture-views:$gestureViews_version",
-            videoPlayer             : "com.sprylab.android.texturevideoview:texturevideoview:$videoPlayer_version",
-            bottomNavigationEx      : "com.github.ittianyu:BottomNavigationViewEx:$bottomNavigationEx_version",
-            softKeyboardHelper      : "net.yslibrary.keyboardvisibilityevent:keyboardvisibilityevent:$softKeyboardHelper_version",
-            pagerIndicator          : "com.ryanjeffreybrooks:indefinitepagerindicator:$pagerIndicator_version",
+            gestureViews                 : "com.alexvasilkov:gesture-views:$gestureViews_version",
+            videoPlayer                  : "com.sprylab.android.texturevideoview:texturevideoview:$videoPlayer_version",
+            bottomNavigationEx           : "com.github.ittianyu:BottomNavigationViewEx:$bottomNavigationEx_version",
+            softKeyboardHelper           : "net.yslibrary.keyboardvisibilityevent:keyboardvisibilityevent:$softKeyboardHelper_version",
+            pagerIndicator               : "com.ryanjeffreybrooks:indefinitepagerindicator:$pagerIndicator_version",
 
             //media
-            mediaPicker             : "com.github.neestell:mediapicker:$mediaPicker_version",
-            imageCropper            : "com.theartofdev.edmodo:android-image-cropper:$imageCropper_version",
+            mediaPicker                  : "com.github.neestell:mediapicker:$mediaPicker_version",
+            imageCropper                 : "com.theartofdev.edmodo:android-image-cropper:$imageCropper_version",
 
-            timesSquare             : "com.squareup:android-times-square:$timesSquare_version",
-            maskedEditText          : "ru.egslava:MaskedEditText:$maskedEditText_version",
-            pageIndicator           : "com.github.chahine:pageindicator:$pageIndicator_version",
+            timesSquare                  : "com.squareup:android-times-square:$timesSquare_version",
+            maskedEditText               : "ru.egslava:MaskedEditText:$maskedEditText_version",
+            pageIndicator                : "com.github.chahine:pageindicator:$pageIndicator_version",
 
-            stickyHeaders           : "com.timehop.stickyheadersrecyclerview:library:$stickyHeaders_version",
+            stickyHeaders                : "com.timehop.stickyheadersrecyclerview:library:$stickyHeaders_version",
 
             //moxy
-            moxy : [
-                    library         : "com.github.moxy-community:moxy:$moxy_version",
-                    compiler        : "com.github.moxy-community:moxy-compiler:$moxy_version",
-                    support         : "com.github.moxy-community:moxy-androidx:$moxy_version",
-                    material         : "com.github.moxy-community:moxy-material:$moxy_version"
+            moxy                         : [
+                    library : "com.github.moxy-community:moxy:$moxy_version",
+                    compiler: "com.github.moxy-community:moxy-compiler:$moxy_version",
+                    support : "com.github.moxy-community:moxy-androidx:$moxy_version",
+                    material: "com.github.moxy-community:moxy-material:$moxy_version"
             ],
 
             //time
-            threetenabp             : "com.jakewharton.threetenabp:threetenabp:$threetenabp_version",
+            threetenabp                  : "com.jakewharton.threetenabp:threetenabp:$threetenabp_version",
 
 
             //Navigation
-            cicerone                : "ru.terrakok.cicerone:cicerone:$cicerone_version",
-            bottomNavigationBar     : "com.ashokvarma.android:bottom-navigation-bar:$bottom_bar_version",
-            barcodescanner          : "me.dm7.barcodescanner:zxing:$barcodescanner_version",
+            cicerone                     : "ru.terrakok.cicerone:cicerone:$cicerone_version",
+            bottomNavigationBar          : "com.ashokvarma.android:bottom-navigation-bar:$bottom_bar_version",
+            barcodescanner               : "me.dm7.barcodescanner:zxing:$barcodescanner_version",
 
             permissiondispatcher         : "com.github.hotchemi:permissionsdispatcher:$permissiondispatcher_version",
             permissiondispatcherProcessor: "com.github.hotchemi:permissionsdispatcher-processor:$permissiondispatcher_version",
 
             // debug
-            debugDb                 : "com.amitshekhar.android:debug-db:$debugDb_version"
+            debugDb                      : "com.amitshekhar.android:debug-db:$debugDb_version",
+            timber                       : "com.jakewharton.timber:timber:$timber_version"
     ]
 }

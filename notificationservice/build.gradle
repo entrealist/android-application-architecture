@@ -1,0 +1,51 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.2"
+
+
+    defaultConfig {
+        applicationId "com.rosberry.notificationservice"
+        minSdkVersion 21
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    sourceSets {
+        main.java.srcDirs += ['src/main/kotlin']
+        test.java.srcDirs += ['src/test/kotlin']
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    def dependencies = rootProject.ext.dependencies
+    def testDependencies = rootProject.ext.testDependencies
+
+    testImplementation testDependencies.jUnit
+    androidTestImplementation testDependencies.jUnit
+    androidTestImplementation testDependencies.runner
+
+    implementation dependencies.kotlin
+    implementation dependencies.threetenabp
+    implementation dependencies.x.appCompat
+    implementation dependencies.x.lifecycleExtensions
+    implementation dependencies.x.cardView
+    implementation dependencies.x.material
+    implementation dependencies.x.ktx
+    implementation dependencies.x.constraint
+    implementation dependencies.threetenabp
+    implementation dependencies.timber
+}
