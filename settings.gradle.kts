@@ -1,5 +1,9 @@
-include(":workmanager",
+include(
+        ":workmanager",
         ":kotlin-dsl",
+        ":gpp",
+        ":downloadservice",
+        ":notificationservice",
         ":motionlayoutcollapsingtoolbar",
         ":rxsearch",
         ":pagination",
